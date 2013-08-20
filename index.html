@@ -1,0 +1,84 @@
+<html>
+    <head>
+        <script src="peg-0.7.0.js"></script>
+        <script src="polymer.min.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Arbutus+Slab" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="index.css">
+
+        <script type="text/x-mathjax-config">
+            // <![CDATA[
+            MathJax.Hub.Config({ 
+                TeX: {extensions: ["AMSmath.js", "AMSsymbols.js"]},     
+                extensions: ["tex2jax.js"],
+                jax: ["input/TeX", "output/HTML-CSS"],
+                showProcessingMessages : false,
+                messageStyle : "none" ,    
+                showMathMenu: false ,
+                tex2jax: {
+                    processEnvironments: true,
+                    inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                    displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                    preview : "none",
+                    processEscapes: true
+                },
+                "HTML-CSS": { linebreaks: { automatic:true, width: "container"} }
+            });
+            // ]]>
+        </script>
+
+        <script type="text/javascript" src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+    </head>
+
+    <body>
+
+        <math>
+        The integral $\int f(x) dx = 0$
+        </math>
+
+        <parser>
+        start
+        = s:statement* {return s;}
+
+        statement
+        = "\\" func:[a-z]+ s:squiggle* {return [func.join(""), s.join("")] }
+
+        squiggle
+        = "{" arg:[a-z,A-Z0-9]* "}" {return arg.join('')}
+        </parser>
+
+        <latex>
+        \begin{center}
+        </latex>
+
+        <script>
+
+            var LaTeXPrototype = Object.create(HTMLElement.prototype);
+            LaTeXPrototype.createdCallback = function() {
+                this.tex = this.textContent;
+                this.parse();
+            };
+            LaTeXPrototype.parse = function() {
+                //this.result = window.parser.parse(this.textContent);
+                console.log(this.textContent);
+                this.textContent = 'LaTeX'; // parse LaTeX here
+            };
+
+            var LaTeX = document.register('latex', {
+                prototype: LaTeXPrototype
+            });
+
+            var Parser = document.register('parser', {
+                prototype: {
+                    createdCallback: function() {
+                        this.grammar = this.textContent;
+                        window.parser = PEG.buildParser(this.grammar);
+                        this.textContent = '';
+                    }
+                }
+            });
+
+
+        </script>
+    </body>
+
+</html>
