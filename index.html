@@ -32,18 +32,18 @@
     <body>
 
         <math>
-        The integral $\int f(x) dx = 0$
+The integral $\int f(x) dx = 0$
         </math>
 
         <parser>
-        start
-        = s:statement* {return s;}
+start
+ = s:statement* {return s;}
 
-        statement
-        = "\\" func:[a-z]+ s:squiggle* {return [func.join(""), s.join("")] }
+statement
+ = "\\" func:[a-z]+ s:squiggle* {return [func.join(""), s.join("")] }
 
-        squiggle
-        = "{" arg:[a-z,A-Z0-9]* "}" {return arg.join('')}
+squiggle
+ = "{" arg:[a-z,A-Z0-9]* "}" {return arg.join('')}
         </parser>
 
         <latex>
@@ -67,18 +67,16 @@
                 prototype: LaTeXPrototype
             });
 
+            var parserPrototype = Object.create(HTMLElement.prototype);
+            parserPrototype.createdCallback = function() {
+                this.grammar = this.textContent;
+                window.parser = PEG.buildParser(this.grammar);
+                this.textContent = '';
+            };
             var Parser = document.register('parser', {
-                prototype: {
-                    createdCallback: function() {
-                        this.grammar = this.textContent;
-                        window.parser = PEG.buildParser(this.grammar);
-                        this.textContent = '';
-                    }
-                }
+                prototype: parserPrototype
             });
-
 
         </script>
     </body>
-
 </html>
