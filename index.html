@@ -36,18 +36,43 @@ The integral $\int f(x) dx = 0$
         </math>
 
         <parser>
-start
- = s:statement* {return s;}
+{
+  var parser;
+  parser = this;
+  parser.statements = [];
+  parser.addStatement = function (s) {
+    parser.statements.push(s)
+  }
+}
+start 
+ = statement* {return parser.statements;}
 
 statement
- = "\\" func:[a-z]+ s:squiggle* {return [func.join(""), s.join("")] }
+ = "\\" func:[a-z]+ s:squiggle* {parser.addStatement([func.join(""), s.join("")])}
+  / comment [\n\r\u2028\u2029]?
+  / _ [\n\r\u2028\u2029]  
+
+LineTerminator
+  = _ ","? comment? [\n\r\u2028\u2029]?
+
+comment
+  = _ "#" (anychar)*
+
+anychar
+  = [a-zA-Z0-9 .,#:{}@+?!^=()_\-$*/\\\[\]{}\"&`%\|]
+_
+  = (" "*)?
+
+__
+  = " "+ 
 
 squiggle
  = "{" arg:[a-z,A-Z0-9]* "}" {return arg.join('')}
         </parser>
 
         <latex>
-        \begin{center}
+\begin{center}
+\end{center}
         </latex>
 
         <script>
@@ -58,7 +83,7 @@ squiggle
                 this.parse();
             };
             LaTeXPrototype.parse = function() {
-                //this.result = window.parser.parse(this.textContent);
+                this.result = window.parser.parse(this.textContent);
                 console.log(this.textContent);
                 this.textContent = 'LaTeX'; // parse LaTeX here
             };
