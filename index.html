@@ -41,14 +41,14 @@ The integral $\int f(x) dx = 0$
   parser = this;
   parser.statements = [];
   parser.addStatement = function (s) {
-    parser.statements.push(s)
+    parser.statements.push.apply(parser.statements, arguments)
   }
 }
 start 
  = statement* {return parser.statements;}
 
 statement
- = "\\" func:[a-z]+ s:squiggle* {parser.addStatement([func.join(""), s.join("")])}
+ = "\\" func:[a-z]+ s:squiggle* {parser.addStatement([func.join(""), s])}
   / comment [\n\r\u2028\u2029]?
   / _ [\n\r\u2028\u2029]  
 
@@ -67,12 +67,14 @@ __
   = " "+ 
 
 squiggle
- = "{" arg:[a-z,A-Z0-9]* "}" {return arg.join('')}
-        </parser>
+ = "{" arg:[^}]* "}" {return arg.join('')}
+ </parser>
 
         <latex>
 \begin{center}
 \end{center}
+\begin{center}
+\end{center}{asdf}{asdf}{->}{->}{asdf}
         </latex>
 
         <script>
