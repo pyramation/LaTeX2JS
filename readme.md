@@ -4,6 +4,7 @@ LaTeX2HTML5
 This project is the frontend only version of [mathapedia](https://mathapedia.com) ([github](https://github.com/pyramation/LaTeX2HTML5))
 
 Simply [download](https://raw.github.com/Mathapedia/LaTeX2HTML5/master/latex2html5.min.js) and include the script on your website: 
+
     &lt;script type=&quot;text/javascript&quot; src=&quot;latex2html5.min.js&quot;&gt;&lt;/script&gt; 
 
 
@@ -25,9 +26,6 @@ Make your push/pull life easier
 -------------------------------
 
 git remote set-url origin git@github.com:Mathapedia/LaTeX2HTML5.git
-
-Thanks
-======
 
 # Frontend Requirements
 
