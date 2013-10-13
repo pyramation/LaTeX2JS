@@ -219,8 +219,7 @@ $$
 
 <p>Currently there are a few issues with polymer and latex2html5 causing the interactivity does not work.</p>
 
-        <latex>
-
+<latex>
 What frequencies can be present in a signal $\vec{x}$? The harmonics are given by a signal with period $p$ are $\{0,\omega_0,2\omega_0,\dots,(p-1)\omega_0\}$. Notice that $p\omega_0$ is missing. This is because $e^{ip\omega_0n}=e^{i2\pi n} = e^{i0n}$. Keep in mind that $\omega_0 = 2\pi/p$. In fact, the complex exponential basis of vectors is periodic with respect to $n$ and their indices $k$. 
 
 \begin{align*}
@@ -597,25 +596,25 @@ The next example allows you to move the height of the graph and also integrate o
 
         <script>
 
-            var LaTeXPrototype = Object.create(HTMLElement.prototype);
-            LaTeXPrototype.createdCallback = function() {
-                this.tex = this.textContent;
-                this.parse();
-            };
-            LaTeXPrototype.parse = function() {
+            MathJax.Hub.Register.StartupHook("End",function () {
+                var LaTeXPrototype = Object.create(HTMLElement.prototype);
+                LaTeXPrototype.createdCallback = function() {
+                    this.tex = this.textContent;
+                    this.parse();
+                };
+                LaTeXPrototype.parse = function() {
 
-                MathJax.Hub.Register.StartupHook("End",function () {
-                    var TEX = new TeX({
-                        latex: this.tex
-                    });
+                        var TEX = new TeX({
+                            latex: this.tex
+                        });
 
-                    TEX.render();
-                    this.innerHTML = TEX.el.innerHTML;
+                        TEX.render();
+                        this.innerHTML = TEX.el.innerHTML;
+                }; 
+             
+                var LaTeX = document.register('latex', {
+                    prototype: LaTeXPrototype
                 });
-            }; 
-         
-            var LaTeX = document.register('latex', {
-                prototype: LaTeXPrototype
             });
 
         </script>
