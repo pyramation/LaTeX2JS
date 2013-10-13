@@ -12,8 +12,6 @@ Parser.prototype = {
 
     parse: function(text) {
 
-        console.log('Parser', text);
-
         if (!text) return {};
 
         var lines = text.split('\n');

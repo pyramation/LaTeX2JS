@@ -1,52 +1,124 @@
+Backbone.Layout.configure({
+    fetch: function(path) {
 
+        var JST = window.JST || {};
 
-// Set all Views to be managed by LayoutManager.
-// Backbone.Layout.configure({ manage: true });
+        var relative = '';
+        var absolute = '';
 
-
-  
-    Backbone.Layout.configure({
-        fetch: function(path) {
-
-            var JST = window.JST || {};
-
-            var relative = '';
-            var absolute = '';
-
-            if (path.indexOf('/') === 0) {
-                relative = path.substr(1);
-                absolute = path;
-            } else {
-                relative = path;
-                absolute = '/' + path;
-            }
-
-            relative += '.html';
-            absolute += '.html';
-
-            var done = this.async();
-
-            if (JST.hasOwnProperty(relative)) {
-                return done(JST[relative]);
-            }
-
-            $.get(absolute, function(contents) {
-                var tmpl = Handlebars.compile(contents);
-                done(JST[relative] = tmpl);
-            }, "text");
-
-        },
-        renderTemplate: function(template, context) {
-            return template(context);
+        if (path.indexOf('/') === 0) {
+            relative = path.substr(1);
+            absolute = path;
+        } else {
+            relative = path;
+            absolute = '/' + path;
         }
 
-    });
+        relative += '.html';
+        absolute += '.html';
+
+        var done = this.async();
+
+        if (JST.hasOwnProperty(relative)) {
+            return done(JST[relative]);
+        }
+
+        $.get(absolute, function(contents) {
+            var tmpl = Handlebars.compile(contents);
+            done(JST[relative] = tmpl);
+        }, "text");
+
+    },
+    renderTemplate: function(template, context) {
+        return template(context);
+    }
+
+});
 
 var BaseView = Backbone.Layout.extend({
 
 });
 
 var TeX = (function(){
+
+var SliderView = BaseView.extend({
+    template: 'latex2html5/templates/sliders',
+
+    serialize: function() {
+        var slider = this.options.slider;
+        return {
+            latex: slider.latex,
+            scalar: slider.scalar,
+            variable: slider.variable,
+            min:  slider.min*slider.scalar,
+            max:  slider.max*slider.scalar,
+            value: slider.value
+        };
+    },
+    afterRender: function() {
+       
+       var slid = this.$('input[type=range]');
+       var p = this.$('h4+p');
+
+       var svg = this.options.svg;
+       var env = this.options.env;
+       var plots = this.options.plot;
+
+
+       // THIS SHOULD DELEGATE, NOT BE RESPONSIBLE FOR RENDERING! 
+       slid.on('change', function(){
+            var value = this.value/this.getAttribute('scalar');
+            var variable = this.getAttribute('variable');
+        
+            p.html(value);
+
+            env.variables[variable] = value;
+            svg.selectAll('.psplot').remove();
+
+            _.each(plots, function(plot, k) {
+
+                if (k.match(/psplot/)) {
+
+                    _.each(plot, function(data) {
+
+                        var d = data.fn.call(data.env, data.match);
+
+                        // var d = _.extend({}, data, env);
+                        psgraph[k].call(d, svg);
+                    });
+                }
+
+            });
+
+        });
+
+        var process = MathJax.Hub.Queue(["Typeset",MathJax.Hub,this.el]);
+        if (typeof process === 'function') process();
+
+    }
+
+
+});
+
+
+var SlidersView = BaseView.extend({
+
+    className: 'well interactive',
+    beforeRender: function() {
+           _.each(this.options.sliders, function(slider) {
+
+            var view = new SliderView({
+                svg: this.options.svg,
+                env: this.options.env,
+                plot: this.options.plot,
+                slider: slider
+            });
+            this.insertView(view);
+
+        }, this);
+    }
+
+});
 
     var views = {
 
@@ -360,82 +432,3 @@ var TeX = (function(){
     });
 
 })();
-
-var SliderView = BaseView.extend({
-    template: 'latex2html5/templates/sliders',
-
-    serialize: function() {
-        var slider = this.options.slider;
-        return {
-            latex: slider.latex,
-            scalar: slider.scalar,
-            variable: slider.variable,
-            min:  slider.min*slider.scalar,
-            max:  slider.max*slider.scalar,
-            value: slider.value
-        };
-    },
-    afterRender: function() {
-       
-       var slid = this.$('input[type=range]');
-       var p = this.$('h4+p');
-
-       var svg = this.options.svg;
-       var env = this.options.env;
-       var plots = this.options.plot;
-
-
-       // THIS SHOULD DELEGATE, NOT BE RESPONSIBLE FOR RENDERING! 
-       slid.on('change', function(){
-            var value = this.value/this.getAttribute('scalar');
-            var variable = this.getAttribute('variable');
-        
-            p.html(value);
-
-            env.variables[variable] = value;
-            svg.selectAll('.psplot').remove();
-
-            _.each(plots, function(plot, k) {
-
-                if (k.match(/psplot/)) {
-
-                    _.each(plot, function(data) {
-
-                        var d = data.fn.call(data.env, data.match);
-
-                        // var d = _.extend({}, data, env);
-                        psgraph[k].call(d, svg);
-                    });
-                }
-
-            });
-
-        });
-
-        var process = MathJax.Hub.Queue(["Typeset",MathJax.Hub,this.el]);
-        if (typeof process === 'function') process();
-
-    }
-
-
-});
-
-
-var SlidersView = BaseView.extend({
-
-    className: 'well interactive',
-    beforeRender: function() {
-           _.each(this.options.sliders, function(slider) {
-
-            var view = new SliderView({
-                svg: this.options.svg,
-                env: this.options.env,
-                plot: this.options.plot,
-                slider: slider
-            });
-            this.insertView(view);
-
-        }, this);
-    }
-
-});
