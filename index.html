@@ -4,7 +4,7 @@
 
 
 
-        <link rel="stylesheet" href="index.css">
+        <link rel="stylesheet" href="latex2html5/css/index.css">
 
         <script type="text/x-mathjax-config">
             // <![CDATA[
@@ -205,6 +205,426 @@ $$
 </div>
         <script type="tex/latex">
 
+Suppose we have a periodic signal with fundamental period 2.
+
+% \img{images/deltas/periodic/periodic.ps}
+
+\psset{unit=1cm}
+\begin{center}
+\begin{pspicture}(-3,-1)(4,4)
+    
+
+\rput(-2.5,1.5){$\cdots$}
+\rput(3.5,1.5){$\cdots$}
+
+% line
+\psline{-*}(-2,0)(-2,2)
+%  value
+\rput(-1.7,2){(2)}
+%  position
+\rput(-2,-0.3){-2}
+
+
+% line
+\psline{-*}(-1,0)(-1,3)
+%  value
+\rput(-0.7,3){(3)}
+%  position
+\rput(-1,-0.3){-1}
+
+
+% line
+\psline{-*}(0,0)(0,2)
+%  value
+\rput(0.3,2){(2)}
+%  position
+\rput(0,-0.3){0}
+
+
+% line
+\psline{-*}(1,0)(1,3)
+%  value
+\rput(1.3,3){(3)}
+%  position
+\rput(1,-0.3){1}
+
+
+% line
+\psline{-*}(2,0)(2,2)
+%  value
+\rput(2.3,2){(2)}
+%  position
+\rput(2,-0.3){2}
+
+
+% line
+\psline{-*}(3,0)(3,3)
+%  value
+\rput(3.3,3){(3)}
+%  position
+\rput(3,-0.3){3}
+
+% axes
+\psline{->}(-3,0)(4,0)
+\rput(4,-0.3){ $n$ }
+\rput(4,3){ $x(n)$ }
+
+\end{pspicture}
+\end{center}
+
+We can then write the signal $x$ as a linear combination of two signals $\Psi_0(n)$, and $\Psi_1(n)$:
+
+% \img{images/deltas/bases/periodic.ps}
+
+\psset{unit=1cm}
+\begin{center}
+\begin{pspicture}(-6,-1)(6,6)
+
+\rput(-4.4, 0.5){$\cdots$}
+\rput(5.4, 0.5){$\cdots$}
+\rput(-4.4, 3.5){$\cdots$}
+\rput(5.4, 3.5){$\cdots$}
+
+    
+
+% line
+\psline{-*}(-4,3)(-4,4)
+%  value
+\rput(-3.7,4){(1)}
+%  position
+\rput(-4,2.7){-4}
+
+
+% line
+\psline{-*}(-3,3)(-3,3)
+%  position
+\rput(-3,2.7){-3}
+
+
+% line
+\psline{-*}(-2,3)(-2,4)
+%  value
+\rput(-1.7,4){(1)}
+%  position
+\rput(-2,2.7){-2}
+
+
+% line
+\psline{-*}(-1,3)(-1,3)
+%  position
+\rput(-1,2.7){-1}
+
+
+% line
+\psline{-*}(0,3)(0,4)
+%  value
+\rput(0.3,4){(1)}
+%  position
+\rput(0,2.7){0}
+
+
+% line
+\psline{-*}(1,3)(1,3)
+%  position
+\rput(1,2.7){1}
+
+
+% line
+\psline{-*}(2,3)(2,4)
+%  value
+\rput(2.3,4){(1)}
+%  position
+\rput(2,2.7){2}
+
+
+% line
+\psline{-*}(3,3)(3,3)
+%  position
+\rput(3,2.7){3}
+
+
+% line
+\psline{-*}(4,3)(4,4)
+%  value
+\rput(4.3,4){(1)}
+%  position
+\rput(4,2.7){4}
+
+% axes
+\psline{->}(-5,3)(5,3)
+\rput(5,2.7){ $n$ }
+\rput(5,4){ $\Psi_0(n)$ }
+
+
+% line
+\psline{-*}(-4,0)(-4,0)
+%  position
+\rput(-4,-0.3){-4}
+
+
+% line
+\psline{-*}(-3,0)(-3,1)
+%  value
+\rput(-2.7,1){(1)}
+%  position
+\rput(-3,-0.3){-3}
+
+
+% line
+\psline{-*}(-2,0)(-2,0)
+%  position
+\rput(-2,-0.3){-2}
+
+
+% line
+\psline{-*}(-1,0)(-1,1)
+%  value
+\rput(-0.7,1){(1)}
+%  position
+\rput(-1,-0.3){-1}
+
+
+% line
+\psline{-*}(0,0)(0,0)
+%  position
+\rput(0,-0.3){0}
+
+
+% line
+\psline{-*}(1,0)(1,1)
+%  value
+\rput(1.3,1){(1)}
+%  position
+\rput(1,-0.3){1}
+
+
+% line
+\psline{-*}(2,0)(2,0)
+%  position
+\rput(2,-0.3){2}
+
+
+% line
+\psline{-*}(3,0)(3,1)
+%  value
+\rput(3.3,1){(1)}
+%  position
+\rput(3,-0.3){3}
+
+
+% line
+\psline{-*}(4,0)(4,0)
+%  position
+\rput(4,-0.3){4}
+
+% axes
+\psline{->}(-5,0)(5,0)
+\rput(5,-0.3){ $n$ }
+\rput(5,1){ $\Psi_1(n)$ }
+
+\end{pspicture}
+\end{center}
+
+Therefore, we can write
+
+$$x(n) = 2\Psi_0(n) + 3\Psi_1(n)$$
+
+Here is another way to decompose the signal:
+
+\begin{align*}
+\left[ \begin{array}{r} 2 \\ 3 \\ \end{array} \right]  &= 2  \left[ \begin{array}{r} 1 \\ 0 \\ \end{array} \right] + 3  \left[ \begin{array}{r} 0 \\ 1 \\ \end{array} \right] \\
+x &= x(0)\Psi_0 + x(1)\Psi_1
+\end{align*}
+
+Fourier analysis is  a way of decomposing signals in terms of some special signals that tell us information:
+
+% \img{images/projections/bases/bases.ps}
+
+\psset{unit=1cm}
+\begin{center}
+\begin{pspicture}(-3,-6)(3,6)
+    
+
+% y-axis
+\psline{->}(0,-6)(0,-1)
+
+% x-axis
+\psline{->}(-2.5,-3.5)(2.5,-3.5)
+
+
+ % new vector 
+\rput(0.8,-4.8){$\Psi_1 = \left[ \begin{array}{r} 1 \\ -1 \\ \end{array} \right]$}
+\psline[linewidth=1.5 pt]{->}(0,-3.5)(1,-4.5)
+
+ % new vector 
+\rput(2.22487174976714,-2){$\vec{x}$}
+\psline[linewidth=1.5 pt]{->}(0,-3.5)(2.42487174976714,-2.10000107243568)
+
+ % new vector 
+\rput(0.8,-2.5){$\Psi_0 = \left[ \begin{array}{r} 1 \\ 1 \\ \end{array} \right]$}
+\psline[linewidth=1.5 pt]{->}(0,-3.5)(1,-2.5)
+
+% y-axis
+\psline{->}(0,0)(0,5)
+
+% x-axis
+\psline{->}(-2.5,2.5)(2.5,2.5)
+
+
+ % new vector 
+\rput(2.22487174976714,3.95){$\vec{x}$}
+\psline[linewidth=1.5 pt]{->}(0,2.5)(2.42487174976714,3.89999892756432)
+
+ % new vector 
+\rput(1,2){$\Psi_0 = \left[ \begin{array}{r} 1 \\ 0 \\ \end{array} \right]$}
+\psline[linewidth=1.5 pt]{->}(0,2.5)(0,3.5)
+
+ % new vector 
+\rput(0,3.5){$\Psi_1 = \left[ \begin{array}{r} 0 \\ 1 \\ \end{array} \right]$}
+\psline[linewidth=1.5 pt]{->}(0,2.5)(1,2.5)
+
+\end{pspicture}
+\end{center}
+
+What we want is to write $x$ as a linear combination of these signals:
+
+$$ x = X_0\Psi_0 + X_1\Psi_1 $$
+
+So to find $X_0$, we can project $\vec{x}$ onto $\Psi_0$:
+ 
+\begin{align*}
+\langle\vec{x}, \Psi_0\rangle &= \langle X_0\Psi_0 + X_1\Psi_1, \Psi_0\rangle \\
+\langle\vec{x}, \Psi_0\rangle &= X_0\langle\Psi_0,\Psi_0\rangle +X_1\langle\Psi_1,\Psi_0\rangle \\
+\langle\vec{x}, \Psi_0\rangle &= X_0\langle\Psi_0,\Psi_0\rangle + 0\quad \mbox{(because of orthogonality)}\\
+X_0 &= \frac{\langle\vec{x}, \Psi_0\rangle }{\langle\Psi_0,\Psi_0\rangle}\\
+\end{align*}
+
+Fourier analysis says if we have a signal with period $p$, then we can represent the signal with complex exponentials that are harmonically related by a fundamental frequency $\omega_0 = 2\pi/p$:
+
+\begin{nicebox}
+$$ x(n) = \sum \limits_{k=0}^{p-1}X_ke^{ik\omega_0 n}  $$
+\end{nicebox}
+
+We can also write this relationship as 
+
+\begin{align*}
+x(n) &= \sum \limits_{k=0}^{p-1}X_k\Psi_k(n)  \quad \mbox{where } e^{ik\omega_0 n} = \Psi_k(n) \\
+\end{align*}
+
+Or even more simplified:
+
+$$ x = \sum \limits_{k=\langle p\rangle}X_k\Psi_k  $$
+
+% Examples
+
+Let $p=2$, then $\omega_0 = 2\pi/2 = \pi$. 
+\begin{align*}
+\Psi_0(n) &= e^{i0\omega_0n} = 1 \\
+\Psi_1(n) &= e^{i\omega_0n} = e^{i\pi n} = \lr{-1}^n \\
+\end{align*}
+
+% \img{images/deltas/single/single.ps}
+
+\psset{unit=1cm}
+\begin{center}
+\begin{pspicture}(-3,-1)(4,4)
+    
+
+% line
+\psline{-*}(0,0)(0,2)
+%  value
+\rput(0.3,2){(2)}
+%  position
+\rput(0,-0.3){0}
+
+
+% line
+\psline{-*}(1,0)(1,3)
+%  value
+\rput(1.3,3){(3)}
+%  position
+\rput(1,-0.3){1}
+
+% axes
+\psline{->}(-1,0)(2,0)
+\rput(2,-0.3){ $n$ }
+\rput(2,3){ $x(n)$ }
+
+\end{pspicture}
+\end{center}
+
+How can we determine $\Psi_0$ and $\Psi_1$? Since the fundamental period is two, we need only one contiguous interval of 2. Lets use 0 and 1:
+
+\begin{align*}
+\Psi_0(0) = 1 \\
+\Psi_0(1) = 1 \\
+\Psi_1(0) = \lr{-1}^0 = 1 \\
+\Psi_1(1) = \lr{-1}^1 = -1 \\
+\end{align*}
+
+Hence the basis vectors are as shown:
+
+% \img{images/deltas/bases/single/single.ps}
+
+\psset{unit=1cm}
+\begin{center}
+\begin{pspicture}(-3,-2)(5,5)
+    
+
+% line
+\psline{-*}(0,3)(0,4)
+%  value
+\rput(0.3,4){(1)}
+%  position
+\rput(0,2.7){0}
+
+
+% line
+\psline{-*}(1,3)(1,4)
+%  value
+\rput(1.3,4){(1)}
+%  position
+\rput(1,2.7){1}
+
+% axes
+\psline{->}(-1,3)(2,3)
+\rput(2,2.7){ $n$ }
+\rput(2,4){ $\Psi_0(n)$ }
+
+
+% line
+\psline{-*}(0,0)(0,1)
+%  value
+\rput(0.3,1){(1)}
+%  position
+\rput(0,-0.3){0}
+
+
+% line
+\psline{-*}(1,0)(1,-1)
+%  value
+\rput(1.3,-1){(-1)}
+%  position
+\rput(1,0.3){1}
+
+% axes
+\psline{->}(-1,0)(2,0)
+\rput(2,-0.3){ $n$ }
+\rput(2,1){ $\Psi_1(n)$ }
+
+\end{pspicture}
+\end{center}
+
+What frequencies can be present in a signal $\vec{x}$? The harmonics are given by a signal with period $p$ are $\{0,\omega_0,2\omega_0,\dots,(p-1)\omega_0\}$. Notice that $p\omega_0$ is missing. This is because $e^{ip\omega_0n}=e^{i2\pi n} = e^{i0n}$. Keep in mind that $\omega_0 = 2\pi/p$. In fact, the complex exponential basis of vectors is periodic with respect to $n$ and their indices $k$. 
+
+\begin{align*}
+\Psi_k(n+p) &= e^{ik\omega_0(n+p)}=e^{ik\omega_0n}e^{ik\omega_0p}=e^{ik\omega_0n} = \Psi_k(n) \\
+\Psi_{k+p}(n) &= e^{i(k+p)\omega_0n} = e^{ik\omega_0n}e^{ip\omega_0n} = \Psi_k(n) 
+\end{align*}
+
+So we know that $\Psi_{-1}(n) = e^{-i\omega_0n} = \Psi_{p-1}(n) = e^{i(p-1)\omega_0n }$. So we can see that in general, we can write out a discrete fourier series expansion over any continuous set of $p$ integers. The notation used is
+$$ x(n) = \sum \limits_{k=\langle p \rangle} X_ke^{ik\omega_0n}$$
+
 
 Given a periodic signal $x$ in CT, we can estimate the signal using the formula: 
 
@@ -381,6 +801,7 @@ I can also draw a more complex version, and start to make more useful diagrams t
     
 \end{pspicture}
 \end{center}
+
 
 \begin{verbatim}
 \begin{pspicture}(-5,-5)(5,5)
