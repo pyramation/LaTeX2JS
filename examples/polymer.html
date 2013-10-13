@@ -19,8 +19,7 @@
 
 
         <link href="https://fonts.googleapis.com/css?family=Arbutus+Slab" rel="stylesheet" type="text/css">
-        <link rel="stylesheet" href="/css/index.css">
-        <link rel="stylesheet" href="/css/latex2html5.css">
+        <link rel="stylesheet" href="../css/index.css">
 
         <script type="text/x-mathjax-config">
             // <![CDATA[
@@ -42,23 +41,24 @@
             });
             // ]]>
         </script>
+        <script type="text/javascript" src="../vendor/polymer.min.js"></script>
 
         <!-- math -->
         <script type="text/javascript" src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
 
         <!-- vendor -->
-        <script type="text/javascript"src="/vendor/jquery.js"></script>
-        <script type="text/javascript"src="/vendor/d3.js"></script>
-        <script type="text/javascript"src="/vendor/underscore.js"></script>
-        <script type="text/javascript"src="/vendor/handlebars.js"></script>
-        <script type="text/javascript"src="/vendor/backbone.js"></script>
-        <script type="text/javascript"src="/vendor/backbone.layoutmanager.js"></script>
+        <script type="text/javascript" src="../vendor/jquery.js"></script>
+        <script type="text/javascript" src="../vendor/d3.js"></script>
+        <script type="text/javascript" src="../vendor/underscore.js"></script>
+        <script type="text/javascript" src="../vendor/handlebars.js"></script>
+        <script type="text/javascript" src="../vendor/backbone.js"></script>
+        <script type="text/javascript" src="../vendor/backbone.layoutmanager.js"></script>
 
         <!-- latex2html5 -->
-        <script type="text/javascript" src="/lib/expressions.js"></script>
-        <script type="text/javascript" src="/lib/parse.js"></script>
-        <script type="text/javascript" src="/lib/psgraph.js"></script>
-        <script type="text/javascript" src="/lib/renderer.js"></script>
+        <script type="text/javascript" src="../lib/expressions.js"></script>
+        <script type="text/javascript" src="../lib/parse.js"></script>
+        <script type="text/javascript" src="../lib/psgraph.js"></script>
+        <script type="text/javascript" src="../lib/renderer.js"></script>
 
         <!-- // <script type="text/javascript" src="/latex2html5.js"></script> -->
         <!-- latex2html5 -->
@@ -71,32 +71,8 @@
 
     <body>
 
-
 <a href="https://github.com/Mathapedia/LaTeX2HTML5"><img style="position: fixed; z-index: 10000000; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png" alt="Fork me on GitHub"></a>
 
-
-<div class="container index-font">
-
-    <h1>LaTeX2HTML5</h1>
-    <h2>Author interactive math equations and diagrams online using $\LaTeX$ and PSTricks</h2>
-
-    <hr>
-
-    <div class="home-image">
-        <img src="assets/images/photo.png">
-    </div>
-
-    <hr>
-
-    <p>This project is the frontend only version of the code that originated from <a href="http://www.mathapedia.com/" target="youlovemathdontyou">Mathapedia</a> to enable real-time, dynamic authorship of mathematical ebooks</p>
-
-    <p>Check out the examples below or view source to get started.</p>
-
-    $$\frac{\delta}{\delta u} \int_{birth}^{death} f(life) du = \mbox{your life}$$
-
-</div>
-
-<!-- begin demo -->
 
 <div style="display:none">
 $$
@@ -236,7 +212,14 @@ arg: The name of the set. -->
 \newcommand{\set}[1]{\textit{#1}}
 $$
 </div>
-        <script type="tex/latex">
+
+<div class="container">
+
+<p>Polymer is a library that helps build web components before we have them. Here we demonstrate how to make a new latex HTMLElement</p>
+
+<p>Currently there are a few issues with polymer and latex2html5 causing the interactivity does not work.</p>
+
+        <latex>
 
 What frequencies can be present in a signal $\vec{x}$? The harmonics are given by a signal with period $p$ are $\{0,\omega_0,2\omega_0,\dots,(p-1)\omega_0\}$. Notice that $p\omega_0$ is missing. This is because $e^{ip\omega_0n}=e^{i2\pi n} = e^{i0n}$. Keep in mind that $\omega_0 = 2\pi/p$. In fact, the complex exponential basis of vectors is periodic with respect to $n$ and their indices $k$. 
 
@@ -244,6 +227,12 @@ What frequencies can be present in a signal $\vec{x}$? The harmonics are given b
 \Psi_k(n+p) &= e^{ik\omega_0(n+p)}=e^{ik\omega_0n}e^{ik\omega_0p}=e^{ik\omega_0n} = \Psi_k(n) \\
 \Psi_{k+p}(n) &= e^{i(k+p)\omega_0n} = e^{ik\omega_0n}e^{ip\omega_0n} = \Psi_k(n) 
 \end{align*}
+
+</latex>
+
+<h2> Here is some HTML between two latex tags </h2>
+
+<latex>
 
 So we know that $\Psi_{-1}(n) = e^{-i\omega_0n} = \Psi_{p-1}(n) = e^{i(p-1)\omega_0n }$. So we can see that in general, we can write out a discrete fourier series expansion over any continuous set of $p$ integers. The notation used is
 $$ x(n) = \sum \limits_{k=\langle p \rangle} X_ke^{ik\omega_0n}$$
@@ -255,7 +244,11 @@ $$ \hat{x}(t) = \sum \limits_{k=-N}^{N}\alpha_k e^{ik\omega_0 t}   $$
 
 How can we determine the coefficients that make the estimates closest in terms of error energy? Let $W\in\R^{2N+1}$ be a subspace spanned by the set of orthogonal basis vectors $\Psi_0, \Psi_1, \Psi_{-1} \dots, \Psi_{N}, \Psi_{-N}$. If $x$ is a vector that is not in the column space of $W$, then we can project $x$ onto the column space of $W$, producing an approximation vector $\hat{x}$, which has a distance of $\abs{\left| \mathcal{E}_N\right|}$ from the vector $x$. The vectors $\mathcal{E}_N$ and $\hat{x}$ are orthogonal.
 
-% \img{images/bases/projtheory/proj.ps}
+</latex>
+
+<h2> Here is some HTML between two latex tags </h2>
+
+<latex>
 
 \psset{unit=1cm}
 \begin{center}
@@ -598,20 +591,30 @@ The next example allows you to move the height of the graph and also integrate o
 \psline{->}(-4,0)(4,0)
 \end{pspicture}
 \end{verbatim}
-        </script>
+        </latex>
 
-        <section class="container">
-
-        </section>
+</div>
 
         <script>
 
-            var TEX = new TeX({
-                latex: $('[type="tex/latex"]').text()
-            });
+            var LaTeXPrototype = Object.create(HTMLElement.prototype);
+            LaTeXPrototype.createdCallback = function() {
+                this.tex = this.textContent;
+                this.parse();
+            };
+            LaTeXPrototype.parse = function() {
 
-            TEX.render();
-            $('section.container').html(TEX.el);
+                var TEX = new TeX({
+                    latex: this.tex
+                });
+
+                TEX.render();
+                this.innerHTML = TEX.el.innerHTML;
+            }; 
+         
+            var LaTeX = document.register('latex', {
+                prototype: LaTeXPrototype
+            });
 
         </script>
         
