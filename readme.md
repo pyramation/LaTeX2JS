@@ -24,10 +24,17 @@ Adding new LaTeX commands
 
 If there is one takeaway for developers, the most important files for adding (LaTeX) functionality: expressions.js, psgraph.js, renderer.js
 
+
 Make your push/pull life easier
 -------------------------------
 
 git remote set-url origin git@github.com:Mathapedia/LaTeX2HTML5.git
+
+# Dev Requirements
+
+[Bower](http://bower.io/)
+
+[Grunt](http://gruntjs.com/)
 
 # Frontend Requirements
 
