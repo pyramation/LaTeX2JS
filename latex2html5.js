@@ -942,21 +942,12 @@ Parser.prototype = {
     parsePSExpression: function (line, exp, plot, k, env) {
         var match = line.match(exp);
         if (match) {
-            if (k == 'pscircle') {
-                plot[k].push({
-                    data: PSTricks.Functions[k].call(env, match),
-                    env: env,
-                    match: match,
-                    fn: PSTricks.Functions[k]
-                });
-            } else {
-                plot[k].push({
-                    data: PSTricks.Functions[k].call(env, match),
-                    env: env,
-                    match: match,
-                    fn: PSTricks.Functions[k]
-                });
-            }
+            plot[k].push({
+                data: PSTricks.Functions[k].call(env, match),
+                env: env,
+                match: match,
+                fn: PSTricks.Functions[k]
+            });
             return true;
         }
         return false;
