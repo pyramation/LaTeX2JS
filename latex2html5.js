@@ -22204,12 +22204,21 @@ Parser.prototype = {
     }
 });
 
-var BaseView = Backbone.Layout.extend({});
+var BaseView = Backbone.Layout.extend({
+
+});
 
 var TeX = function () {
 
         var SliderView = BaseView.extend({
                 template: 'templates/sliders',
+                initialize: function (options) {
+                    this.options = options;
+                    if (!options.svg) {
+                        throw new Error('svg is required!');
+                    }
+
+                },                
                 serialize: function () {
                     var slider = this.options.slider;
                     return {
@@ -22256,6 +22265,13 @@ var TeX = function () {
 
         var SlidersView = BaseView.extend({
                 className: 'well interactive',
+                initialize: function (options) {
+                    this.options = options;
+                    if (!options.svg) {
+                        throw new Error('svg is required!');
+                    }
+
+                },
                 beforeRender: function () {
                     _.each(this.options.sliders, function (slider) {
                         var view = new SliderView({
@@ -22272,12 +22288,19 @@ var TeX = function () {
         var views = {
                 pspicture: BaseView.extend({
                     className: 'pspicture-view',
-                    initialize: function () {
+                    initialize: function (options) {
+                        this.options = options;
                         var env = this.env = this.options.content.settings;
                         var svg = this.svg = psgraph.init.call(env, this.el);
                         var self = this;
                         var plots = this.options.content.plot;
                         
+
+                        if (!this.svg) {
+                            throw new Error('svg is required!');
+                        }
+
+
                         svg.on('touchmove', function () {
                             d3.event.preventDefault();
                             var touchcoords = d3.touches(this)[0];
@@ -22481,23 +22504,25 @@ var TeX = function () {
                     if (!element.hasOwnProperty('type')) {
                         throw new Error('no type!');
                     }
-                    var view = _.any(views, function (view, hash) {
+                    var matchedView = null;
+                        _.any(views, function (view, hash) {
                             if (element.type == hash) {
                                 var fn = views[hash];
                                 if (_.isFunction(fn)) {
                                     var v = new fn({ content: element });
                                     this.insertView(v);
+                                    matchedView = v;
                                     return v;
                                 }
                             }
                         }, this);
-                    if (element.env && element.env.sliders && element.env.sliders.length) {
+                    if (matchedView && element.env && element.env.sliders && element.env.sliders.length) {
                         //give related interactive elements the SVG reference!!
                         var slidersView = new SlidersView({
                                 env: element.env,
                                 sliders: element.env.sliders,
                                 plot: element.plot,
-                                svg: view.svg
+                                svg: matchedView.svg
                             });
                         this.insertView(slidersView);
                     }
