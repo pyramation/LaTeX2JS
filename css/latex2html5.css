@@ -3,8 +3,10 @@
     text-align: center;
 }
 
-.home-image > img {
-    max-width: 600px;
+@media (min-width: 768px) {
+    .home-image > img {
+        max-width: 600px;
+    }
 }
 
 .index-font {
