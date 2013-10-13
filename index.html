@@ -31,45 +31,6 @@
 
     <body>
 
-        <math>
-The integral $\int f(x) dx = 0$
-        </math>
-
-        <parser>
-{
-  var parser;
-  parser = this;
-  parser.statements = [];
-  parser.addStatement = function (s) {
-    parser.statements.push.apply(parser.statements, arguments)
-  }
-}
-start 
- = statement* {return parser.statements;}
-
-statement
- = "\\" func:[a-z]+ s:squiggle* {parser.addStatement([func.join(""), s])}
-  / comment [\n\r\u2028\u2029]?
-  / _ [\n\r\u2028\u2029]  
-
-LineTerminator
-  = _ ","? comment? [\n\r\u2028\u2029]?
-
-comment
-  = _ "#" (anychar)*
-
-anychar
-  = [a-zA-Z0-9 .,#:{}@+?!^=()_\-$*/\\\[\]{}\"&`%\|]
-_
-  = (" "*)?
-
-__
-  = " "+ 
-
-squiggle
- = "{" arg:[^}]* "}" {return arg.join('')}
- </parser>
-
         <latex>
 \begin{center}
 \end{center}
@@ -85,23 +46,12 @@ squiggle
                 this.parse();
             };
             LaTeXPrototype.parse = function() {
-                this.result = window.parser.parse(this.textContent);
                 console.log(this.textContent);
                 this.textContent = 'LaTeX'; // parse LaTeX here
             };
 
             var LaTeX = document.register('latex', {
                 prototype: LaTeXPrototype
-            });
-
-            var parserPrototype = Object.create(HTMLElement.prototype);
-            parserPrototype.createdCallback = function() {
-                this.grammar = this.textContent;
-                window.parser = PEG.buildParser(this.grammar);
-                this.textContent = '';
-            };
-            var Parser = document.register('parser', {
-                prototype: parserPrototype
             });
 
         </script>
