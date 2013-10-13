@@ -3,6 +3,9 @@ LaTeX2HTML5
 
 This project is the frontend only version of [mathapedia](https://mathapedia.com) ([github](https://github.com/pyramation/LaTeX2HTML5))
 
+Simply [download](https://raw.github.com/Mathapedia/LaTeX2HTML5/master/latex2html5.min.js) and include the script on your website: 
+    &lt;script type=&quot;text/javascript&quot; src=&quot;latex2html5.min.js&quot;&gt;&lt;/script&gt; 
+
 
 The loose structure and nature of user interface design poses a problem for documenting science and related interfaces in a consistent manner. TeX provides us with some "laws" to obey in order to design the output of a text and graphical language around. Hence, we can attempt to create a synthesis of a structured user interface specification (TeX) and a structured functional specification (HTML5) to provide a publishing platform for the current and next generation.
 
