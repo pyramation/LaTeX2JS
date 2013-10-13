@@ -1,6 +1,8 @@
 LaTeX2HTML5
 ====================
 
+This project is the frontend only version of [mathapedia](https://mathapedia.com) ([github](https://github.com/pyramation/LaTeX2HTML5))
+
 
 The loose structure and nature of user interface design poses a problem for documenting science and related interfaces in a consistent manner. TeX provides us with some "laws" to obey in order to design the output of a text and graphical language around. Hence, we can attempt to create a synthesis of a structured user interface specification (TeX) and a structured functional specification (HTML5) to provide a publishing platform for the current and next generation.
 
@@ -8,7 +10,6 @@ The Art is where we can blend these two standards bodies; higher levels of abstr
 
 ![LaTeX2HTML5](http://latex2html5.com/assets/images/photo.png)
 
-This project is the frontend only version of [mathapedia](https://mathapedia.com) ([github](https://github.com/pyramation/LaTeX2HTML5))
 
 [video](http://www.youtube.com/watch?v=QYMLMUKJyFc)
 
@@ -25,7 +26,7 @@ git remote set-url origin git@github.com:Mathapedia/LaTeX2HTML5.git
 Thanks
 ======
 
-# Frontend
+# Frontend Requirements
 
 [MathJax](http://www.mathjax.org/)
     
