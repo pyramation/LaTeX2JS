@@ -1,0 +1,110 @@
+<html>
+    <head>
+        <script src="peg-0.7.0.js"></script>
+        <script src="polymer.min.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Arbutus+Slab" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="index.css">
+
+        <script type="text/x-mathjax-config">
+            // <![CDATA[
+            MathJax.Hub.Config({ 
+                TeX: {extensions: ["AMSmath.js", "AMSsymbols.js"]},     
+                extensions: ["tex2jax.js"],
+                jax: ["input/TeX", "output/HTML-CSS"],
+                showProcessingMessages : false,
+                messageStyle : "none" ,    
+                showMathMenu: false ,
+                tex2jax: {
+                    processEnvironments: true,
+                    inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                    displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                    preview : "none",
+                    processEscapes: true
+                },
+                "HTML-CSS": { linebreaks: { automatic:true, width: "container"} }
+            });
+            // ]]>
+        </script>
+
+        <script type="text/javascript" src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+    </head>
+
+    <body>
+
+        <math>
+The integral $\int f(x) dx = 0$
+        </math>
+
+        <parser>
+{
+  var parser;
+  parser = this;
+  parser.statements = [];
+  parser.addStatement = function (s) {
+    parser.statements.push.apply(parser.statements, arguments)
+  }
+}
+start 
+ = statement* {return parser.statements;}
+
+statement
+ = "\\" func:[a-z]+ s:squiggle* {parser.addStatement([func.join(""), s])}
+  / comment [\n\r\u2028\u2029]?
+  / _ [\n\r\u2028\u2029]  
+
+LineTerminator
+  = _ ","? comment? [\n\r\u2028\u2029]?
+
+comment
+  = _ "#" (anychar)*
+
+anychar
+  = [a-zA-Z0-9 .,#:{}@+?!^=()_\-$*/\\\[\]{}\"&`%\|]
+_
+  = (" "*)?
+
+__
+  = " "+ 
+
+squiggle
+ = "{" arg:[^}]* "}" {return arg.join('')}
+ </parser>
+
+        <latex>
+\begin{center}
+\end{center}
+\begin{center}
+\end{center}{asdf}{asdf}{->}{->}{asdf}
+        </latex>
+
+        <script>
+
+            var LaTeXPrototype = Object.create(HTMLElement.prototype);
+            LaTeXPrototype.createdCallback = function() {
+                this.tex = this.textContent;
+                this.parse();
+            };
+            LaTeXPrototype.parse = function() {
+                this.result = window.parser.parse(this.textContent);
+                console.log(this.textContent);
+                this.textContent = 'LaTeX'; // parse LaTeX here
+            };
+
+            var LaTeX = document.register('latex', {
+                prototype: LaTeXPrototype
+            });
+
+            var parserPrototype = Object.create(HTMLElement.prototype);
+            parserPrototype.createdCallback = function() {
+                this.grammar = this.textContent;
+                window.parser = PEG.buildParser(this.grammar);
+                this.textContent = '';
+            };
+            var Parser = document.register('parser', {
+                prototype: parserPrototype
+            });
+
+        </script>
+    </body>
+</html>
+
