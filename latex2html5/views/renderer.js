@@ -6,7 +6,9 @@
 
   
     Backbone.Layout.configure({
-        fetchTemplate: function(path) {
+        fetch: function(path) {
+
+            var JST = window.JST || {};
 
             var relative = '';
             var absolute = '';
@@ -43,18 +45,6 @@
 var BaseView = Backbone.Layout.extend({
 
 });
-
-var TeXMacro = Backbone.Layout.extend({
-    tagName: 'div',
-    className: 'macro',
-    attributes: {
-        style: 'display: none'
-    },
-    initialize: function () {
-        this.el.innerHTML = '$$\n' + this.options.latex + '$$\n';
-        $('body').append(this.el);
-    }
-})
 
 var TeX = (function(){
 
@@ -334,16 +324,32 @@ var TeX = (function(){
                     throw new Error('no type!');
                 }
 
-                var view = _.each(views, function (view, hash) {
+                var view = _.any(views, function (view, hash) {
                     if (element.type == hash) {
                         var fn = views[hash];
 
                         if (_.isFunction(fn)) {
                             var v = new fn({content: element});
                             this.insertView(v);
+                            return v;
                         }
                     }
+
                 }, this);
+
+
+                if (element.env && element.env.sliders && element.env.sliders.length) {
+
+                    //give related interactive elements the SVG reference!!
+                    var slidersView = new SlidersView({
+                        env: element.env,
+                        sliders: element.env.sliders,
+                        plot: element.plot,
+                        svg: view.svg
+                    });
+                    this.insertView(slidersView);
+                }
+
 
 
             }, this);
@@ -356,7 +362,7 @@ var TeX = (function(){
 })();
 
 var SliderView = BaseView.extend({
-    template: 'templates/sliders',
+    template: 'latex2html5/templates/sliders',
 
     serialize: function() {
         var slider = this.options.slider;

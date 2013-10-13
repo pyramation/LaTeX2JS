@@ -421,6 +421,13 @@
         return this.y1 - Number(v)/this.yunit;
     };
 
+    var Expressions = {
+        X: X,
+        Y: Y,
+        Xinv: Xinv,
+        Yinv: Yinv
+    };
+
     var RE = {
 
         // NOTE: ESCAPES MUST BE ESCAPED!
