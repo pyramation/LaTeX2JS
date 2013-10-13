@@ -126,10 +126,7 @@ var psgraph = (function(){
 
         },
         pscircle: function(svg) {
-
-
-alert('pscircle!');
-
+            
             svg.append('svg:circle')
             .attr('cx', this.cx)
             .attr('cy', this.cy)

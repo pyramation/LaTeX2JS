@@ -5,127 +5,60 @@
 
 
   
-    // Backbone.Layout.configure({
+    Backbone.Layout.configure({
+        fetchTemplate: function(path) {
 
-    //     fetchTemplate: function(path) {
+            var relative = '';
+            var absolute = '';
 
-    //         alert(path);
+            if (path.indexOf('/') === 0) {
+                relative = path.substr(1);
+                absolute = path;
+            } else {
+                relative = path;
+                absolute = '/' + path;
+            }
 
-    //         var relative = '';
-    //         var absolute = '';
+            relative += '.html';
+            absolute += '.html';
 
-    //         if (path.indexOf('/') === 0) {
-    //             relative = path.substr(1);
-    //             absolute = path;
-    //         } else {
-    //             relative = path;
-    //             absolute = '/' + path;
-    //         }
+            var done = this.async();
 
-    //         relative += '.html';
-    //         absolute += '.html';
+            if (JST.hasOwnProperty(relative)) {
+                return done(JST[relative]);
+            }
 
-    //         var done = this.async();
+            $.get(absolute, function(contents) {
+                var tmpl = Handlebars.compile(contents);
+                done(JST[relative] = tmpl);
+            }, "text");
 
-    //         if (JST.hasOwnProperty(relative)) {
-    //             return done(JST[relative]);
-    //         }
+        },
+        renderTemplate: function(template, context) {
+            return template(context);
+        }
 
-    //         $.get(absolute, function(contents) {
-    //             var tmpl = Handlebars.compile(contents);
-    //             done(JST[relative] = tmpl);
-    //         }, "text");
+    });
 
-    //     },
-    //     renderTemplate: function(template, context) {
-    //         return template(context);
-    //     }
-
-    // });
-
-
-// var BaseView = Backbone.View.extend({
- 
-//         initialize: function () {
-
-            
-//             this.render = _.wrap(this.render, function(render) {
-//                 this.beforeRender();
-//                 render();                       
-//                 this.afterRender();
-//             });                     
-            
-//             this.render();
-//         },
- 
-//         render: function () {
-//             console.log('Inside render');
-//             return this;
-//         },
-        
-//         beforeRender: function () {
-//             console.log("Before render");
-//         },
-        
-//         afterRender: function () {
-//             console.log("After render");
-//         }
- 
-
-// });
-var BaseView = Backbone.View.extend({
+var BaseView = Backbone.Layout.extend({
 
 });
 
-// var BaseView = Backbone.View.extend({
-//   // Override this property to specify the path to the template.
-//   template: "",
-
-//   // Override this method to provide the right data to your template.
-//   serialize: function() {
-//     return {};
-//   },
-
-//   // Overrideable fetch method to get the template contents, pass a callback to
-//   // get the contents.
-//   fetch: function(done) {
-//     // Using jQuery, execute a GET request to asynchronously load the template
-//     // from the filesystem.
-
-
-
-//     alert(this.template + ".html");
-
-//     $.get(this.template + ".html", function(contents) {
-//       // Trigger the callback with the compiled template function.
-//       done(Handlebars.compile(con));
-//     });
-
-//   },
-
-//   // This method now looks for the above `template` and `serialize` properties
-//   // in order to render.
-//   render: function() {
-//     // Fetch the template.
-
-//     alert('render!!!!!!!!!!!');
-
-//     this.fetch(function(template) {
-//       // Render the markup.
-//       var markup = template(this.serialize());
-
-//       // Put the content into this Views element.
-//       this.$el.html(markup);
-//     });
-
-//     // Allow chaining.
-//     return this;
-//   }
-// });
+var TeXMacro = Backbone.Layout.extend({
+    tagName: 'div',
+    className: 'macro',
+    attributes: {
+        style: 'display: none'
+    },
+    initialize: function () {
+        this.el.innerHTML = '$$\n' + this.options.latex + '$$\n';
+        $('body').append(this.el);
+    }
+})
 
 var TeX = (function(){
 
-    var views = window.views = {
+    var views = {
 
         pspicture: BaseView.extend({
 
@@ -241,7 +174,6 @@ var TeX = (function(){
             },
 
             afterRender: function() {
-
 
                 var env = this.env;
                 var svg = this.svg;
@@ -385,58 +317,37 @@ var TeX = (function(){
 
     };
 
-
-
     return BaseView.extend({
 
-        className: 'latex2html5',
-
-        initialize: function() {
-
-            window.lastScrollTo = $(document).scrollTop();
-
-            alert('render BaseView?');
-
+        initialize: function (options) {
+            if (options.latex) {
+                 var parser = new Parser();
+                 this.options.parsed = parser.parse(options.latex);
+            }
         },
 
         beforeRender: function() {
 
-            // iterate through the parsed object!
-            // insert subviews
-
-            // create MATH view
-            // create PSTRICKS view
-
-            alert('in beforeRender');
-
-            _.each(this.options.latex, function(element) {
+            _.each(this.options.parsed, function(element) {
 
                 if (! element.hasOwnProperty('type')) {
                     throw new Error('no type!');
                 }
 
-
-
-                _.any(views, function (view, hash) {
+                var view = _.each(views, function (view, hash) {
                     if (element.type == hash) {
-                        var fn = view[hash];
+                        var fn = views[hash];
+
                         if (_.isFunction(fn)) {
-                            fn.call(this, element);
-                            alert('found it!');
-                            return true;
+                            var v = new fn({content: element});
+                            this.insertView(v);
                         }
                     }
                 }, this);
 
+
             }, this);
 
-        },
-
-        afterRender: function() {
-            window.scrollTo(0, window.lastScrollTo);
-
-
-            alert('afterRender');
 
         }
 

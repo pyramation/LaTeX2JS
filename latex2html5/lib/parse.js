@@ -22,13 +22,10 @@ Parser.prototype = {
         this.parseEnv(lines);
         
         _.each(this.objects, function(obj) {
-            console.log(obj.type);
             if (obj.type.match(/pspicture/)) {
                 obj.plot = this.parsePSTricks(obj.lines, obj.env);
             }
         }, this);
-
-
 
         return this.objects;
 
@@ -205,18 +202,30 @@ Parser.prototype = {
 
     parsePSExpression: function (line, exp, plot, k, env) {
 
-
-
         var match = line.match(exp);
         if (match) {
 
-            plot[k].push(
-                {
-                    data: PSTricks.Functions[k].call(env, match),
-                    env: env,
-                    match: match,
-                    fn: PSTricks.Functions[k]
-                });
+
+            if (k == 'pscircle') {
+                plot[k].push(
+                    {
+                        data: PSTricks.Functions[k].call(env, match),
+                        env: env,
+                        match: match,
+                        fn: PSTricks.Functions[k]
+                    });
+
+            } else {
+                plot[k].push(
+                        {
+                            data: PSTricks.Functions[k].call(env, match),
+                            env: env,
+                            match: match,
+                            fn: PSTricks.Functions[k]
+                        });
+                
+            }
+
             return true;
         }
         return false;
