@@ -56,15 +56,14 @@ body {
 }
 
 .container {
+  max-width: 870px;
   margin-right: auto;
   margin-left: auto;
   *zoom: 1;
 }
 
 @media (min-width: 1200px) {
-  .container {
-    max-width: 870px;
-  }
+
 }
 
 @media (min-width: 768px) and (max-width: 979px) {
@@ -87,4 +86,14 @@ body {
   body {
     padding-top: 0;
   }
+}
+
+
+
+img {
+  height: auto;
+  max-width: 100%;
+  vertical-align: middle;
+  border: 0;
+  -ms-interpolation-mode: bicubic;
 }
