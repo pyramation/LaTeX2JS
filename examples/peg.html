@@ -1,7 +1,6 @@
 <html>
     <head>
-        <script src="../components/peg/peg.js"></script>
-        <script src="../components/polymer/polymer.min.js"></script>
+        <script src="./peg.js"></script>
 
 
         <link href="https://fonts.googleapis.com/css?family=Arbutus+Slab" rel="stylesheet" type="text/css">
@@ -37,8 +36,7 @@
 The integral $\int f(x) dx = 0$
         </math>
 
-        <parser>
-{
+<script type="peg/grammar">{
   var parser;
   parser = this;
   parser.statements = [];
@@ -69,42 +67,20 @@ __
   = " "+ 
 
 squiggle
- = "{" arg:[^}]* "}" {return arg.join('')}
- </parser>
+ = "{" arg:[^}]* "}" {return arg.join('')}</script>
 
-        <latex>
-\begin{center}
+<script type="peg/program">\begin{center}
 \end{center}
 \begin{center}
-\end{center}{asdf}{asdf}{->}{->}{asdf}
-        </latex>
+\end{center}{asdf}{asdf}{->}{->}{asdf}</script>
 
         <script>
 
-            var LaTeXPrototype = Object.create(HTMLElement.prototype);
-            LaTeXPrototype.createdCallback = function() {
-                this.tex = this.textContent;
-                this.parse();
-            };
-            LaTeXPrototype.parse = function() {
-                this.result = window.parser.parse(this.textContent);
-                console.log(this.textContent);
-                this.textContent = 'LaTeX'; // parse LaTeX here
-            };
-
-            var LaTeX = document.register('latex', {
-                prototype: LaTeXPrototype
-            });
-
-            var parserPrototype = Object.create(HTMLElement.prototype);
-            parserPrototype.createdCallback = function() {
-                this.grammar = this.textContent;
-                window.parser = PEG.buildParser(this.grammar);
-                this.textContent = '';
-            };
-            var Parser = document.register('parser', {
-                prototype: parserPrototype
-            });
+        var program = document.querySelector('script[type="peg/program"]').textContent;
+        var grammar = document.querySelector('script[type="peg/grammar"]').textContent;
+        var parser = PEG.buildParser(grammar);
+        var res = parser.parse(program);
+        console.log(res);
 
         </script>
     </body>
