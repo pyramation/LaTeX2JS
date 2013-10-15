@@ -24580,30 +24580,40 @@ keys = _.keys(LayoutManager.prototype.options);
   });
   return d3;
 }();;var LaTeX2HTML5 = {
-    version: '0.0.1'
+    version: '0.0.1',
+    addEnvironment: function(name) {
+        var delim = {};
+        delim.begin = new RegExp('\\\\begin\\{'+name+'\\}');
+        delim.end = new RegExp('\\\\end\\{'+name+'\\}');
+        LaTeX2HTML5.Delimiters[name] = delim;
+    },
+
+    addView: function (name, options) {
+        LaTeX2HTML5.addEnvironment(name);
+        var view = {};
+        LaTeX2HTML5.Views[name] = LaTeX2HTML5.BaseEnvView.extend(options);
+    },
+
+    addText: function (name, exp, func) {
+
+        LaTeX2HTML5.Text.Expressions[name] = exp;
+        LaTeX2HTML5.Text.Functions[name] = func;
+
+    }
+
+
 };;(function (LaTeX2HTML5) {
-    var Delimiters = LaTeX2HTML5.Delimiters = {
-            pspicture: {
-                begin: /\\begin\{pspicture\}/,
-                end: /\\end\{pspicture\}/
-            },
-            verbatim: {
-                begin: /^\\begin\{verbatim\}/,
-                end: /^\\end\{verbatim\}/
-            },
-            enumerate: {
-                begin: /\\begin\{enumerate\}/,
-                end: /\\end\{enumerate\}/
-            },
-            print: {
-                begin: /\\begin\{print\}/,
-                end: /\\end\{print\}/
-            },
-            nicebox: {
-                begin: /\\begin\{nicebox\}/,
-                end: /\\end\{nicebox\}/
-            }
-        };
+    var Delimiters = LaTeX2HTML5.Delimiters = {};
+
+    _.each(['pspicture',
+        'verbatim',
+        'enumerate',
+        'print',
+        'nicebox'
+        ], function (name) {
+            LaTeX2HTML5.addEnvironment(name);
+        });
+
     var Ignore = LaTeX2HTML5.Ignore = [
             /^\%/,
             /\\begin\{document\}/,
@@ -24706,12 +24716,16 @@ keys = _.keys(LayoutManager.prototype.options);
     /**
 * TEXT
 */
-    var simplerepl = function (regex, replace) {
+    LaTeX2HTML5.utils = {
+
+    };
+
+    var simplerepl = LaTeX2HTML5.utils.simplerepl = function (regex, replace) {
         return function (m, contents) {
             return contents.replace(regex, replace);
         };
     };
-    var matchrepl = function (regex, callback) {
+    var matchrepl = LaTeX2HTML5.utils.matchrepl = function (regex, callback) {
         return function (m, contents) {
             _.each(m, function (match) {
                 var m2 = match.match(regex);
