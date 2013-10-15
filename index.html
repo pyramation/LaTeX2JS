@@ -273,6 +273,31 @@ $$
 
 <script type="tex/latex">
 
+\begin{pspicture}(0,-3)(8,3)
+\rput(0,0){$x(t)$}
+\rput(4,1.5){$f(t)$}
+\rput(4,-1.5){$g(t)$}
+\rput(8.2,0){$y(t)$}
+\rput(1.5,-2){$h(t)$}
+\psframe(1,-2.5)(7,2.5)
+\psframe(3,1)(5,2)
+\psframe(3,-1)(5,-2)
+\rput(4,0){$X_k = \frac{1}{p} \sum \limits_{n=\langle p\rangle}x(n)e^{-ik\omega_0n}$}
+\psline{->}(0.5,0)(1.5,0)
+\psline{->}(1.5,1.5)(3,1.5)
+\psline{->}(1.5,-1.5)(3,-1.5)
+\psline{->}(6.5,1.5)(6.5,0.25)
+\psline{->}(6.5,-1.5)(6.5,-0.25)
+\psline{->}(6.75,0)(7.75,0)
+\psline(1.5,-1.5)(1.5,1.5)
+\psline(5,1.5)(6.5,1.5)
+\psline(5,-1.5)(6.5,-1.5)
+\psline(6,-1.5)(6.5,-1.5)
+\pscircle(6.5,0){0.25}
+\psline(6.25,0)(6.75,0)
+\psline(6.5,0.5)(6.5,-0.5)
+\end{pspicture}
+
 What frequencies can be present in a signal $\vec{x}$? The harmonics are given by a signal with period $p$ are $\{0,\omega_0,2\omega_0,\dots,(p-1)\omega_0\}$. Notice that $p\omega_0$ is missing. This is because $e^{ip\omega_0n}=e^{i2\pi n} = e^{i0n}$. Keep in mind that $\omega_0 = 2\pi/p$. In fact, the complex exponential basis of vectors is periodic with respect to $n$ and their indices $k$. 
 
 \begin{align*}
@@ -290,7 +315,6 @@ $$ \hat{x}(t) = \sum \limits_{k=-N}^{N}\alpha_k e^{ik\omega_0 t}   $$
 
 How can we determine the coefficients that make the estimates closest in terms of error energy? Let $W\in\R^{2N+1}$ be a subspace spanned by the set of orthogonal basis vectors $\Psi_0, \Psi_1, \Psi_{-1} \dots, \Psi_{N}, \Psi_{-N}$. If $x$ is a vector that is not in the column space of $W$, then we can project $x$ onto the column space of $W$, producing an approximation vector $\hat{x}$, which has a distance of $\abs{\left| \mathcal{E}_N\right|}$ from the vector $x$. The vectors $\mathcal{E}_N$ and $\hat{x}$ are orthogonal.
 
-% \img{images/bases/projtheory/proj.ps}
 
 \psset{unit=1cm}
 \begin{center}
