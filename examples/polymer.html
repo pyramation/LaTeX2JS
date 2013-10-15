@@ -56,6 +56,7 @@
         <script type="text/javascript"src="../components/layoutmanager/backbone.layoutmanager.js"></script>
 
         <!-- latex2html5 -->
+        <script type="text/javascript" src="../lib/init.js"></script>
         <script type="text/javascript" src="../lib/expressions.js"></script>
         <script type="text/javascript" src="../lib/parse.js"></script>
         <script type="text/javascript" src="../lib/psgraph.js"></script>
@@ -605,7 +606,7 @@ The next example allows you to move the height of the graph and also integrate o
                 };
                 LaTeXPrototype.parse = function() {
 
-                        var TEX = new TeX({
+                        var TEX = new LaTeX2HTML5.TeX({
                             latex: this.tex
                         });
 

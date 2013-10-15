@@ -19,7 +19,12 @@ module.exports = function (grunt) {
                     'components/backbone/backbone.js', 
                     'components/layoutmanager/backbone.layoutmanager.js', 
                     'components/d3/d3.js',
-                    'lib/*.js'],
+                    'lib/init.js',
+                    'lib/expressions.js',
+                    'lib/parse.js',
+                    'lib/psgraph.js',
+                    'lib/renderer.js'
+                    ],
                 dest: 'dist/latex2html5.js',
             },
         },

@@ -24579,8 +24579,10 @@ keys = _.keys(LayoutManager.prototype.options);
     return request.responseXML;
   });
   return d3;
-}();;(function (root) {
-    var Delimiters = {
+}();;var LaTeX2HTML5 = {
+    version: '0.0.1'
+};;(function (LaTeX2HTML5) {
+    var Delimiters = LaTeX2HTML5.Delimiters = {
             pspicture: {
                 begin: /\\begin\{pspicture\}/,
                 end: /\\end\{pspicture\}/
@@ -24602,7 +24604,7 @@ keys = _.keys(LayoutManager.prototype.options);
                 end: /\\end\{nicebox\}/
             }
         };
-    var Ignore = [
+    var Ignore = LaTeX2HTML5.Ignore = [
             /^\%/,
             /\\begin\{document\}/,
             /\\end\{document\}/,
@@ -24623,7 +24625,7 @@ keys = _.keys(LayoutManager.prototype.options);
             /\\begin\{center\}/,
             /\\end\{center\}/
         ];
-    var Headers = {
+    var Headers = LaTeX2HTML5.Headers = {
             Expressions: {
                 bq: /\\begin\{quotation\}/,
                 eq: /\\end\{quotation\}/,
@@ -24718,7 +24720,7 @@ keys = _.keys(LayoutManager.prototype.options);
             return contents;
         };
     };
-    var Text = {
+    LaTeX2HTML5.Text = {
             Expressions: {
                 emph: /\\emph\{[^}]*\}/g,
                 bf: /\{*\\bf [^}]*\}/g,
@@ -24738,9 +24740,11 @@ keys = _.keys(LayoutManager.prototype.options);
                 img: /\\img\{[^}]*\}/g,
                 set: /\\set\{[^}]*\}/g,
                 youtube: /\\youtube\{[^}]*\}/g,
-                euler: /Euler\^/g
+                euler: /Euler\^/g,
+
             },
             Functions: {
+
                 cite: function (m, contents) {
                     _.each(m, function (match) {
                         var m2 = match.match(/\\cite\[(\d+)\]\{([^}]*)\}/);
@@ -24943,13 +24947,14 @@ keys = _.keys(LayoutManager.prototype.options);
             coordsOpt: '(\\(\\s*([^\\)]*),([^\\)]*)\\s*\\))?',
             coords: '\\(\\s*([^\\)]*),([^\\)]*)\\s*\\)'
         };
-    var Expressions = {
+
+    LaTeX2HTML5.Transformations = {
             X: X,
             Y: Y,
             Xinv: Xinv,
             Yinv: Yinv
         };
-    var PSTricks = {
+    LaTeX2HTML5.PSTricks = {
             Expressions: {
                 pspicture: /\\begin\{pspicture\}\(\s*(.*),(.*)\s*\)\(\s*(.*),(.*)\s*\)/,
                 psframe: /\\psframe\(\s*(.*),(.*)\s*\)\(\s*(.*),(.*)\s*\)/,
@@ -25364,1018 +25369,843 @@ keys = _.keys(LayoutManager.prototype.options);
                 }
             }
         };
-    root.PSTricks = PSTricks;
-    root.Headers = Headers;
-    root.Ignore = Ignore;
-    root.Delimiters = Delimiters;
-    root.Expressions = Expressions;
-}(window));
-;function Parser() {
-    this.objects = [];
-    this.environment = null;
-    // emulating a match
-    this.settings = PSTricks.Functions.psset.call(this, [
-        '',
-        'units=1cm,linecolor=black,linestyle=solid,fillstyle=none'
-    ]);
-}
-Parser.prototype = {
-    parse: function (text) {
-        if (!text)
-            return {};
-        var lines = text.split('\n');
-        this.parseEnvText(lines);
-        this.parseEnv(lines);
-        _.each(this.objects, function (obj) {
-            if (obj.type.match(/pspicture/)) {
-                obj.plot = this.parsePSTricks(obj.lines, obj.env);
-            }
-        }, this);
-        return this.objects;
-    },
-    newEnvironment: function (type) {
-        if (this.environment && this.environment.lines.length) {
-            this.environment.settings = _.clone(this.settings);
-            this.objects.push(this.environment);
-        }
-        this.environment = {
-            type: type,
-            lines: []
-        };
-    },
-    pushLine: function (line) {
-        var add = true;
-        _.each(Ignore, function (exp) {
-            if (exp.test(line)) {
-                add = false;
-            }
-        });
-        if (add) {
-            if (typeof line === 'string' && line.trim().length) {
-                if (PSTricks.Expressions.psset.test(line)) {
-                    this.parseUnits(line);
-                } else {
-                    this.environment.lines.push(line);
-                }
-            }
-        }
-    },
-    parseUnits: function (line) {
-        var m = line.match(PSTricks.Expressions.psset);
-        _.extend(this.settings, PSTricks.Functions.psset.call(this, m));
-    },
-    metaData: function (environment, line) {
-        if (PSTricks.Expressions.hasOwnProperty(environment)) {
-            this.environment.match = line.match(PSTricks.Expressions[environment]);
-            this.environment.env = PSTricks.Functions[environment].call(this.settings, this.environment.match);
-            if (environment.match(/pspicture/)) {
-                _.defaults(this.environment.env, _.pick(this.settings, 'xunit', 'yunit'));
-            }
-        }
-    },
-    parseEnv: function (lines) {
+}(LaTeX2HTML5));
+;(function(LaTeX2HTML5) {
+
+    var PSTricks = LaTeX2HTML5.PSTricks;
+    var Delimiters = LaTeX2HTML5.Delimiters;
+    var Headers = LaTeX2HTML5.Headers;
+    var Ignore = LaTeX2HTML5.Ignore;
+
+
+
+    function Parser() {
         this.objects = [];
-        this.environment = {
-            type: 'math',
-            lines: []
-        };
-        // for(var i=0; i<lines.length; i++) {
-        //     var line = lines[i];
-        var print = false;
-        _.each(lines, function (line) {
-            var isDelim = false;
-            _.each(Delimiters, function (type, env) {
-                _.each(type, function (delim, k) {
-                    if (line.match(delim)) {
-                        isDelim = true;
-                        if (k.match(/begin/)) {
-                            if (this.environment.type.match(/verbatim/)) {
-                                isDelim = false;
-                            } else if (this.environment.type.match(/print/)) {
-                                isDelim = false;
-                            } else {
-                                this.newEnvironment(env);
-                                this.metaData(env, line);
-                            }
-                        } else if (k.match(/end/)) {
-                            if (this.environment.type.match(/verbatim/)) {
-                                if (env.match(/verbatim/)) {
-                                    this.newEnvironment('math');
-                                } else {
-                                    isDelim = false;
-                                }
-                            } else if (this.environment.type.match(/print/)) {
-                                if (env.match(/print/)) {
-                                    this.newEnvironment('math');
-                                } else {
-                                    isDelim = false;
-                                }
-                            } else {
-                                this.newEnvironment('math');
-                            }
-                        }
-                    }
-                }, this);
-            }, this);
-            if (!isDelim)
-                this.pushLine(line);    // }
-        }, this);
-        // push last!
-        this.newEnvironment('math');
-    },
-    parseEnvText: function (lines) {
-        var _env = 'math';
-        _.each(lines, function (line, i) {
-            var isDelim = false;
-            _.each(Delimiters, function (type, env) {
-                _.each(type, function (delim, k) {
-                    if (line.match(delim)) {
-                        isDelim = true;
-                        if (k.match(/begin/)) {
-                            if (!_env.match(/verbatim/)) {
-                                _env = env;
-                            } else {
-                                isDelim = false;
-                            }
-                        } else if (k.match(/end/)) {
-                            if (!_env.match(/verbatim/)) {
-                                _env = 'math';
-                            } else {
-                                if (!env.match(/verbatim/)) {
-                                    isDelim = false;
-                                } else {
-                                    _env = 'math';
-                                }
-                            }
-                        }
-                    }
-                }, this);
-            }, this);
-            if (!isDelim) {
-                if (!_env.match(/verbatim/)) {
-                    lines[i] = this.parseText(line);
+        this.environment = null;
+        // emulating a match
+        this.settings = PSTricks.Functions.psset.call(this, [
+            '',
+            'units=1cm,linecolor=black,linestyle=solid,fillstyle=none'
+        ]);
+    }
+    Parser.prototype = {
+        parse: function (text) {
+            if (!text)
+                return {};
+            var lines = text.split('\n');
+            this.parseEnvText(lines);
+            this.parseEnv(lines);
+            _.each(this.objects, function (obj) {
+                if (obj.type.match(/pspicture/)) {
+                    obj.plot = this.parsePSTricks(obj.lines, obj.env);
                 }
-                if (!line.trim().length) {
-                    lines[i] = '<br>';
-                }
+            }, this);
+            return this.objects;
+        },
+        newEnvironment: function (type) {
+            if (this.environment && this.environment.lines.length) {
+                this.environment.settings = _.clone(this.settings);
+                this.objects.push(this.environment);
             }
-        }, this);
-    },
-    parsePSExpression: function (line, exp, plot, k, env) {
-        var match = line.match(exp);
-        if (match) {
-            plot[k].push({
-                data: PSTricks.Functions[k].call(env, match),
-                env: env,
-                match: match,
-                fn: PSTricks.Functions[k]
+            this.environment = {
+                type: type,
+                lines: []
+            };
+        },
+        pushLine: function (line) {
+            var add = true;
+            _.each(Ignore, function (exp) {
+                if (exp.test(line)) {
+                    add = false;
+                }
             });
-            return true;
-        }
-        return false;
-    },
-    parsePSVariables: function (line, exp, plot, k, env) {
-        var match = line.match(exp);
-        if (match) {
-            if (k.match(/uservariable/)) {
-                var dd = PSTricks.Functions[k].call(env, match);
-                env.variables = env.variables || {};
-                env.variables[dd.name] = dd.value;
+            if (add) {
+                if (typeof line === 'string' && line.trim().length) {
+                    if (PSTricks.Expressions.psset.test(line)) {
+                        this.parseUnits(line);
+                    } else {
+                        this.environment.lines.push(line);
+                    }
+                }
             }
-        }
-    },
-    parsePSTricks: function (lines, env) {
-        var plot = {};
-        _.each(PSTricks.Expressions, function (exp, k) {
-            plot[k] = [];
-        });
-        _.each(lines, function (line) {
-            _.each(PSTricks.Expressions, function (exp, k) {
-                this.parsePSVariables(line, exp, plot, k, env);
-                this.parsePSExpression(line, exp, plot, k, env);
+        },
+        parseUnits: function (line) {
+            var m = line.match(PSTricks.Expressions.psset);
+            _.extend(this.settings, PSTricks.Functions.psset.call(this, m));
+        },
+        metaData: function (environment, line) {
+            if (PSTricks.Expressions.hasOwnProperty(environment)) {
+                this.environment.match = line.match(PSTricks.Expressions[environment]);
+                this.environment.env = PSTricks.Functions[environment].call(this.settings, this.environment.match);
+                if (environment.match(/pspicture/)) {
+                    _.defaults(this.environment.env, _.pick(this.settings, 'xunit', 'yunit'));
+                }
+            }
+        },
+        parseEnv: function (lines) {
+            this.objects = [];
+            this.environment = {
+                type: 'math',
+                lines: []
+            };
+            // for(var i=0; i<lines.length; i++) {
+            //     var line = lines[i];
+            var print = false;
+            _.each(lines, function (line) {
+                var isDelim = false;
+                _.each(Delimiters, function (type, env) {
+                    _.each(type, function (delim, k) {
+                        if (line.match(delim)) {
+                            isDelim = true;
+                            if (k.match(/begin/)) {
+                                if (this.environment.type.match(/verbatim/)) {
+                                    isDelim = false;
+                                } else if (this.environment.type.match(/print/)) {
+                                    isDelim = false;
+                                } else {
+                                    this.newEnvironment(env);
+                                    this.metaData(env, line);
+                                }
+                            } else if (k.match(/end/)) {
+                                if (this.environment.type.match(/verbatim/)) {
+                                    if (env.match(/verbatim/)) {
+                                        this.newEnvironment('math');
+                                    } else {
+                                        isDelim = false;
+                                    }
+                                } else if (this.environment.type.match(/print/)) {
+                                    if (env.match(/print/)) {
+                                        this.newEnvironment('math');
+                                    } else {
+                                        isDelim = false;
+                                    }
+                                } else {
+                                    this.newEnvironment('math');
+                                }
+                            }
+                        }
+                    }, this);
+                }, this);
+                if (!isDelim)
+                    this.pushLine(line);    // }
             }, this);
-        }, this);
-        return plot;
-    },
-    parseTextExpression: function (line, exp, k, contents) {
-        var match = line.match(exp);
-        if (match) {
-            return Text.Functions[k].call(this, match, contents);
-        }
-        return contents;
-    },
-    parseHeadersExpression: function (line, exp, k, contents) {
-        var match = line.match(exp);
-        if (match) {
-            return Headers.Functions[k].call(this);
-        }
-        return contents;
-    },
-    parseText: function (line) {
-        var contents = line;
-        // TEXT
-        _.each(Text.Expressions, function (exp, k) {
-            contents = this.parseTextExpression(line, exp, k, contents);
-        }, this);
-        // HEADERS
-        _.each(Headers.Expressions, function (exp, k) {
-            contents = this.parseHeadersExpression(line, exp, k, contents);
-        }, this);
-        return contents;
-    }
-};;var psgraph = (function(){
-
-    // http://mathforum.org/library/drmath/view/54146.html
-    function arrow(x1, y1, x2, y2) {
-
-        var t = Math.PI/6;
-
-        // d is the length of the arrowhead line
-        var d = 8;
-
-        // l is the length of the line AB = sqrt((x1-x0)^2 + (y1-y0)^2)
-        var dx = x2-x1, dy=y2-y1;
-        var l =Math.sqrt(dx*dx+dy*dy);
-
-        var cost = Math.cos(t);
-        var sint = Math.sin(t);
-        var dl = d/l;
-
-        var x = x2 - (dx*cost - dy*sint)*dl;
-        var y = y2 - (dy*cost + dx*sint)*dl;
-
-        var context = [];
-        context.push('M');
-        context.push(x2);
-        context.push(y2);
-        context.push('L');
-        context.push(x);
-        context.push(y);
-
-        cost = Math.cos(-t);
-        sint = Math.sin(-t);
-
-        x = x2 - (dx*cost - dy*sint)*dl;
-        y = y2 - (dy*cost + dx*sint)*dl;
-
-        // context.push('L');
-        context.push(x);
-        context.push(y);
-
-        context.push('Z');
-        return context.join(' ');
-
-    }
-
-    return {
-
-        init: function(el) {
-
-            var padding = 20;
-            this.scale = 1;
-
-            var goalWidth = $(window).width() - padding;
-            if (goalWidth <= this.w * this.xunit) {
-                this.scale = goalWidth / this.w / this.xunit;
+            // push last!
+            this.newEnvironment('math');
+        },
+        parseEnvText: function (lines) {
+            var _env = 'math';
+            _.each(lines, function (line, i) {
+                var isDelim = false;
+                _.each(Delimiters, function (type, env) {
+                    _.each(type, function (delim, k) {
+                        if (line.match(delim)) {
+                            isDelim = true;
+                            if (k.match(/begin/)) {
+                                if (!_env.match(/verbatim/)) {
+                                    _env = env;
+                                } else {
+                                    isDelim = false;
+                                }
+                            } else if (k.match(/end/)) {
+                                if (!_env.match(/verbatim/)) {
+                                    _env = 'math';
+                                } else {
+                                    if (!env.match(/verbatim/)) {
+                                        isDelim = false;
+                                    } else {
+                                        _env = 'math';
+                                    }
+                                }
+                            }
+                        }
+                    }, this);
+                }, this);
+                if (!isDelim) {
+                    if (!_env.match(/verbatim/)) {
+                        lines[i] = this.parseText(line);
+                    }
+                    if (!line.trim().length) {
+                        lines[i] = '<br>';
+                    }
+                }
+            }, this);
+        },
+        parsePSExpression: function (line, exp, plot, k, env) {
+            var match = line.match(exp);
+            if (match) {
+                plot[k].push({
+                    data: PSTricks.Functions[k].call(env, match),
+                    env: env,
+                    match: match,
+                    fn: PSTricks.Functions[k]
+                });
+                return true;
             }
-
-            var width = this.w * this.xunit;
-            var height = this.h * this.yunit;
-           
-
-
-            var svg = d3.select(el).append('svg:svg')
-            .attr("width", width)
-            .attr("height", height);
-
-            // .append('g')
-            // .attr('transform', 'scale('+ this.scale + ')');
-
-            // so we can center the diagrams, lets set the width
-            $(el)
-            .width(width)
-            .height(height);
-
-            return svg;
-
+            return false;
         },
-
-        psframe: function(svg) {
-
-            // svg.append("svg:rect")
-            //   .attr("x", this.x2)
-            //   .attr("y", this.y2)
-            //   .attr("height", Math.abs(this.y2 - this.y1))
-            //   .attr("width", Math.abs(this.x1 - this.x2))
-            // .style("stroke-width", 2)
-            // .style("fill-color", "rgba(0,0,0,0)")
-            //   .style("stroke", "rgb(0,0,0)")
-            //   .style("stroke-opacity", 1);
-
-            svg.append('svg:line')
-            .attr("x1", this.x1)
-            .attr("y1", this.y1)
-            .attr("x2", this.x2)
-            .attr("y2", this.y1)
-            .style("stroke-width", 2)
-            .style("stroke", "rgb(0,0,0)")
-            .style("stroke-opacity", 1);
-
-            svg.append('svg:line')
-            .attr("x1", this.x2)
-            .attr("y1", this.y1)
-            .attr("x2", this.x2)
-            .attr("y2", this.y2)
-            .style("stroke-width", 2)
-            .style("stroke", "rgb(0,0,0)")
-            .style("stroke-opacity", 1);
-
-            svg.append('svg:line')
-            .attr("x1", this.x2)
-            .attr("y1", this.y2)
-            .attr("x2", this.x1)
-            .attr("y2", this.y2)
-            .style("stroke-width", 2)
-            .style("stroke", "rgb(0,0,0)")
-            .style("stroke-opacity", 1);
-
-            svg.append('svg:line')
-            .attr("x1", this.x1)
-            .attr("y1", this.y2)
-            .attr("x2", this.x1)
-            .attr("y2", this.y1)
-            .style("stroke-width", 2)
-            .style("stroke", "rgb(0,0,0)")
-            .style("stroke-opacity", 1);
-
-
+        parsePSVariables: function (line, exp, plot, k, env) {
+            var match = line.match(exp);
+            if (match) {
+                if (k.match(/uservariable/)) {
+                    var dd = PSTricks.Functions[k].call(env, match);
+                    env.variables = env.variables || {};
+                    env.variables[dd.name] = dd.value;
+                }
+            }
         },
-        pscircle: function(svg) {
-            
-            svg.append('svg:circle')
-            .attr('cx', this.cx)
-            .attr('cy', this.cy)
-            .attr('r', this.r)
-            .style("stroke", "black")
-            .style("fill", "none")
-            .style("stroke-width", 2)
-            .style("stroke-opacity", 1);
-
+        parsePSTricks: function (lines, env) {
+            var plot = {};
+            _.each(PSTricks.Expressions, function (exp, k) {
+                plot[k] = [];
+            });
+            _.each(lines, function (line) {
+                _.each(PSTricks.Expressions, function (exp, k) {
+                    this.parsePSVariables(line, exp, plot, k, env);
+                    this.parsePSExpression(line, exp, plot, k, env);
+                }, this);
+            }, this);
+            return plot;
         },
+        parseTextExpression: function (line, exp, k, contents) {
+            var match = line.match(exp);
+            if (match) {
+                return LaTeX2HTML5.Text.Functions[k].call(this, match, contents);
+            }
+            return contents;
+        },
+        parseHeadersExpression: function (line, exp, k, contents) {
+            var match = line.match(exp);
+            if (match) {
+                return Headers.Functions[k].call(this);
+            }
+            return contents;
+        },
+        parseText: function (line) {
+            var contents = line;
+            // TEXT
+            _.each(LaTeX2HTML5.Text.Expressions, function (exp, k) {
+                contents = this.parseTextExpression(line, exp, k, contents);
+            }, this);
+            // HEADERS
+            _.each(Headers.Expressions, function (exp, k) {
+                contents = this.parseHeadersExpression(line, exp, k, contents);
+            }, this);
+            return contents;
+        }
+    };
 
-        psplot: function(svg) {
+    LaTeX2HTML5.Parser = Parser;
+
+}(LaTeX2HTML5));
+;(function(LaTeX2HTML5) {
+
+    var psgraph = (function(){
+
+        // http://mathforum.org/library/drmath/view/54146.html
+        function arrow(x1, y1, x2, y2) {
+
+            var t = Math.PI/6;
+
+            // d is the length of the arrowhead line
+            var d = 8;
+
+            // l is the length of the line AB = sqrt((x1-x0)^2 + (y1-y0)^2)
+            var dx = x2-x1, dy=y2-y1;
+            var l =Math.sqrt(dx*dx+dy*dy);
+
+            var cost = Math.cos(t);
+            var sint = Math.sin(t);
+            var dl = d/l;
+
+            var x = x2 - (dx*cost - dy*sint)*dl;
+            var y = y2 - (dy*cost + dx*sint)*dl;
 
             var context = [];
             context.push('M');
-            if (this.fillstyle === 'solid') {
-                context.push(this.data[0]);
-                context.push(Expressions.Y.call(this.global, 0));
-            } else {                
-                context.push(this.data[0]);
-                context.push(this.data[1]);
-            }
+            context.push(x2);
+            context.push(y2);
             context.push('L');
-            
-            _.each(this.data, function(data) {
-                context.push(data);
-            });            
+            context.push(x);
+            context.push(y);
 
-            if (this.fillstyle === 'solid') {
-                context.push(this.data[this.data.length - 2]);
-                context.push(Expressions.Y.call(this.global, 0));
-                context.push('Z');
-            }
+            cost = Math.cos(-t);
+            sint = Math.sin(-t);
 
-            svg.append('svg:path')
-                .attr("d",context.join(' '))
-                .attr('class', 'psplot')
-                .style("stroke-width", this.linewidth)
-                .style("stroke-opacity", 1)
-                .style("fill", this.fillstyle  === 'none' ? 'none' : this.fillcolor)
-                .style('stroke', this.linecolor);
+            x = x2 - (dx*cost - dy*sint)*dl;
+            y = y2 - (dy*cost + dx*sint)*dl;
 
+            // context.push('L');
+            context.push(x);
+            context.push(y);
 
-        },
-
-        pspolygon: function (svg) {
-
-            var context = [];
-            context.push('M');
-            context.push(this.data[0]);
-            context.push(this.data[1]);
-            context.push('L');
-            
-            _.each(this.data, function(data) {
-                context.push(data);
-            });            
             context.push('Z');
+            return context.join(' ');
+
+        }
+
+        return {
+
+            init: function(el) {
+
+                var padding = 20;
+                this.scale = 1;
+
+                var goalWidth = $(window).width() - padding;
+                if (goalWidth <= this.w * this.xunit) {
+                    this.scale = goalWidth / this.w / this.xunit;
+                }
+
+                var width = this.w * this.xunit;
+                var height = this.h * this.yunit;
+               
 
 
-            svg.append('svg:path')
-                .attr("d",context.join(' '))
-                .style("stroke-width", this.linewidth)
-                .style("stroke-opacity", 1)
-                .style("fill", this.fillstyle === 'none' ? 'none' : this.fillcolor)
-                .style('stroke', 'black');
+                var svg = d3.select(el).append('svg:svg')
+                .attr("width", width)
+                .attr("height", height);
 
-        },
+                // .append('g')
+                // .attr('transform', 'scale('+ this.scale + ')');
 
-        psarc: function(svg) {
+                // so we can center the diagrams, lets set the width
+                $(el)
+                .width(width)
+                .height(height);
 
+                return svg;
 
-            // http://www.w3.org/TR/SVG/paths.html#PathDataEllipticalArcCommands
-            var context = [];
-            context.push('M');
-            context.push(this.cx);
-            context.push(this.cy);
-            context.push('L');
-            context.push(this.A.x);
-            context.push(this.A.y);
+            },
 
-            context.push('A');
-            // context.push('a');
+            psframe: function(svg) {
 
-            context.push(this.A.x);
-            context.push(this.A.y);
+                // svg.append("svg:rect")
+                //   .attr("x", this.x2)
+                //   .attr("y", this.y2)
+                //   .attr("height", Math.abs(this.y2 - this.y1))
+                //   .attr("width", Math.abs(this.x1 - this.x2))
+                // .style("stroke-width", 2)
+                // .style("fill-color", "rgba(0,0,0,0)")
+                //   .style("stroke", "rgb(0,0,0)")
+                //   .style("stroke-opacity", 1);
 
-            context.push(0);
-            context.push(0);
-            context.push(0);
-
-            context.push(this.B.x);
-            context.push(this.B.y);
-
-
-
-
-
-
-
-            svg.append('svg:path')
-                .attr("d",context.join(' '))
-                .style("stroke-width", 2)
-                .style("stroke-opacity", 1)
-                .style("fill", "blue")
-                .style('stroke', 'black');
-
-            // svg.append('svg:circle')
-            // .attr('cx', this.cx)
-            // .attr('cy', this.cy)
-            // .attr('r', this.r)
-            // .style("stroke", this.linecolor)
-            // .style("fill", "none")
-            // .style("stroke-width", 2)
-            // .style("stroke-opacity", 1);            
-
-        },
-
-        psaxes: function(svg) {
-
-            var xaxis = [this.bottomLeft[0], this.topRight[0]];
-            var yaxis = [this.bottomLeft[1], this.topRight[1]];
-
-            var origin = this.origin;
-
-            function line(x1,y1,x2,y2) {
-                svg.append('svg:path')
-                .attr("d", 'M ' + x1 + ' ' + y1 + ' L ' + x2 + ' ' + y2)
+                svg.append('svg:line')
+                .attr("x1", this.x1)
+                .attr("y1", this.y1)
+                .attr("x2", this.x2)
+                .attr("y2", this.y1)
                 .style("stroke-width", 2)
                 .style("stroke", "rgb(0,0,0)")
                 .style("stroke-opacity", 1);
-            }
 
-            var xticks = function() {
-                   // draw ticks
-                for(var x=xaxis[0]; x<=xaxis[1]; x+=this.dx) {
-                    line(x, origin[1]-5, x, origin[1]+5);
+                svg.append('svg:line')
+                .attr("x1", this.x2)
+                .attr("y1", this.y1)
+                .attr("x2", this.x2)
+                .attr("y2", this.y2)
+                .style("stroke-width", 2)
+                .style("stroke", "rgb(0,0,0)")
+                .style("stroke-opacity", 1);
+
+                svg.append('svg:line')
+                .attr("x1", this.x2)
+                .attr("y1", this.y2)
+                .attr("x2", this.x1)
+                .attr("y2", this.y2)
+                .style("stroke-width", 2)
+                .style("stroke", "rgb(0,0,0)")
+                .style("stroke-opacity", 1);
+
+                svg.append('svg:line')
+                .attr("x1", this.x1)
+                .attr("y1", this.y2)
+                .attr("x2", this.x1)
+                .attr("y2", this.y1)
+                .style("stroke-width", 2)
+                .style("stroke", "rgb(0,0,0)")
+                .style("stroke-opacity", 1);
+
+
+            },
+            pscircle: function(svg) {
+                
+                svg.append('svg:circle')
+                .attr('cx', this.cx)
+                .attr('cy', this.cy)
+                .attr('r', this.r)
+                .style("stroke", "black")
+                .style("fill", "none")
+                .style("stroke-width", 2)
+                .style("stroke-opacity", 1);
+
+            },
+
+            psplot: function(svg) {
+
+                var context = [];
+                context.push('M');
+                if (this.fillstyle === 'solid') {
+                    context.push(this.data[0]);
+                    context.push(LaTeX2HTML5.Transformations.Y.call(this.global, 0));
+                } else {                
+                    context.push(this.data[0]);
+                    context.push(this.data[1]);
+                }
+                context.push('L');
+                
+                _.each(this.data, function(data) {
+                    context.push(data);
+                });            
+
+                if (this.fillstyle === 'solid') {
+                    context.push(this.data[this.data.length - 2]);
+                    context.push(LaTeX2HTML5.Transformations.Y.call(this.global, 0));
+                    context.push('Z');
                 }
 
-            };
+                svg.append('svg:path')
+                    .attr("d",context.join(' '))
+                    .attr('class', 'psplot')
+                    .style("stroke-width", this.linewidth)
+                    .style("stroke-opacity", 1)
+                    .style("fill", this.fillstyle  === 'none' ? 'none' : this.fillcolor)
+                    .style('stroke', this.linecolor);
 
-            var yticks = function() {
+
+            },
+
+            pspolygon: function (svg) {
+
+                var context = [];
+                context.push('M');
+                context.push(this.data[0]);
+                context.push(this.data[1]);
+                context.push('L');
+                
+                _.each(this.data, function(data) {
+                    context.push(data);
+                });            
+                context.push('Z');
+
+
+                svg.append('svg:path')
+                    .attr("d",context.join(' '))
+                    .style("stroke-width", this.linewidth)
+                    .style("stroke-opacity", 1)
+                    .style("fill", this.fillstyle === 'none' ? 'none' : this.fillcolor)
+                    .style('stroke', 'black');
+
+            },
+
+            psarc: function(svg) {
+
+
+                // http://www.w3.org/TR/SVG/paths.html#PathDataEllipticalArcCommands
+                var context = [];
+                context.push('M');
+                context.push(this.cx);
+                context.push(this.cy);
+                context.push('L');
+                context.push(this.A.x);
+                context.push(this.A.y);
+
+                context.push('A');
+                // context.push('a');
+
+                context.push(this.A.x);
+                context.push(this.A.y);
+
+                context.push(0);
+                context.push(0);
+                context.push(0);
+
+                context.push(this.B.x);
+                context.push(this.B.y);
+
+
+
+
+
+
+
+                svg.append('svg:path')
+                    .attr("d",context.join(' '))
+                    .style("stroke-width", 2)
+                    .style("stroke-opacity", 1)
+                    .style("fill", "blue")
+                    .style('stroke', 'black');
+
+                // svg.append('svg:circle')
+                // .attr('cx', this.cx)
+                // .attr('cy', this.cy)
+                // .attr('r', this.r)
+                // .style("stroke", this.linecolor)
+                // .style("fill", "none")
+                // .style("stroke-width", 2)
+                // .style("stroke-opacity", 1);            
+
+            },
+
+            psaxes: function(svg) {
+
+                var xaxis = [this.bottomLeft[0], this.topRight[0]];
+                var yaxis = [this.bottomLeft[1], this.topRight[1]];
+
+                var origin = this.origin;
+
+                function line(x1,y1,x2,y2) {
+                    svg.append('svg:path')
+                    .attr("d", 'M ' + x1 + ' ' + y1 + ' L ' + x2 + ' ' + y2)
+                    .style("stroke-width", 2)
+                    .style("stroke", "rgb(0,0,0)")
+                    .style("stroke-opacity", 1);
+                }
+
+                var xticks = function() {
+                       // draw ticks
+                    for(var x=xaxis[0]; x<=xaxis[1]; x+=this.dx) {
+                        line(x, origin[1]-5, x, origin[1]+5);
+                    }
+
+                };
+
+                var yticks = function() {
+
+                    // draw ticks
+                    for(var y=yaxis[0]; y<=yaxis[1]; y+=this.dy) {
+                        line(origin[0]-5, y, origin[0]+5, y);
+                    }
+
+                };
+
+
+                // draw axes
+                line(xaxis[0], origin[1], xaxis[1], origin[1]);
+                line(origin[0], yaxis[0], origin[0], yaxis[1]);
+
 
                 // draw ticks
-                for(var y=yaxis[0]; y<=yaxis[1]; y+=this.dy) {
-                    line(origin[0]-5, y, origin[0]+5, y);
+                if (this.ticks.match(/all/)) {
+                    xticks();
+                    yticks();
+                } else if (this.ticks.match(/x/)) {
+                    xticks();
+                } else if (this.ticks.match(/y/)) {
+                    yticks();
                 }
 
-            };
+                if (this.arrows[0]) {
+                  svg.append('path')
+                  .attr('d', arrow(xaxis[1], origin[1], xaxis[0], origin[1]))
+                  .style("fill", "black")
+                  .style('stroke', 'black');
+
+                  svg.append('path')
+                  .attr('d', arrow(origin[0], yaxis[1], origin[0], yaxis[0]))
+                  .style("fill", "black")
+                  .style('stroke', 'black');
 
-
-            // draw axes
-            line(xaxis[0], origin[1], xaxis[1], origin[1]);
-            line(origin[0], yaxis[0], origin[0], yaxis[1]);
-
-
-            // draw ticks
-            if (this.ticks.match(/all/)) {
-                xticks();
-                yticks();
-            } else if (this.ticks.match(/x/)) {
-                xticks();
-            } else if (this.ticks.match(/y/)) {
-                yticks();
-            }
-
-            if (this.arrows[0]) {
-              svg.append('path')
-              .attr('d', arrow(xaxis[1], origin[1], xaxis[0], origin[1]))
-              .style("fill", "black")
-              .style('stroke', 'black');
-
-              svg.append('path')
-              .attr('d', arrow(origin[0], yaxis[1], origin[0], yaxis[0]))
-              .style("fill", "black")
-              .style('stroke', 'black');
-
-            }
-
-            if (this.arrows[1]) {            
-              svg.append('path')
-              .attr('d', arrow(xaxis[0], origin[1], xaxis[1], origin[1]))
-              .style("fill", "black")
-              .style('stroke', 'black');
-
-
-              svg.append('path')
-              .attr('d', arrow(origin[0], yaxis[0], origin[0], yaxis[1]))
-              .style("fill", "black")
-              .style('stroke', 'black');
-
-            }
-           
-
-
-
-        },
-        psline: function(svg) {
-
-            var linewidth = this.linewidth,
-            linecolor = this.linecolor;
-
-            function solid(x1,y1,x2,y2) {
-                svg.append('svg:path')
-                .attr("d", 'M ' + x1 + ' ' + y1 + ' L ' + x2 + ' ' + y2)
-                .style("stroke-width", linewidth)
-                .style("stroke", linecolor)
-                .style("stroke-opacity", 1);
-            }
-
-
-            function dashed(x1,y1,x2,y2) {
-
-                svg.append('svg:path')
-                .attr("d", 'M ' + x1 + ' ' + y1 + ' L ' + x2 + ' ' + y2)
-                .style("stroke-width", linewidth)
-                .style("stroke", linecolor)
-                .style("stroke-dasharray", "9,5")
-                .style("stroke-opacity", 1);
-            }
-
-            function dotted(x1,y1,x2,y2) {
-                svg.append('svg:path')
-                .attr("d", 'M ' + x1 + ' ' + y1 + ' L ' + x2 + ' ' + y2)
-                .style("stroke-width", linewidth)
-                .style("stroke", linecolor)
-                .style("stroke-dasharray", "9,5")
-                .style("stroke-opacity", 1);
-            }
-
-            // draw line
-            if (this.linestyle.match(/dotted/)) {
-                dotted(this.x1, this.y1, this.x2, this.y2);
-            } else if (this.linestyle.match(/dashed/)) {
-                dashed(this.x1, this.y1, this.x2, this.y2);
-            } else {
-                solid(this.x1, this.y1, this.x2, this.y2);
-            }
-
-
-            // for arrows we have to calculate
-            // var dx = this.x2-this.x1, dy=this.y2-this.y1, len=Math.sqrt(dx*dx+dy*dy);
-
-            // ADD DOTS
-
-            if (this.dots[0]) {
-
-                svg.append('svg:circle')
-                .attr('cx', this.x1)
-                .attr('cy', this.y1)
-                .attr('r', 3)
-                .style("stroke", this.linecolor)
-                .style("fill", this.linecolor)
-                .style("stroke-width", 1)
-                .style("stroke-opacity", 1);
-
-
-            }
-
-            if (this.dots[1]) {
-
-                svg.append('svg:circle')
-                .attr('cx', this.x2)
-                .attr('cy', this.y2)
-                .attr('r', 3)
-                .style("stroke", this.linecolor)
-                .style("fill", this.linecolor)
-                .style("stroke-width", 1)
-                .style("stroke-opacity", 1);
-
-            }
-
-            var x1 = this.x1,
-            y1 = this.y1,
-            x2 = this.x2,
-            y2 = this.y2;
-
-
-            if (this.arrows[0]) {
-              svg.append('path')
-              .attr('d', arrow(x2, y2, x1, y1))
-              .style("fill", this.linecolor)
-              .style('stroke', this.linecolor);
-
-            }
-
-            if (this.arrows[1]) {            
-              svg.append('path')
-              .attr('d', arrow(x1, y1, x2, y2))
-              .style("fill", this.linecolor)
-              .style('stroke', this.linecolor);
-            }
-
-        },
-
-        userline: function(svg) {
-
-            var linewidth = this.linewidth,
-            linecolor = this.linecolor;
-
-            function solid(x1,y1,x2,y2) {
-                svg.append('svg:path')
-                .attr('class', 'userline')
-                .attr("d", 'M ' + x1 + ' ' + y1 + ' L ' + x2 + ' ' + y2)
-                .style("stroke-width", linewidth)
-                .style("stroke", linecolor)
-                .style("stroke-opacity", 1);
-            }
-
-
-            function dashed(x1,y1,x2,y2) {
-
-                svg.append('svg:path')
-                .attr("d", 'M ' + x1 + ' ' + y1 + ' L ' + x2 + ' ' + y2)
-                .attr('class', 'userline')
-                .style("stroke-width", linewidth)
-                .style("stroke", linecolor)
-                .style("stroke-dasharray", "9,5")
-                .style("stroke-opacity", 1);
-            }
-
-            function dotted(x1,y1,x2,y2) {
-                svg.append('svg:path')
-                .attr("d", 'M ' + x1 + ' ' + y1 + ' L ' + x2 + ' ' + y2)
-                .attr('class', 'userline')
-                .style("stroke-width", linewidth)
-                .style("stroke", linecolor)
-                .style("stroke-dasharray", "9,5")
-                .style("stroke-opacity", 1);
-            }
-
-            // draw line
-            if (this.linestyle.match(/dotted/)) {
-                dotted(this.x1, this.y1, this.x2, this.y2);
-            } else if (this.linestyle.match(/dashed/)) {
-                dashed(this.x1, this.y1, this.x2, this.y2);
-            } else {
-                solid(this.x1, this.y1, this.x2, this.y2);
-            }
-
-
-            // for arrows we have to calculate
-            // var dx = this.x2-this.x1, dy=this.y2-this.y1, len=Math.sqrt(dx*dx+dy*dy);
-
-            // ADD DOTS
-
-            if (this.dots[0]) {
-
-                svg.append('svg:circle')
-                .attr('cx', this.x1)
-                .attr('cy', this.y1)
-                .attr('r', 3)
-                .attr('class', 'userline')
-                .style("stroke", this.linecolor)
-                .style("fill", this.linecolor)
-                .style("stroke-width", 1)
-                .style("stroke-opacity", 1);
-
-
-            }
-
-            if (this.dots[1]) {
-
-                svg.append('svg:circle')
-                .attr('cx', this.x2)
-                .attr('cy', this.y2)
-                .attr('r', 3)
-                .attr('class', 'userline')
-                .style("stroke", this.linecolor)
-                .style("fill", this.linecolor)
-                .style("stroke-width", 1)
-                .style("stroke-opacity", 1);
-
-            }
-
-            var x1 = this.x1,
-            y1 = this.y1,
-            x2 = this.x2,
-            y2 = this.y2;
-
-
-            if (this.arrows[0]) {
-              svg.append('path')
-              .attr('d', arrow(x2, y2, x1, y1))
-              .attr('class', 'userline')
-              .style("fill", this.linecolor)
-              .style('stroke', this.linecolor);
-
-            }
-
-            if (this.arrows[1]) {            
-              svg.append('path')
-              .attr('d', arrow(x1, y1, x2, y2))
-              .attr('class', 'userline')
-              .style("fill", this.linecolor)
-              .style('stroke', this.linecolor);
-            }
-
-        },
-
-        rput: function(el) {
-
-            var $_ = $('<div></div>');
-
-            $_.html(this.text).css({
-                position: 'absolute',
-                top: this.y,
-                left: this.x
-            });
-
-            $(el).append($_);
-
-            var process = MathJax.Hub.Queue(["Typeset",MathJax.Hub,$_[0]]);
-            if (typeof process === 'function') process();
-
-            //rput defaults to centering the element in pstricks, so then so do we!
-            var x = this.x;
-            var y = this.y;
-            setTimeout(function(){
-                var w = $_.width();
-                var h = $_.height();
-                $_.css({
-                    top: y-h/2,
-                    left: x-w/2
-                });
-            },0);
-
-            return $_;
-
-        }
-
-    };
-
-})();;Backbone.Layout.configure({
-    fetch: function (path) {
-        var JST = window.JST || {};
-        var relative = '';
-        var absolute = '';
-        if (path.indexOf('/') === 0) {
-            relative = path.substr(1);
-            absolute = path;
-        } else {
-            relative = path;
-            absolute = '/' + path;
-        }
-        relative += '.html';
-        absolute += '.html';
-        var done = this.async();
-        if (JST.hasOwnProperty(relative)) {
-            return done(JST[relative]);
-        }
-        $.get(absolute, function (contents) {
-            var tmpl = Handlebars.compile(contents);
-            done(JST[relative] = tmpl);
-        }, 'text');
-    },
-    renderTemplate: function (template, context) {
-        return template(context);
-    }
-});
-
-var BaseView = Backbone.Layout.extend({
-
-});
-
-var BaseEnvView = BaseView.extend({
-    beforeRender: function () {
-        $(this.el).html(this.options.content.lines.join('\n'));
-    },
-    afterRender: function () {
-        var process = MathJax.Hub.Queue([
-                'Typeset',
-                MathJax.Hub,
-                this.el
-            ]);
-        if (typeof process === 'function')
-            process();
-    }
-});
-
-var TeXViews = {};
-
-_.extend(TeXViews, {
-    pspicture: BaseView.extend({
-        className: 'pspicture-view',
-        initialize: function (options) {
-            this.options = options;
-            var env = this.env = this.options.content.settings;
-            var svg = this.svg = psgraph.init.call(env, this.el);
-            var self = this;
-            var plots = this.options.content.plot;
-            
-
-            if (!this.svg) {
-                throw new Error('svg is required!');
-            }
-
-
-            svg.on('touchmove', function () {
-                d3.event.preventDefault();
-                var touchcoords = d3.touches(this)[0];
-                userEvent(touchcoords);
-            }, false);
-            
-            svg.on('mousemove', function () {
-                var coords = d3.mouse(this);
-                userEvent(coords);
-            }, false);
-
-            function userEvent(coords) {
-                svg.selectAll('.userline').remove();
-                svg.selectAll('.psplot').remove();
-                var currentEnvironment = {};
-                // find special vars
-                _.each(plots, function (plot, k) {
-                    if (k.match(/uservariable/)) {
-                        _.each(plot, function (data) {
-                            data.env.userx = coords[0];
-                            data.env.usery = coords[1];
-                            var dd = data.fn.call(data.env, data.match);
-                            currentEnvironment[data.data.name] = dd.value;
-                        });
-                    }
-                });
-                _.each(plots, function (plot, k) {
-                    if (k.match(/psplot/)) {
-                        _.each(plot, function (data) {
-                            _.each(currentEnvironment, function (variable, name) {
-                                data.env.variables[name] = variable;
-                            });
-                            var d = data.fn.call(data.env, data.match);
-                            d.global = {};
-                            _.extend(d.global, env);
-                            // give pspicture!
-                            psgraph[k].call(d, svg);
-                        });
-                    }
-                    if (k.match(/userline/)) {
-                        _.each(plot, function (data) {
-                            var d = data.fn.call(data.env, data.match);
-                            data.env.x2 = coords[0];
-                            // / env.xunit;
-                            data.env.y2 = coords[1];
-                            // / env.yunit;
-                            data.data.x2 = data.env.x2;
-                            data.data.y2 = data.env.y2;
-                            if (data.data.xExp2) {
-                                data.data.x2 = d.userx2(coords);
-                                data.data.x1 = d.userx(coords);
-                            } else if (data.data.xExp) {
-                                data.data.x2 = d.userx(coords);
-                            }
-                            if (data.data.yExp2) {
-                                data.data.y2 = d.usery2(coords);
-                                data.data.y1 = d.usery(coords);
-                            } else if (data.data.yExp) {
-                                data.data.y2 = d.usery(coords);
-                            }
-                            d.global = {};
-                            _.extend(d.global, env);
-                            // give pspicture!
-                            _.extend(d, data.data);
-                            psgraph[k].call(d, svg);
-                        });
-                    }
-                });
-            }
-        },
-        afterRender: function () {
-            var env = this.env;
-            var svg = this.svg;
-            var el = this.el;
-            var plots = this.options.content.plot;
-            _.each(plots, function (plot, k) {
-                if (k.match(/rput/))
-                    return;
-                if (psgraph.hasOwnProperty(k)) {
-                    _.each(plot, function (data) {
-                        data.data.global = env;
-                        // give access to pspicture!
-                        psgraph[k].call(data.data, svg);
-                    });
                 }
-            });
-            _.each(plots.rput, function (rput) {
-                var elem = psgraph.rput.call(rput.data, this.el);
-            }, this);
-        }
-    }),
 
-    math: BaseEnvView.extend({
-        className: 'mathjax-view'
-    }),
+                if (this.arrows[1]) {            
+                  svg.append('path')
+                  .attr('d', arrow(xaxis[0], origin[1], xaxis[1], origin[1]))
+                  .style("fill", "black")
+                  .style('stroke', 'black');
 
-    nicebox: BaseEnvView.extend({
-        className: 'well'
-    }),
 
-    enumerate: BaseEnvView.extend({
-        className: 'mathjax-view',
-        tagName: 'ul',
-        beforeRender: function () {
-            var ls = [];
-            _.each(this.options.content.lines, function (line) {
-                var m = line.match(/\\item (.*)/);
-                if (m) {
-                    ls.push('<li>' + m[1] + '</li>');
+                  svg.append('path')
+                  .attr('d', arrow(origin[0], yaxis[0], origin[0], yaxis[1]))
+                  .style("fill", "black")
+                  .style('stroke', 'black');
+
+                }
+               
+
+
+
+            },
+            psline: function(svg) {
+
+                var linewidth = this.linewidth,
+                linecolor = this.linecolor;
+
+                function solid(x1,y1,x2,y2) {
+                    svg.append('svg:path')
+                    .attr("d", 'M ' + x1 + ' ' + y1 + ' L ' + x2 + ' ' + y2)
+                    .style("stroke-width", linewidth)
+                    .style("stroke", linecolor)
+                    .style("stroke-opacity", 1);
+                }
+
+
+                function dashed(x1,y1,x2,y2) {
+
+                    svg.append('svg:path')
+                    .attr("d", 'M ' + x1 + ' ' + y1 + ' L ' + x2 + ' ' + y2)
+                    .style("stroke-width", linewidth)
+                    .style("stroke", linecolor)
+                    .style("stroke-dasharray", "9,5")
+                    .style("stroke-opacity", 1);
+                }
+
+                function dotted(x1,y1,x2,y2) {
+                    svg.append('svg:path')
+                    .attr("d", 'M ' + x1 + ' ' + y1 + ' L ' + x2 + ' ' + y2)
+                    .style("stroke-width", linewidth)
+                    .style("stroke", linecolor)
+                    .style("stroke-dasharray", "9,5")
+                    .style("stroke-opacity", 1);
+                }
+
+                // draw line
+                if (this.linestyle.match(/dotted/)) {
+                    dotted(this.x1, this.y1, this.x2, this.y2);
+                } else if (this.linestyle.match(/dashed/)) {
+                    dashed(this.x1, this.y1, this.x2, this.y2);
                 } else {
-                    ls.push(line);
+                    solid(this.x1, this.y1, this.x2, this.y2);
                 }
-            });
-            $(this.el).html(ls.join('\n'));
-        }
-    }),
 
-    verbatim: BaseView.extend({
-        tagName: 'pre',
+
+                // for arrows we have to calculate
+                // var dx = this.x2-this.x1, dy=this.y2-this.y1, len=Math.sqrt(dx*dx+dy*dy);
+
+                // ADD DOTS
+
+                if (this.dots[0]) {
+
+                    svg.append('svg:circle')
+                    .attr('cx', this.x1)
+                    .attr('cy', this.y1)
+                    .attr('r', 3)
+                    .style("stroke", this.linecolor)
+                    .style("fill", this.linecolor)
+                    .style("stroke-width", 1)
+                    .style("stroke-opacity", 1);
+
+
+                }
+
+                if (this.dots[1]) {
+
+                    svg.append('svg:circle')
+                    .attr('cx', this.x2)
+                    .attr('cy', this.y2)
+                    .attr('r', 3)
+                    .style("stroke", this.linecolor)
+                    .style("fill", this.linecolor)
+                    .style("stroke-width", 1)
+                    .style("stroke-opacity", 1);
+
+                }
+
+                var x1 = this.x1,
+                y1 = this.y1,
+                x2 = this.x2,
+                y2 = this.y2;
+
+
+                if (this.arrows[0]) {
+                  svg.append('path')
+                  .attr('d', arrow(x2, y2, x1, y1))
+                  .style("fill", this.linecolor)
+                  .style('stroke', this.linecolor);
+
+                }
+
+                if (this.arrows[1]) {            
+                  svg.append('path')
+                  .attr('d', arrow(x1, y1, x2, y2))
+                  .style("fill", this.linecolor)
+                  .style('stroke', this.linecolor);
+                }
+
+            },
+
+            userline: function(svg) {
+
+                var linewidth = this.linewidth,
+                linecolor = this.linecolor;
+
+                function solid(x1,y1,x2,y2) {
+                    svg.append('svg:path')
+                    .attr('class', 'userline')
+                    .attr("d", 'M ' + x1 + ' ' + y1 + ' L ' + x2 + ' ' + y2)
+                    .style("stroke-width", linewidth)
+                    .style("stroke", linecolor)
+                    .style("stroke-opacity", 1);
+                }
+
+
+                function dashed(x1,y1,x2,y2) {
+
+                    svg.append('svg:path')
+                    .attr("d", 'M ' + x1 + ' ' + y1 + ' L ' + x2 + ' ' + y2)
+                    .attr('class', 'userline')
+                    .style("stroke-width", linewidth)
+                    .style("stroke", linecolor)
+                    .style("stroke-dasharray", "9,5")
+                    .style("stroke-opacity", 1);
+                }
+
+                function dotted(x1,y1,x2,y2) {
+                    svg.append('svg:path')
+                    .attr("d", 'M ' + x1 + ' ' + y1 + ' L ' + x2 + ' ' + y2)
+                    .attr('class', 'userline')
+                    .style("stroke-width", linewidth)
+                    .style("stroke", linecolor)
+                    .style("stroke-dasharray", "9,5")
+                    .style("stroke-opacity", 1);
+                }
+
+                // draw line
+                if (this.linestyle.match(/dotted/)) {
+                    dotted(this.x1, this.y1, this.x2, this.y2);
+                } else if (this.linestyle.match(/dashed/)) {
+                    dashed(this.x1, this.y1, this.x2, this.y2);
+                } else {
+                    solid(this.x1, this.y1, this.x2, this.y2);
+                }
+
+
+                // for arrows we have to calculate
+                // var dx = this.x2-this.x1, dy=this.y2-this.y1, len=Math.sqrt(dx*dx+dy*dy);
+
+                // ADD DOTS
+
+                if (this.dots[0]) {
+
+                    svg.append('svg:circle')
+                    .attr('cx', this.x1)
+                    .attr('cy', this.y1)
+                    .attr('r', 3)
+                    .attr('class', 'userline')
+                    .style("stroke", this.linecolor)
+                    .style("fill", this.linecolor)
+                    .style("stroke-width", 1)
+                    .style("stroke-opacity", 1);
+
+
+                }
+
+                if (this.dots[1]) {
+
+                    svg.append('svg:circle')
+                    .attr('cx', this.x2)
+                    .attr('cy', this.y2)
+                    .attr('r', 3)
+                    .attr('class', 'userline')
+                    .style("stroke", this.linecolor)
+                    .style("fill", this.linecolor)
+                    .style("stroke-width", 1)
+                    .style("stroke-opacity", 1);
+
+                }
+
+                var x1 = this.x1,
+                y1 = this.y1,
+                x2 = this.x2,
+                y2 = this.y2;
+
+
+                if (this.arrows[0]) {
+                  svg.append('path')
+                  .attr('d', arrow(x2, y2, x1, y1))
+                  .attr('class', 'userline')
+                  .style("fill", this.linecolor)
+                  .style('stroke', this.linecolor);
+
+                }
+
+                if (this.arrows[1]) {            
+                  svg.append('path')
+                  .attr('d', arrow(x1, y1, x2, y2))
+                  .attr('class', 'userline')
+                  .style("fill", this.linecolor)
+                  .style('stroke', this.linecolor);
+                }
+
+            },
+
+            rput: function(el) {
+
+                var $_ = $('<div></div>');
+
+                $_.html(this.text).css({
+                    position: 'absolute',
+                    top: this.y,
+                    left: this.x
+                });
+
+                $(el).append($_);
+
+                var process = MathJax.Hub.Queue(["Typeset",MathJax.Hub,$_[0]]);
+                if (typeof process === 'function') process();
+
+                //rput defaults to centering the element in pstricks, so then so do we!
+                var x = this.x;
+                var y = this.y;
+                setTimeout(function(){
+                    var w = $_.width();
+                    var h = $_.height();
+                    $_.css({
+                        top: y-h/2,
+                        left: x-w/2
+                    });
+                },0);
+
+                return $_;
+
+            }
+
+        };
+
+    })();
+
+    LaTeX2HTML5.Graph = psgraph;
+
+}(LaTeX2HTML5));;(function(LaTeX2HTML5) {
+
+
+    var Graph = LaTeX2HTML5.Graph;
+
+    Backbone.Layout.configure({
+        fetch: function (path) {
+            var JST = window.JST || {};
+            var relative = '';
+            var absolute = '';
+            if (path.indexOf('/') === 0) {
+                relative = path.substr(1);
+                absolute = path;
+            } else {
+                relative = path;
+                absolute = '/' + path;
+            }
+            relative += '.html';
+            absolute += '.html';
+            var done = this.async();
+            if (JST.hasOwnProperty(relative)) {
+                return done(JST[relative]);
+            }
+            $.get(absolute, function (contents) {
+                var tmpl = Handlebars.compile(contents);
+                done(JST[relative] = tmpl);
+            }, 'text');
+        },
+        renderTemplate: function (template, context) {
+            return template(context);
+        }
+    });
+
+    var BaseView = LaTeX2HTML5.BaseView = Backbone.Layout.extend({
+
+    });
+
+    var BaseEnvView = LaTeX2HTML5.BaseEnvView = BaseView.extend({
         beforeRender: function () {
             $(this.el).html(this.options.content.lines.join('\n'));
-        }
-    }),
-
-    slider: BaseView.extend({
-        template: 'templates/sliders',
-        initialize: function (options) {
-            this.options = options;
-            if (!options.svg) {
-                throw new Error('svg is required!');
-            }
-
-        },                
-        serialize: function () {
-            var slider = this.options.slider;
-            return {
-                latex: slider.latex,
-                scalar: slider.scalar,
-                variable: slider.variable,
-                min: slider.min * slider.scalar,
-                max: slider.max * slider.scalar,
-                value: slider.value
-            };
         },
         afterRender: function () {
-            var slid = this.$('input[type=range]');
-            var p = this.$('h4+p');
-            var svg = this.options.svg;
-            var env = this.options.env;
-            var plots = this.options.plot;
-            // THIS SHOULD DELEGATE, NOT BE RESPONSIBLE FOR RENDERING! 
-            slid.on('change', function () {
-                var value = this.value / this.getAttribute('scalar');
-                var variable = this.getAttribute('variable');
-                p.html(value);
-                env.variables[variable] = value;
-                svg.selectAll('.psplot').remove();
-                _.each(plots, function (plot, k) {
-                    if (k.match(/psplot/)) {
-                        _.each(plot, function (data) {
-                            var d = data.fn.call(data.env, data.match);
-                            // var d = _.extend({}, data, env);
-                            psgraph[k].call(d, svg);
-                        });
-                    }
-                });
-            });
             var process = MathJax.Hub.Queue([
                     'Typeset',
                     MathJax.Hub,
@@ -26384,66 +26214,263 @@ _.extend(TeXViews, {
             if (typeof process === 'function')
                 process();
         }
-    }),
+    });
 
-    sliders: BaseView.extend({
-        className: 'well interactive',
-        initialize: function (options) {
-            this.options = options;
-            if (!options.svg) {
-                throw new Error('svg is required!');
+    var TeXViews = LaTeX2HTML5.Views = {};
+
+    _.extend(TeXViews, {
+        pspicture: BaseView.extend({
+            className: 'pspicture-view',
+            initialize: function (options) {
+                this.options = options;
+                var env = this.env = this.options.content.settings;
+                var svg = this.svg = Graph.init.call(env, this.el);
+                var self = this;
+                var plots = this.options.content.plot;
+                
+
+                if (!this.svg) {
+                    throw new Error('svg is required!');
+                }
+
+
+                svg.on('touchmove', function () {
+                    d3.event.preventDefault();
+                    var touchcoords = d3.touches(this)[0];
+                    userEvent(touchcoords);
+                }, false);
+                
+                svg.on('mousemove', function () {
+                    var coords = d3.mouse(this);
+                    userEvent(coords);
+                }, false);
+
+                function userEvent(coords) {
+                    svg.selectAll('.userline').remove();
+                    svg.selectAll('.psplot').remove();
+                    var currentEnvironment = {};
+                    // find special vars
+                    _.each(plots, function (plot, k) {
+                        if (k.match(/uservariable/)) {
+                            _.each(plot, function (data) {
+                                data.env.userx = coords[0];
+                                data.env.usery = coords[1];
+                                var dd = data.fn.call(data.env, data.match);
+                                currentEnvironment[data.data.name] = dd.value;
+                            });
+                        }
+                    });
+                    _.each(plots, function (plot, k) {
+                        if (k.match(/psplot/)) {
+                            _.each(plot, function (data) {
+                                _.each(currentEnvironment, function (variable, name) {
+                                    data.env.variables[name] = variable;
+                                });
+                                var d = data.fn.call(data.env, data.match);
+                                d.global = {};
+                                _.extend(d.global, env);
+                                // give pspicture!
+                                Graph[k].call(d, svg);
+                            });
+                        }
+                        if (k.match(/userline/)) {
+                            _.each(plot, function (data) {
+                                var d = data.fn.call(data.env, data.match);
+                                data.env.x2 = coords[0];
+                                // / env.xunit;
+                                data.env.y2 = coords[1];
+                                // / env.yunit;
+                                data.data.x2 = data.env.x2;
+                                data.data.y2 = data.env.y2;
+                                if (data.data.xExp2) {
+                                    data.data.x2 = d.userx2(coords);
+                                    data.data.x1 = d.userx(coords);
+                                } else if (data.data.xExp) {
+                                    data.data.x2 = d.userx(coords);
+                                }
+                                if (data.data.yExp2) {
+                                    data.data.y2 = d.usery2(coords);
+                                    data.data.y1 = d.usery(coords);
+                                } else if (data.data.yExp) {
+                                    data.data.y2 = d.usery(coords);
+                                }
+                                d.global = {};
+                                _.extend(d.global, env);
+                                // give pspicture!
+                                _.extend(d, data.data);
+                                Graph[k].call(d, svg);
+                            });
+                        }
+                    });
+                }
+            },
+            afterRender: function () {
+                var env = this.env;
+                var svg = this.svg;
+                var el = this.el;
+                var plots = this.options.content.plot;
+                _.each(plots, function (plot, k) {
+                    if (k.match(/rput/))
+                        return;
+                    if (Graph.hasOwnProperty(k)) {
+                        _.each(plot, function (data) {
+                            data.data.global = env;
+                            // give access to pspicture!
+                            Graph[k].call(data.data, svg);
+                        });
+                    }
+                });
+                _.each(plots.rput, function (rput) {
+                    var elem = Graph.rput.call(rput.data, this.el);
+                }, this);
             }
+        }),
 
+        math: BaseEnvView.extend({
+            className: 'mathjax-view'
+        }),
+
+        nicebox: BaseEnvView.extend({
+            className: 'well'
+        }),
+
+        enumerate: BaseEnvView.extend({
+            className: 'mathjax-view',
+            tagName: 'ul',
+            beforeRender: function () {
+                var ls = [];
+                _.each(this.options.content.lines, function (line) {
+                    var m = line.match(/\\item (.*)/);
+                    if (m) {
+                        ls.push('<li>' + m[1] + '</li>');
+                    } else {
+                        ls.push(line);
+                    }
+                });
+                $(this.el).html(ls.join('\n'));
+            }
+        }),
+
+        verbatim: BaseView.extend({
+            tagName: 'pre',
+            beforeRender: function () {
+                $(this.el).html(this.options.content.lines.join('\n'));
+            }
+        }),
+
+        slider: BaseView.extend({
+            template: 'templates/sliders',
+            initialize: function (options) {
+                this.options = options;
+                if (!options.svg) {
+                    throw new Error('svg is required!');
+                }
+
+            },                
+            serialize: function () {
+                var slider = this.options.slider;
+                return {
+                    latex: slider.latex,
+                    scalar: slider.scalar,
+                    variable: slider.variable,
+                    min: slider.min * slider.scalar,
+                    max: slider.max * slider.scalar,
+                    value: slider.value
+                };
+            },
+            afterRender: function () {
+                var slid = this.$('input[type=range]');
+                var p = this.$('h4+p');
+                var svg = this.options.svg;
+                var env = this.options.env;
+                var plots = this.options.plot;
+                // THIS SHOULD DELEGATE, NOT BE RESPONSIBLE FOR RENDERING! 
+                slid.on('change', function () {
+                    var value = this.value / this.getAttribute('scalar');
+                    var variable = this.getAttribute('variable');
+                    p.html(value);
+                    env.variables[variable] = value;
+                    svg.selectAll('.psplot').remove();
+                    _.each(plots, function (plot, k) {
+                        if (k.match(/psplot/)) {
+                            _.each(plot, function (data) {
+                                var d = data.fn.call(data.env, data.match);
+                                // var d = _.extend({}, data, env);
+                                Graph[k].call(d, svg);
+                            });
+                        }
+                    });
+                });
+                var process = MathJax.Hub.Queue([
+                        'Typeset',
+                        MathJax.Hub,
+                        this.el
+                    ]);
+                if (typeof process === 'function')
+                    process();
+            }
+        }),
+
+        sliders: BaseView.extend({
+            className: 'well interactive',
+            initialize: function (options) {
+                this.options = options;
+                if (!options.svg) {
+                    throw new Error('svg is required!');
+                }
+
+            },
+            beforeRender: function () {
+                _.each(this.options.sliders, function (slider) {
+                    var view = new TeXViews.slider({
+                            svg: this.options.svg,
+                            env: this.options.env,
+                            plot: this.options.plot,
+                            slider: slider
+                        });
+                    this.insertView(view);
+                }, this);
+            }
+        })
+
+    });
+
+    LaTeX2HTML5.TeX = BaseView.extend({
+        initialize: function (options) {
+            if (options.latex) {
+                var parser = new LaTeX2HTML5.Parser();
+                this.options.parsed = parser.parse(options.latex);
+            }
         },
         beforeRender: function () {
-            _.each(this.options.sliders, function (slider) {
-                var view = new TeXViews.slider({
-                        svg: this.options.svg,
-                        env: this.options.env,
-                        plot: this.options.plot,
-                        slider: slider
-                    });
-                this.insertView(view);
+            _.each(this.options.parsed, function (element) {
+                if (!element.hasOwnProperty('type')) {
+                    throw new Error('no type!');
+                }
+                var matchedView = null;
+                    _.any(TeXViews, function (view, hash) {
+                        if (element.type == hash) {
+                            var fn = TeXViews[hash];
+                            if (_.isFunction(fn)) {
+                                var v = new fn({ content: element });
+                                this.insertView(v);
+                                matchedView = v;
+                                return v;
+                            }
+                        }
+                    }, this);
+                if (matchedView && element.env && element.env.sliders && element.env.sliders.length) {
+                    //give related interactive elements the SVG reference!!
+                    var slidersView = new TeXViews.sliders({
+                            env: element.env,
+                            sliders: element.env.sliders,
+                            plot: element.plot,
+                            svg: matchedView.svg
+                        });
+                    this.insertView(slidersView);
+                }
             }, this);
         }
-    })
+    });
 
-});
-
-var TeX = BaseView.extend({
-    initialize: function (options) {
-        if (options.latex) {
-            var parser = new Parser();
-            this.options.parsed = parser.parse(options.latex);
-        }
-    },
-    beforeRender: function () {
-        _.each(this.options.parsed, function (element) {
-            if (!element.hasOwnProperty('type')) {
-                throw new Error('no type!');
-            }
-            var matchedView = null;
-                _.any(TeXViews, function (view, hash) {
-                    if (element.type == hash) {
-                        var fn = TeXViews[hash];
-                        if (_.isFunction(fn)) {
-                            var v = new fn({ content: element });
-                            this.insertView(v);
-                            matchedView = v;
-                            return v;
-                        }
-                    }
-                }, this);
-            if (matchedView && element.env && element.env.sliders && element.env.sliders.length) {
-                //give related interactive elements the SVG reference!!
-                var slidersView = new TeXViews.sliders({
-                        env: element.env,
-                        sliders: element.env.sliders,
-                        plot: element.plot,
-                        svg: matchedView.svg
-                    });
-                this.insertView(slidersView);
-            }
-        }, this);
-    }
-});
+}(LaTeX2HTML5));

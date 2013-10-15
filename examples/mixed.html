@@ -55,6 +55,7 @@
 
 
         <!-- latex2html5 -->
+        <script type="text/javascript" src="../lib/init.js"></script>
         <script type="text/javascript" src="../lib/expressions.js"></script>
         <script type="text/javascript" src="../lib/parse.js"></script>
         <script type="text/javascript" src="../lib/psgraph.js"></script>
@@ -582,12 +583,17 @@ The next example allows you to move the height of the graph and also integrate o
 
         <script>
 
-            var TEX = new TeX({
+        MathJax.Hub.Register.StartupHook("End",function () {
+
+
+            var TEX = new LaTeX2HTML5.TeX({
                 latex: $('[type="tex/latex"]').text()
             });
 
             TEX.render();
             $('section.container').html(TEX.el);
+
+        });
 
         </script>
         
