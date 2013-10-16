@@ -130,8 +130,8 @@
 
 </div>
 
-<!-- begin demo -->
 
+<!-- this div is optional, if you use macros -->
 <div style="display:none">
 $$
 % create the definition symbol
@@ -271,6 +271,9 @@ arg: The name of the set. -->
 $$
 </div>
 
+
+<!-- begin latex -->
+
 <script type="tex/latex">
 
 \begin{pspicture}(0,-3)(8,3)
@@ -297,98 +300,6 @@ $$
 \psline(6.25,0)(6.75,0)
 \psline(6.5,0.5)(6.5,-0.5)
 \end{pspicture}
-
-What frequencies can be present in a signal $\vec{x}$? The harmonics are given by a signal with period $p$ are $\{0,\omega_0,2\omega_0,\dots,(p-1)\omega_0\}$. Notice that $p\omega_0$ is missing. This is because $e^{ip\omega_0n}=e^{i2\pi n} = e^{i0n}$. Keep in mind that $\omega_0 = 2\pi/p$. In fact, the complex exponential basis of vectors is periodic with respect to $n$ and their indices $k$. 
-
-\begin{align*}
-\Psi_k(n+p) &= e^{ik\omega_0(n+p)}=e^{ik\omega_0n}e^{ik\omega_0p}=e^{ik\omega_0n} = \Psi_k(n) \\
-\Psi_{k+p}(n) &= e^{i(k+p)\omega_0n} = e^{ik\omega_0n}e^{ip\omega_0n} = \Psi_k(n) 
-\end{align*}
-
-So we know that $\Psi_{-1}(n) = e^{-i\omega_0n} = \Psi_{p-1}(n) = e^{i(p-1)\omega_0n }$. So we can see that in general, we can write out a discrete fourier series expansion over any continuous set of $p$ integers. The notation used is
-$$ x(n) = \sum \limits_{k=\langle p \rangle} X_ke^{ik\omega_0n}$$
-
-
-Given a periodic signal $x$ in CT, we can estimate the signal using the formula: 
-
-$$ \hat{x}(t) = \sum \limits_{k=-N}^{N}\alpha_k e^{ik\omega_0 t}   $$
-
-How can we determine the coefficients that make the estimates closest in terms of error energy? Let $W\in\R^{2N+1}$ be a subspace spanned by the set of orthogonal basis vectors $\Psi_0, \Psi_1, \Psi_{-1} \dots, \Psi_{N}, \Psi_{-N}$. If $x$ is a vector that is not in the column space of $W$, then we can project $x$ onto the column space of $W$, producing an approximation vector $\hat{x}$, which has a distance of $\abs{\left| \mathcal{E}_N\right|}$ from the vector $x$. The vectors $\mathcal{E}_N$ and $\hat{x}$ are orthogonal.
-
-
-\psset{unit=1cm}
-\begin{center}
-\begin{pspicture}(-1,-3)(9,4)
-    
-\pscustom[fillstyle=solid,fillcolor=gray!40,linestyle=none]{
-    \psline[linewidth=1 pt](0,0)(4,1.2)
-    \psline[linewidth=1 pt](4,1.2)(8.4,0)
-    \psline[linewidth=1 pt](8.4,0)(4,-1.2)
-    \psline[linewidth=1 pt](4,-1.2)(0,0)
-}
-
-\psline[linewidth=1 pt](0,0)(4,1.2)
-\psline[linewidth=1 pt](4,1.2)(8.4,0)
-\psline[linewidth=1 pt](8.4,0)(4,-1.2)
-\psline[linewidth=1 pt](4,-1.2)(0,0)
-
-\rput(0.78,0){$W$}
-
-
- % new vector 
-\rput(6,3.3){$x$}
-\psline[linewidth=1.5 pt,linecolor=red]{->}(2.2,0.2)(6,3)
-
- % new vector 
-\rput(6.35,1.5){$\mathcal{E}_N$}
-\psline[linewidth=1.5 pt]{->}(6,0)(6,3)
-
- % new vector 
-\rput(4,-0.3){$\hat{x}_N$}
-\psline[linewidth=1.5 pt]{->}(2.2,0.2)(6,0)
-
- % new vector 
-\psline[linewidth=1.5 pt](2.2,0.2)(6,0)
-
-
-\end{pspicture}
-\end{center}
-We want to minimize $\abs{\left| \mathcal{E}_N\right|}$ to make the best approximation. $\mathcal{E}_N = x - \hat{x}_N$, hence $\abs{\left| \mathcal{E}_N\right|} = \abs{\left| x-\hat{x}_N\right|}$. Since $\mathcal{E} \perp W$, then we can use the inner product and the properties of orthogonality to solve for the coefficients. Since $W \in \R^{2N+1}$, we have $2N+1$ equations and $2N+1$ coefficients.
-
-\begin{align*}
-\langle \hat{x}_N, \Psi_\ell\rangle  &= \langle \sum \limits_{k=-N}^{N}\alpha_k e^{ik\omega_0 t} , \Psi_\ell\rangle  \\
-\langle \hat{x}_N, \Psi_\ell\rangle  &= \sum \limits_{k=-N}^{N}\alpha_k \langle e^{ik\omega_0 t} , \Psi_\ell\rangle  \\
-\langle \hat{x}_N, \Psi_\ell\rangle  &= \alpha_\ell \langle e^{i\ell\omega_0 t} , \Psi_\ell\rangle  \\
-\langle \hat{x}_N, \Psi_\ell\rangle  &= \alpha_\ell \langle \Psi_\ell , \Psi_\ell\rangle  \\
-\alpha_\ell &= \frac{\langle \hat{x}_N, \Psi_\ell\rangle }{\langle \Psi_\ell , \Psi_\ell\rangle } \\
-\end{align*}
-
-if $\hat{x}(t) = \sum \limits_{k=0}^{M-1}\alpha_k \Psi_k$, where $x$ is a $p$-periodic signal, which $\Psi_k$'s would you choose? Since we are taking a subset, the larger exponentials are better since they dominate. Otherwise, using $\{0,1,\dots,M\}\in\Z$ is not using very much. Pick the largest in magnitude FS coefficient, and then go down from there, but it doesn't have to be continguous. 
-
-
-\begin{pspicture}(-5,-5)(5,5)
-\rput(0.3,3.75){ $Im$ }
-\psline{->}(0,-3.75)(0,3.75)
-\rput(3.75,0.3){ $Re$ }
-\psline{->}(-3.75,0)(3.75,0)
-\pscircle(0,0){ 3 }
-\pscircle(0,0){ 2 }
-\pscircle(0,0){ 1 }
-\rput(2.3,1){$e^{i\omega}-\alpha$}
-\userline[linewidth=1.5 pt]{->}(1.500,0.000)(1.121,2.121)
-\userline[linewidth=1.5 pt]{->}(1.500,0.000)(2.121,2.121)
-\userline[linewidth=1.5 pt,linecolor=blue]{->}(0,0.000)(2.121,2.121){(x>0) ? 3 * cos( atan(-y/x) ) : -3 * cos( atan(-y/x) ) }{ (x>0) ? -3 * sin( atan(-y/x) ) : 3 * sin( atan(-y/x) )}
-\userline[linewidth=1.5 pt,linestyle=dashed](-1.500,0.000)(2.121,2.121){x}{0}{x}{y}
-\userline[linewidth=1.5 pt,linestyle=dashed](-1.500,0.000)(2.121,2.121){0}{y}{x}{y}
-\rput(-0.75,-4.25){$1+\alpha$}
-\rput(2.25,-4.25){$1-\alpha$}
-\psline{<->}(-3,-4)(1.5,-4)
-\psline{<->}(1.5,-4)(3,-4)
-\psline[linestyle=dashed](3,-4.5)(3,0)
-\psline[linestyle=dashed](-3,-4.5)(-3,0)
-\psline[linestyle=dashed](1.5,-4.5)(1.5,0)
-\end{pspicture}
-
 
 Many of us think our thoughts using a language of some sort---there is usually some voice in our minds. Language in some ways, makes us who we are. Some even argue in the world of cognitive science that language is the foundation of our consciousness. 
 
@@ -658,6 +569,101 @@ The next example allows you to move the height of the graph and also integrate o
 \psline{->}(-4,0)(4,0)
 \end{pspicture}
 \end{verbatim}
+
+
+
+
+What frequencies can be present in a signal $\vec{x}$? The harmonics are given by a signal with period $p$ are $\{0,\omega_0,2\omega_0,\dots,(p-1)\omega_0\}$. Notice that $p\omega_0$ is missing. This is because $e^{ip\omega_0n}=e^{i2\pi n} = e^{i0n}$. Keep in mind that $\omega_0 = 2\pi/p$. In fact, the complex exponential basis of vectors is periodic with respect to $n$ and their indices $k$. 
+
+\begin{align*}
+\Psi_k(n+p) &= e^{ik\omega_0(n+p)}=e^{ik\omega_0n}e^{ik\omega_0p}=e^{ik\omega_0n} = \Psi_k(n) \\
+\Psi_{k+p}(n) &= e^{i(k+p)\omega_0n} = e^{ik\omega_0n}e^{ip\omega_0n} = \Psi_k(n) 
+\end{align*}
+
+So we know that $\Psi_{-1}(n) = e^{-i\omega_0n} = \Psi_{p-1}(n) = e^{i(p-1)\omega_0n }$. So we can see that in general, we can write out a discrete fourier series expansion over any continuous set of $p$ integers. The notation used is
+$$ x(n) = \sum \limits_{k=\langle p \rangle} X_ke^{ik\omega_0n}$$
+
+
+Given a periodic signal $x$ in CT, we can estimate the signal using the formula: 
+
+$$ \hat{x}(t) = \sum \limits_{k=-N}^{N}\alpha_k e^{ik\omega_0 t}   $$
+
+How can we determine the coefficients that make the estimates closest in terms of error energy? Let $W\in\R^{2N+1}$ be a subspace spanned by the set of orthogonal basis vectors $\Psi_0, \Psi_1, \Psi_{-1} \dots, \Psi_{N}, \Psi_{-N}$. If $x$ is a vector that is not in the column space of $W$, then we can project $x$ onto the column space of $W$, producing an approximation vector $\hat{x}$, which has a distance of $\abs{\left| \mathcal{E}_N\right|}$ from the vector $x$. The vectors $\mathcal{E}_N$ and $\hat{x}$ are orthogonal.
+
+
+\psset{unit=1cm}
+\begin{center}
+\begin{pspicture}(-1,-3)(9,4)
+    
+\pscustom[fillstyle=solid,fillcolor=gray!40,linestyle=none]{
+    \psline[linewidth=1 pt](0,0)(4,1.2)
+    \psline[linewidth=1 pt](4,1.2)(8.4,0)
+    \psline[linewidth=1 pt](8.4,0)(4,-1.2)
+    \psline[linewidth=1 pt](4,-1.2)(0,0)
+}
+
+\psline[linewidth=1 pt](0,0)(4,1.2)
+\psline[linewidth=1 pt](4,1.2)(8.4,0)
+\psline[linewidth=1 pt](8.4,0)(4,-1.2)
+\psline[linewidth=1 pt](4,-1.2)(0,0)
+
+\rput(0.78,0){$W$}
+
+
+ % new vector 
+\rput(6,3.3){$x$}
+\psline[linewidth=1.5 pt,linecolor=red]{->}(2.2,0.2)(6,3)
+
+ % new vector 
+\rput(6.35,1.5){$\mathcal{E}_N$}
+\psline[linewidth=1.5 pt]{->}(6,0)(6,3)
+
+ % new vector 
+\rput(4,-0.3){$\hat{x}_N$}
+\psline[linewidth=1.5 pt]{->}(2.2,0.2)(6,0)
+
+ % new vector 
+\psline[linewidth=1.5 pt](2.2,0.2)(6,0)
+
+
+\end{pspicture}
+\end{center}
+We want to minimize $\abs{\left| \mathcal{E}_N\right|}$ to make the best approximation. $\mathcal{E}_N = x - \hat{x}_N$, hence $\abs{\left| \mathcal{E}_N\right|} = \abs{\left| x-\hat{x}_N\right|}$. Since $\mathcal{E} \perp W$, then we can use the inner product and the properties of orthogonality to solve for the coefficients. Since $W \in \R^{2N+1}$, we have $2N+1$ equations and $2N+1$ coefficients.
+
+\begin{align*}
+\langle \hat{x}_N, \Psi_\ell\rangle  &= \langle \sum \limits_{k=-N}^{N}\alpha_k e^{ik\omega_0 t} , \Psi_\ell\rangle  \\
+\langle \hat{x}_N, \Psi_\ell\rangle  &= \sum \limits_{k=-N}^{N}\alpha_k \langle e^{ik\omega_0 t} , \Psi_\ell\rangle  \\
+\langle \hat{x}_N, \Psi_\ell\rangle  &= \alpha_\ell \langle e^{i\ell\omega_0 t} , \Psi_\ell\rangle  \\
+\langle \hat{x}_N, \Psi_\ell\rangle  &= \alpha_\ell \langle \Psi_\ell , \Psi_\ell\rangle  \\
+\alpha_\ell &= \frac{\langle \hat{x}_N, \Psi_\ell\rangle }{\langle \Psi_\ell , \Psi_\ell\rangle } \\
+\end{align*}
+
+if $\hat{x}(t) = \sum \limits_{k=0}^{M-1}\alpha_k \Psi_k$, where $x$ is a $p$-periodic signal, which $\Psi_k$'s would you choose? Since we are taking a subset, the larger exponentials are better since they dominate. Otherwise, using $\{0,1,\dots,M\}\in\Z$ is not using very much. Pick the largest in magnitude FS coefficient, and then go down from there, but it doesn't have to be continguous. 
+
+
+\begin{pspicture}(-5,-5)(5,5)
+\rput(0.3,3.75){ $Im$ }
+\psline{->}(0,-3.75)(0,3.75)
+\rput(3.75,0.3){ $Re$ }
+\psline{->}(-3.75,0)(3.75,0)
+\pscircle(0,0){ 3 }
+\pscircle(0,0){ 2 }
+\pscircle(0,0){ 1 }
+\rput(2.3,1){$e^{i\omega}-\alpha$}
+\userline[linewidth=1.5 pt]{->}(1.500,0.000)(1.121,2.121)
+\userline[linewidth=1.5 pt]{->}(1.500,0.000)(2.121,2.121)
+\userline[linewidth=1.5 pt,linecolor=blue]{->}(0,0.000)(2.121,2.121){(x>0) ? 3 * cos( atan(-y/x) ) : -3 * cos( atan(-y/x) ) }{ (x>0) ? -3 * sin( atan(-y/x) ) : 3 * sin( atan(-y/x) )}
+\userline[linewidth=1.5 pt,linestyle=dashed](-1.500,0.000)(2.121,2.121){x}{0}{x}{y}
+\userline[linewidth=1.5 pt,linestyle=dashed](-1.500,0.000)(2.121,2.121){0}{y}{x}{y}
+\rput(-0.75,-4.25){$1+\alpha$}
+\rput(2.25,-4.25){$1-\alpha$}
+\psline{<->}(-3,-4)(1.5,-4)
+\psline{<->}(1.5,-4)(3,-4)
+\psline[linestyle=dashed](3,-4.5)(3,0)
+\psline[linestyle=dashed](-3,-4.5)(-3,0)
+\psline[linestyle=dashed](1.5,-4.5)(1.5,0)
+\end{pspicture}
+
         </script>
 
         <section class="container">
