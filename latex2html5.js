@@ -25138,7 +25138,41 @@ return LayoutManager;
     return request.responseXML;
   });
   return d3;
-}();;var LaTeX2HTML5 = {
+}();;this["JST"] = this["JST"] || {};
+
+this["JST"]["templates/sliders.html"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression;
+
+
+  buffer += "<h4> ";
+  if (stack1 = helpers.latex) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.latex; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + " </h4>\n<p></p>\n\n<input scalar=\"";
+  if (stack1 = helpers.scalar) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.scalar; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\" variable=\"";
+  if (stack1 = helpers.variable) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.variable; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\" type=\"range\" min=\"";
+  if (stack1 = helpers.min) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.min; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\" max=\"";
+  if (stack1 = helpers.max) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.max; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\" value=\"";
+  if (stack1 = helpers.value) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.value; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\" />";
+  return buffer;
+  });;var LaTeX2HTML5 = {
     version: '0.0.1',
     addEnvironment: function(name) {
         var delim = {};
@@ -26741,7 +26775,7 @@ return LayoutManager;
 
 
     var Graph = LaTeX2HTML5.Graph;
-    var JST = window.JST || {};
+    var JST = window.JST = window.JST || {};
 
     Backbone.Layout.configure({
         fetchTemplate: function (path) {

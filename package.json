@@ -8,6 +8,7 @@
     "grunt-contrib-concat": "*",
     "grunt-contrib-cssmin": "*",
     "grunt-contrib-uglify": "*",
+    "grunt-contrib-handlebars": "*",
     "express":"3.4.1"
   }
 }
