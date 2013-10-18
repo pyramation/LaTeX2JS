@@ -27058,6 +27058,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
     });
 
     LaTeX2HTML5.TeX = BaseView.extend({
+        className: 'latex2html5',
         initialize: function (options) {
             if (options.latex) {
                 var parser = new LaTeX2HTML5.Parser();

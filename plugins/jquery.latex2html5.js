@@ -15,7 +15,6 @@ $.fn.latex = function () {
 
                 MathJax.Hub.Register.StartupHook("End",function () {
                     var TEX = new LaTeX2HTML5.TeX({
-                        el: false,
                         latex: data
                     });
                     TEX.render();
