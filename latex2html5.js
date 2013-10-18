@@ -25195,13 +25195,17 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
     },
 
     addHeaders: function (name, begin, end) {
-        var exp = {};
-        exp[name + 'begin'] = new RegExp('\\\\begin\\{'+name+'\\}');
-        exp[name + 'end'] = new RegExp('\\\\end\\{'+name+'\\}');
+        var exp = {}, beginHash = name + 'begin', endHash = name + 'end';
+        exp[beginHash] = new RegExp('\\\\begin\\{'+name+'\\}');
+        exp[endHash] = new RegExp('\\\\end\\{'+name+'\\}');
         _.extend(LaTeX2HTML5.Headers.Expressions, exp);
         var fns = {};
-        fns[name + 'begin'] = begin || '';
-        fns[name + 'end'] = end || '';
+        fns[beginHash] = function() {
+            return begin || '';
+        };
+        fns[endHash] = function() {
+            return end || '';
+        };
         _.extend(LaTeX2HTML5.Headers.Functions, fns);
     }
 
