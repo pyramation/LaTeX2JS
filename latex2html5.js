@@ -26842,7 +26842,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 
     _.extend(TeXViews, {
         pspicture: BaseView.extend({
-            className: 'pspicture-view',
+            className: 'pspicture-view latex2html5',
             initialize: function (options) {
                 this.options = options;
                 var env = this.env = this.options.content.settings;
@@ -26949,15 +26949,15 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
         }),
 
         math: BaseEnvView.extend({
-            className: 'mathjax-view'
+            className: 'mathjax-view latex2html5'
         }),
 
         nicebox: BaseEnvView.extend({
-            className: 'well'
+            className: 'well latex2html5'
         }),
 
         enumerate: BaseEnvView.extend({
-            className: 'mathjax-view',
+            className: 'mathjax-view latex2html5',
             tagName: 'ul',
             beforeRender: function () {
                 var ls = [];
@@ -26974,7 +26974,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
         }),
 
         verbatim: BaseView.extend({
-            tagName: 'pre',
+            tagName: 'pre latex2html5',
             beforeRender: function () {
                 $(this.el).html(this.options.content.lines.join('\n'));
             }
@@ -27058,7 +27058,6 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
     });
 
     LaTeX2HTML5.TeX = BaseView.extend({
-        className: 'latex2html5',
         initialize: function (options) {
             if (options.latex) {
                 var parser = new LaTeX2HTML5.Parser();
