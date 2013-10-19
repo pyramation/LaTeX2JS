@@ -6,7 +6,7 @@ app.configure(function(){
     app.use(express.static(__dirname + '/'));
 });
 
-server.listen(8000);
+server.listen(7777);
 app.get('/', function (req, res) {
     res.sendfile(__dirname + '/index.html');
 });
