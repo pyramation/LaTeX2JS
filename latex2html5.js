@@ -25207,7 +25207,8 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
             return end || '';
         };
         _.extend(LaTeX2HTML5.Headers.Functions, fns);
-    }
+    },
+    events: _.clone(Backbone.Events)
 
 
 };;(function (LaTeX2HTML5) {
@@ -27092,6 +27093,9 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
                     this.insertView(slidersView);
                 }
             }, this);
+        },
+        afterRender: function() {
+            LaTeX2HTML5.events.trigger('afterRender');
         }
     });
 
