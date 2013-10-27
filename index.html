@@ -104,7 +104,7 @@
 
     <br>
 
-    <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://latex2html5.com" data-text="LaTeX2HTML5: Author interactive math equations and diagrams online using LaTeX and PSTricks" data-via="skatalynch">Tweet</a>
+    <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://latex2html5.com" data-text="LaTeX2HTML5: Author interactive math equations and diagrams online using LaTeX and PSTricks" data-via="danpatricklynch">Tweet</a>
 
     <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
     <g:plusone></g:plusone>
@@ -543,16 +543,11 @@ if $\hat{x}(t) = \sum \limits_{k=0}^{M-1}\alpha_k \Psi_k$, where $x$ is a $p$-pe
         <script>
 
             MathJax.Hub.Register.StartupHook("End",function () {
-
                 var TEX = new LaTeX2HTML5.TeX({
                     latex: $('[type="tex/latex"]').text()
                 });
-
                 TEX.render();
                 $('section.latex-container').html(TEX.el);
-
-                
-
             });
 
         </script>
