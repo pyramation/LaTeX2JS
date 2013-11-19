@@ -19,7 +19,6 @@ module.exports = function (grunt) {
                     'components/backbone/backbone.js', 
                     'components/layoutmanager/backbone.layoutmanager.js', 
                     'components/d3/d3.js',
-                    'dist/latex2html5.templates.js',
                     'lib/init.js',
                     'lib/expressions.js',
                     'lib/parse.js',
@@ -52,16 +51,6 @@ module.exports = function (grunt) {
                         module: true
                     }
                 }
-        },
-        handlebars: {
-          compile: {
-            options: {
-              namespace: "JST"
-            },
-            files: {
-              "dist/latex2html5.templates.js": ["templates/sliders.html"]
-            }
-          }
         }
     });
     grunt.loadNpmTasks('grunt-contrib-clean');
@@ -69,9 +58,8 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.loadNpmTasks('grunt-contrib-handlebars');
     
     // the default task can be run just by typing "grunt" on the command line
-    grunt.registerTask('default', ['jshint', 'handlebars', 'concat', 'uglify']);
+    grunt.registerTask('default', ['jshint', 'concat', 'uglify']);
 
 };

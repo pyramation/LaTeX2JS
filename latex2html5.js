@@ -25138,41 +25138,7 @@ return LayoutManager;
     return request.responseXML;
   });
   return d3;
-}();;this["JST"] = this["JST"] || {};
-
-this["JST"]["templates/sliders.html"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
-  this.compilerInfo = [4,'>= 1.0.0'];
-helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
-  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression;
-
-
-  buffer += "<h4> ";
-  if (stack1 = helpers.latex) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.latex; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
-    + " </h4>\n<p></p>\n\n<input scalar=\"";
-  if (stack1 = helpers.scalar) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.scalar; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
-    + "\" variable=\"";
-  if (stack1 = helpers.variable) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.variable; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
-    + "\" type=\"range\" min=\"";
-  if (stack1 = helpers.min) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.min; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
-    + "\" max=\"";
-  if (stack1 = helpers.max) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.max; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
-    + "\" value=\"";
-  if (stack1 = helpers.value) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.value; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
-    + "\" />";
-  return buffer;
-  });;var LaTeX2HTML5 = {
+}();;var LaTeX2HTML5 = {
     version: '0.0.1',
     addEnvironment: function(name) {
         var delim = {};
@@ -26791,32 +26757,13 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 
 
     var Graph = LaTeX2HTML5.Graph;
-    var JST = window.JST = window.JST || {};
 
     Backbone.Layout.configure({
         fetchTemplate: function (path) {
-            var relative = '';
-            var absolute = '';
-            if (path.indexOf('/') === 0) {
-                relative = path.substr(1);
-                absolute = path;
-            } else {
-                relative = path;
-                absolute = '/' + path;
-            }
-            relative += '.html';
-            absolute += '.html';
-            var done = this.async();
-            if (JST.hasOwnProperty(relative)) {
-                return done(JST[relative]);
-            }
-            $.get(absolute, function (contents) {
-                var tmpl = Handlebars.compile(contents);
-                done(JST[relative] = tmpl);
-            }, 'text');
+            return path;
         },
         renderTemplate: function (template, context) {
-            return template(context);
+            return Handlebars.compile(template)(context);
         }
     });
 
@@ -26982,7 +26929,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
         }),
 
         slider: BaseView.extend({
-            template: 'templates/sliders',
+            template: '<h4> {{latex}} </h4><p></p><input scalar="{{scalar}}" variable="{{variable}}" type="range" min="{{min}}" max="{{max}}" value="{{value}}" />',
             initialize: function (options) {
                 this.options = options;
                 if (!options.svg) {
