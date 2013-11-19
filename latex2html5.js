@@ -27100,3 +27100,75 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
     });
 
 }(LaTeX2HTML5));
+;// usage: \image{url}
+LaTeX2HTML5.addText(
+    'image',
+    /\\image\{[^}]*\}/g,            
+     LaTeX2HTML5.utils.matchrepl(/\\image\{([^}]*)\}/, function (m) {
+        return '<div style="width: 100%;text-align: center;"><img src="' + m[1] + '"></div>';
+    }));;
+LaTeX2HTML5.addText(
+'waypoint',
+/\\waypoint\{[^}]*\}/g,            
+ LaTeX2HTML5.utils.matchrepl(/\\waypoint\{([^}]*)\}/, function (m) {
+        var name = m[1].replace(/\s+/g, '_').toLowerCase();
+        return '<h1><a waypoint=true name="'+name+'" id="' + name + '">'+m[1]+'</a></h1>';
+}));
+
+
+LaTeX2HTML5.addText(
+'waypointlink',
+/\\waypointlink\{[^}]*\}\{([^}]*)\}/g,            
+ LaTeX2HTML5.utils.matchrepl(/\\waypointlink\{([^}]*)\}\{([^}]*)\}/, function (m) {
+        var name = m[1].replace(/\s+/g, '_').toLowerCase();
+        return '<a href="#'+name+'">'+m[2]+'</a>';
+}));;// <latex src="some/path.tex"> 
+// will get replaced with the tex rendered
+$.fn.LaTeX = function () {
+
+    $.each(this, function (i, el) {
+        var $el = $(el);
+        var url = $el.attr('src');
+        if (!url) {
+            throw new Error('!Error: latex element requires src attribute');
+        }
+        
+      jQuery.ajax({
+             url: url,
+             success: function(data) {
+
+                MathJax.Hub.Register.StartupHook("End",function () {
+                    var TEX = new LaTeX2HTML5.TeX({
+                        latex: data
+                    });
+                    TEX.render();
+                    $el.replaceWith(TEX.$el);
+                });
+             },
+             async:   true
+        });
+    });
+
+};
+
+
+$.fn.latex = function () {
+
+  var $parent = $(this);
+
+  MathJax.Hub.Register.StartupHook("End",function () {
+
+      $parent.find('[type="tex/latex"]').each(function (i, el) {
+          var $el = $(el);
+          var TEX = new LaTeX2HTML5.TeX({
+              tagName: 'section',
+              className: 'latex-container',
+              latex: $el.text()
+          });
+          TEX.render();
+          $el.replaceWith(TEX.$el);
+      });
+      
+  });
+
+};

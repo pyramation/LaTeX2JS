@@ -24,7 +24,10 @@ module.exports = function (grunt) {
                     'lib/expressions.js',
                     'lib/parse.js',
                     'lib/psgraph.js',
-                    'lib/renderer.js'
+                    'lib/renderer.js',
+                    'plugins/latex2html5.image.js',
+                    'plugins/latex2html5.waypoint.js',
+                    'plugins/jquery.latex2html5.js'
                     ],
                 dest: 'dist/latex2html5.js',
             },

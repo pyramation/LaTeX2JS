@@ -47,8 +47,8 @@
         <!-- math -->
         <script type="text/javascript" src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
 
-        
-        <!-- script type="text/javascript"src="/components/jquery/jquery.js"></script>
+        <!-- 
+        <script type="text/javascript"src="/components/jquery/jquery.js"></script>
         <script type="text/javascript"src="/components/d3/d3.js"></script>
         <script type="text/javascript"src="/components/underscore/underscore.js"></script>
         <script type="text/javascript"src="/components/handlebars/handlebars.js"></script>
@@ -59,9 +59,12 @@
         <script type="text/javascript" src="/lib/expressions.js"></script>
         <script type="text/javascript" src="/lib/parse.js"></script>
         <script type="text/javascript" src="/lib/psgraph.js"></script>
-        <script type="text/javascript" src="/lib/renderer.js"></script -->
+        <script type="text/javascript" src="/lib/renderer.js"></script>
+        <script type="text/javascript" src="/plugins/jquery.latex2html5.js"></script>
+        <script type="text/javascript" src="/plugins/latex2html5.image.js"></script>
+        <script type="text/javascript" src="/plugins/latex2html5.waypoint.js"></script>
 
-
+ -->
         <script type="text/javascript" src="/latex2html5.min.js"></script>
     </head>
 
@@ -98,12 +101,18 @@
 
     <hr>
 
+<p>
+
+
     <p>This project is the frontend only version of the code that originated from <a href="http://www.mathapedia.com/" target="youlovemathdontyou">Mathapedia</a> to enable real-time, dynamic authorship of mathematical ebooks</p>
+
+</p>
+
+
+
 
     $$\frac{\delta}{\delta u} \int_{birth}^{death} f(life) du = \mbox{your life}$$
 
-
-    <br>
 
     <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://latex2html5.com" data-text="LaTeX2HTML5: Author interactive math equations and diagrams online using LaTeX and PSTricks" data-via="danpatricklynch">Tweet</a>
 
@@ -115,19 +124,20 @@
 
     <hr>
 
-
     <p>
 
-    Simply <a href="https://raw.github.com/Mathapedia/LaTeX2HTML5/master/latex2html5.min.js">download</a> and include the script on your <a href="http://www.mathjax.org" target="mathjax">MathJax</a> enabled website:
+    Simply download the <a href="https://raw.github.com/Mathapedia/LaTeX2HTML5/master/latex2html5.min.js" target="js">JS</a> and <a target="css" href="https://raw.github.com/Mathapedia/LaTeX2HTML5/master/css/latex2html5.css">CSS</a> files and include them on your <a href="http://www.mathjax.org" target="mathjax">MathJax</a> enabled website:
 
     <pre>
+     &lt;link rel=&quot;stylesheet&quot; href=&quot;latex2html5.min.css&quot;&gt; 
      &lt;script type=&quot;text/javascript&quot; src=&quot;latex2html5.min.js&quot;&gt;&lt;/script&gt; 
     </pre>
 
 
     </p>
 
-    <p>Check out the examples below or view source to get started. There's also documentation <a href="https://mathapedia.com/books/31/sections/176" target="mathapedia">here</a> and sandbox <a href="https://mathapedia.com/latex" target="mathsand">here</a>.</p>
+    <p>Check out the examples below or view source to get started. There's also documentation <a href="https://mathapedia.com/books/31/sections/176" target="mathapedia">here</a> and sandbox <a href="https://mathapedia.com/latex" target="mathsand">here</a>.</p> For a quick look on this page, we have <i>interactive</i> <a href="#lines_and_vectors">lines and vectors</a>, <a href="#user_variables">user variables</a>, and <a href="#sliders">sliders</a>.
+
 
 </div>
 
@@ -189,6 +199,7 @@ If you know \LaTeX, then get ready to author interactive diagrams in real-time (
 
 \begin{interactive}
 
+\waypoint{Lines And Vectors}
 
 What matters most is minimizing the distance between our expression of an idea and the execution of that idea. For example, I can describe a vector at $(0,0)$ and initial value of the head at $(2,2)$ that will follow a user touch or mouse event. This will produce the following interaction:
 
@@ -209,7 +220,6 @@ This was as easy as using this \TeX, which many math professors could understand
 \userline[linewidth=1.5 pt]{->}(0,0)(2,2)
 \end{pspicture}
 \end{verbatim}
-
 
 If you specify more arguments, you can create functions for the head and and tail of the vector, which each takes the current $x$ and $y$ position of the users finger or cursor as they move and produces the following interaction:
 
@@ -297,6 +307,8 @@ I can also draw a more complex version, and start to make more useful diagrams t
 \end{pspicture}
 \end{verbatim}
 
+\waypoint{User Variables}
+
 
 The {\tt uservariable} command represents a variable that changes with user interaction such as touch or mouse events over the graphic.
 
@@ -364,6 +376,9 @@ The next example allows you to move the height of the graph and also integrate o
 \end{verbatim}
 
 \end{interactive}
+
+\waypoint{Sliders}
+
 One useful way to expose basic interactive functionality for an end user is the {\tt slider} command. 
 
 
@@ -478,7 +493,7 @@ Note that using these ``extended'' features are not backwards compatible, a.k.a 
 \end{verbatim}
 
 
-
+\waypoint{math excerpt}
 
 What frequencies can be present in a signal $\vec{x}$? The harmonics are given by a signal with period $p$ are $\{0,\omega_0,2\omega_0,\dots,(p-1)\omega_0\}$. Notice that $p\omega_0$ is missing. This is because $e^{ip\omega_0n}=e^{i2\pi n} = e^{i0n}$. Keep in mind that $\omega_0 = 2\pi/p$. In fact, the complex exponential basis of vectors is periodic with respect to $n$ and their indices $k$. 
 
@@ -573,19 +588,9 @@ if $\hat{x}(t) = \sum \limits_{k=0}^{M-1}\alpha_k \Psi_k$, where $x$ is a $p$-pe
 
         </script>
 
-        <section class="latex-container">
-
-        </section>
-
         <script>
 
-            MathJax.Hub.Register.StartupHook("End",function () {
-                var TEX = new LaTeX2HTML5.TeX({
-                    latex: $('[type="tex/latex"]').text()
-                });
-                TEX.render();
-                $('section.latex-container').html(TEX.el);
-            });
+        $('body').latex();
 
         </script>
 

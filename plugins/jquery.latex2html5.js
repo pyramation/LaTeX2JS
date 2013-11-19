@@ -1,6 +1,6 @@
 // <latex src="some/path.tex"> 
 // will get replaced with the tex rendered
-$.fn.latex = function () {
+$.fn.LaTeX = function () {
 
     $.each(this, function (i, el) {
         var $el = $(el);
@@ -24,5 +24,27 @@ $.fn.latex = function () {
              async:   true
         });
     });
+
+};
+
+
+$.fn.latex = function () {
+
+  var $parent = $(this);
+
+  MathJax.Hub.Register.StartupHook("End",function () {
+
+      $parent.find('[type="tex/latex"]').each(function (i, el) {
+          var $el = $(el);
+          var TEX = new LaTeX2HTML5.TeX({
+              tagName: 'section',
+              className: 'latex-container',
+              latex: $el.text()
+          });
+          TEX.render();
+          $el.replaceWith(TEX.$el);
+      });
+      
+  });
 
 };
