@@ -210,19 +210,7 @@ This was as easy as using this \TeX, which many math professors could understand
 \end{verbatim}
 
 
-If you specify more arguments, you can create functions for the head and and tail of the vector, which each takes the current $x$ and $y$ position of the users finger or cursor and they move. 
-
-
-2 extra arguments provide functions for the head, 4 extra arguments allows you to control both and tail
-
-\begin{verbatim}
-\userline[linewidth=2pt,linecolor=green]{->}(0,0)(2,2){-x}{-y}
-\userline[linewidth=2pt,linecolor=red]{->}(0,0)(2,2){0}{y}
-\userline[linewidth=2pt,linecolor=purple]{->}(0,0)(2,2){-x}{cos(y)}
-\userline[linewidth=2pt,linecolor=lightblue]{->}(0,0)(2,2)(sin(x)}{-y}
-\end{verbatim}
-
-and produce the following interaction
+If you specify more arguments, you can create functions for the head and and tail of the vector, which each takes the current $x$ and $y$ position of the users finger or cursor and they move and produce the following interaction:
 
 \begin{interactive}
 
@@ -237,6 +225,16 @@ and produce the following interaction
 \end{center}
 
 \end{interactive}
+
+
+2 extra arguments provide functions for the head, 4 extra arguments allows you to control both and tail
+
+\begin{verbatim}
+\userline[linewidth=2pt,linecolor=green]{->}(0,0)(2,2){-x}{-y}
+\userline[linewidth=2pt,linecolor=red]{->}(0,0)(2,2){0}{y}
+\userline[linewidth=2pt,linecolor=purple]{->}(0,0)(2,2){-x}{cos(y)}
+\userline[linewidth=2pt,linecolor=lightblue]{->}(0,0)(2,2)(sin(x)}{-y}
+\end{verbatim}
 
 I can also draw a more complex version, and start to make more useful diagrams to describe vectors:
 
