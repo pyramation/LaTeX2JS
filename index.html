@@ -366,6 +366,23 @@ The next example allows you to move the height of the graph and also integrate o
 \end{interactive}
 
 
+One useful element to expose basic interactive functionality for an end user is the {\tt slider} command. 
+
+
+Arguments for the {\tt slider} command are:
+
+\begin{verbatim}
+ \slider{min}{max}{variable}{latex}{default}
+\end{verbatim}
+
+The min and max values are for specifying the minimum and maximum of the range of the slider. 
+
+
+The {\tt latex} argument is what to display next to the slider to indicate to the end user what variable the slider is changing. Finally, the most important is the {\tt variable} argument. The {\tt variable} specifies the variable that is changed based on the values of the slider, and can be used in the equations of {\tt psplot} commands. 
+
+
+Note that using these ``extended'' features are not backwards compatible, a.k.a they don't work on paper!
+
 
 \begin{interactive}
 \psset{unit=1cm}
