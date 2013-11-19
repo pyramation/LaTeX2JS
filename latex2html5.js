@@ -27086,6 +27086,8 @@ $.fn.LaTeX = function () {
 
                 MathJax.Hub.Register.StartupHook("End",function () {
                     var TEX = new LaTeX2HTML5.TeX({
+                        tagName: 'section',
+                        className: 'latex-container',
                         latex: data
                     });
                     TEX.render();
