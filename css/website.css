@@ -1,0 +1,14 @@
+.home-image {
+    max-width: 100%;
+    text-align: center;
+}
+
+@media (min-width: 768px) {
+    .home-image > img {
+        max-width: 600px;
+    }
+}
+
+.index-font {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
