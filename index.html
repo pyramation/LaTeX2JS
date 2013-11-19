@@ -297,6 +297,20 @@ I can also draw a more complex version, and start to make more useful diagrams t
 \end{verbatim}
 
 
+The {\tt uservariable} command represents a variable that changes with user interaction such as touch or mouse events over the graphic.
+
+\begin{verbatim}
+\uservariable{variable}(x1,y1){f(x,y)}
+\end{verbatim}
+
+{\tt variable} is the variable that you can use in {\tt psplot} and {\tt userline} parameters and equations. Eventually it should be something you can use everywhere, but for the scope of this project, we kept it limited.
+
+
+{\tt x1} and {\tt y1} are the initial values of {\tt x} and {\tt y} for the function $f(x,y)$ that is that last argument for the command. If there are no user interactions, the function is evaluated with the specified inital values.
+
+
+On any user event, such as a touch or mouse event, the function $f(x,y)$ is evaluated and any dependent commands, namely {\tt psplot} and {\tt userline} are immediately notified and re-rendered with updated execution contexts.
+
 Think about the student learning a new concept. Here is an example of teaching integration using ``area under the curve'', for example, you can represent $\int_a^b f(x) dx$ as:
 
 \begin{center}
