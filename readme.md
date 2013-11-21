@@ -5,9 +5,7 @@ This project is the frontend only version of [mathapedia](https://mathapedia.com
 
 [LaTeX2HTML5 demo website](http://latex2html5.com)
 
-Simply [download](https://raw.github.com/Mathapedia/LaTeX2HTML5/master/latex2html5.min.js) and include the script on your [MathJax](http://www.mathjax.org/) enabled website: 
-
-    <script type="text/javascript" src="latex2html5.min.js"></script>
+[Installation instructions](http://latex2html5.com/installation.html)
 
 
 The loose structure and nature of user interface design poses a problem for documenting science and related interfaces in a consistent manner. TeX provides us with some "laws" to obey in order to design the output of a text and graphical language around. Hence, we can attempt to create a synthesis of a structured user interface specification (TeX) and a structured functional specification (HTML5) to provide a publishing platform for the current and next generation.
