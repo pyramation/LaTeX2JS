@@ -1,7 +1,7 @@
 LaTeX2HTML5
 ====================
 
-This project is the frontend only version of [mathapedia](https://mathapedia.com) ([github](https://github.com/pyramation/LaTeX2HTML5))
+This project is the frontend only version of [mathapedia](https://mathapedia.com) ([github](https://github.com/pyramation/Mathapedia))
 
 [LaTeX2HTML5 demo website](http://latex2html5.com)
 
