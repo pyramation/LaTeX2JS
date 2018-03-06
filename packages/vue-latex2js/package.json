@@ -1,0 +1,8 @@
+{
+  "name": "vue-latex2js",
+  "version": "0.0.1",
+  "description": "latex2js",
+  "author": "pyramation@gmail.com",
+  "license": "MIT",
+  "main": "./index.js"
+}
