@@ -33,7 +33,8 @@ export default class LaTeX2HTML5 {
     public Headers: LaTeX2JSExt = HeadersExt,
     public Environments: string[] = EnvironmentsDefault,
     public Ignore: RegExp[] = IgnoreDefault,
-    public PSTricks: LaTeX2JSExt = PSTricksExt
+    public PSTricks: LaTeX2JSExt = PSTricksExt,
+    public Views: Hash = {}
   ) {
     _.each(Environments, (name: string) => {
       this.addEnvironment(name);
@@ -79,5 +80,18 @@ export default class LaTeX2HTML5 {
 
   getParser() {
     return new Parser(this);
+  }
+
+  parse(text) {
+    const parser = new Parser(this);
+    const parsed = parser.parse(text);
+    _.each(parsed, element => {
+      if (!element.hasOwnProperty('type')) {
+        throw new Error('no type!');
+      }
+      // TODO implement rendering
+      // console.log(element.type);
+    });
+    return parsed;
   }
 }
