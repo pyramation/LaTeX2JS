@@ -4,5 +4,8 @@
   "description": "latex2js",
   "author": "pyramation@gmail.com",
   "license": "MIT",
-  "main": "./index.js"
+  "main": "./index.js",
+  "dependencies": {
+    "latex2js": "^0.0.3"
+  }
 }
