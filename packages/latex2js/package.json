@@ -11,6 +11,9 @@
     "test": "jest",
     "test:watch": "jest --watch"
   },
+  "dependencies": {
+    "underscore": "1.5.2"
+  },
   "devDependencies": {
     "@types/jest": "^21.1.0",
     "@types/node": "^8.0.0",
