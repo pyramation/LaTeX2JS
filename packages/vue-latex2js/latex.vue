@@ -13,11 +13,11 @@
 
 <script>
 import LaTeX2JS from 'latex2js';
-import pspicture from './pspicture.vue';
-import nicebox from './nicebox.vue';
-import enumerate from './enumerate.vue';
-import slider from './slider.vue';
-import math from './math.vue';
+import pspicture from './components/pspicture.vue';
+import nicebox from './components/nicebox.vue';
+import enumerate from './components/enumerate.vue';
+import slider from './components/lider.vue';
+import math from './components/math.vue';
 
 export default {
   name: 'latex',
