@@ -19,6 +19,5 @@
     "ts-node": "^5.0.0",
     "tslint": "^5.4.3",
     "typescript": "^2.7.1"
-  },
-  "dependencies": {}
+  }
 }
