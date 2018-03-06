@@ -29,8 +29,18 @@ export declare const Functions: {
         x2: any;
         y2: any;
     };
-    pscircle: (m: any) => any;
-    psaxes: (m: any) => any;
+    pscircle: (m: any) => {
+        cx: any;
+        cy: any;
+        r: number;
+    };
+    psaxes: (m: any) => {
+        dx: number;
+        dy: number;
+        arrows: number[];
+        dots: number[];
+        ticks: string;
+    };
     psplot: (m: any) => {
         linecolor: string;
         linestyle: string;
@@ -45,7 +55,7 @@ export declare const Functions: {
         fillcolor: string;
         linewidth: number;
         data: any[];
-    } | undefined;
+    };
     psarc: (m: any) => {
         linecolor: string;
         linestyle: string;
@@ -133,8 +143,18 @@ declare const _default: {
             x2: any;
             y2: any;
         };
-        pscircle: (m: any) => any;
-        psaxes: (m: any) => any;
+        pscircle: (m: any) => {
+            cx: any;
+            cy: any;
+            r: number;
+        };
+        psaxes: (m: any) => {
+            dx: number;
+            dy: number;
+            arrows: number[];
+            dots: number[];
+            ticks: string;
+        };
         psplot: (m: any) => {
             linecolor: string;
             linestyle: string;
@@ -149,7 +169,7 @@ declare const _default: {
             fillcolor: string;
             linewidth: number;
             data: any[];
-        } | undefined;
+        };
         psarc: (m: any) => {
             linecolor: string;
             linestyle: string;

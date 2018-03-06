@@ -2,10 +2,10 @@
   "compilerOptions": {
     "moduleResolution": "node",
     "target": "es5",
-    "module": "cjs",
+    "module": "commonjs",
     "lib": ["es2015", "es2016", "es2017", "dom"],
-    "strict": true,
     "sourceMap": true,
+    "noImplicitUseStrict": true,
     "declaration": true,
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,

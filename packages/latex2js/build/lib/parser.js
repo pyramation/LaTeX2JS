@@ -1,4 +1,3 @@
-"use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var _ = require("underscore");
 function Parser(LaTeX2JS) {

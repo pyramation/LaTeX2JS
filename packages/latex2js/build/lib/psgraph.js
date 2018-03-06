@@ -1,4 +1,3 @@
-"use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 // THIS FILE SHOULD BE REQUIRED BY COMPONENT THAT IMPLEMENTS pspicture
 var _ = require("underscore");
