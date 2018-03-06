@@ -36,6 +36,8 @@ export default {
   data() {
     const latex = new LaTeX2JS();
     const parsed = latex.parse(this.$attrs.content);
+    console.log(parsed);
+    console.log(JSON.stringify(parsed, null, 2));
     return {
       items: parsed.map((item, i) => {
         item.id = i;
