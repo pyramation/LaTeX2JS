@@ -1,10 +1,13 @@
 <template>
   <div>
-    by dynamic Component:
+    LaTeX components
     <component
       v-for="item in items"
       :is="item.type"
-      :opts="item.props"
+      :env="item.env"
+      :lines="item.lines"
+      :plot="item.plot"
+      :settings="item.settings"
       :key="item.id"
       >
     </component>
@@ -16,6 +19,7 @@ import LaTeX2JS from 'latex2js';
 import pspicture from './components/pspicture.vue';
 import nicebox from './components/nicebox.vue';
 import enumerate from './components/enumerate.vue';
+import verbatim from './components/verbatim.vue';
 import slider from './components/slider.vue';
 import math from './components/math.vue';
 
@@ -25,33 +29,18 @@ export default {
     pspicture,
     nicebox,
     enumerate,
+    verbatim,
     slider,
     math,
   },
   data() {
     const latex = new LaTeX2JS();
-    console.log(this);
-    console.log(latex);
     const parsed = latex.parse(this.$attrs.content);
-    console.log(parsed);
     return {
-      content: 'loading...',
-      items: [
-        {
-          id: 1,
-          type: 'div',
-          props: {
-            color: 'white',
-          },
-        },
-        {
-          id: 2,
-          type: 'img',
-          props: {
-            src: 'boom.jpg',
-          },
-        },
-      ],
+      items: parsed.map((item, i) => {
+        item.id = i;
+        return item;
+      }),
     };
   },
 };
