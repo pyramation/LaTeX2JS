@@ -1,5 +1,7 @@
 <template>
   <div>
-    math
+    <span v-for="line in lines">
+        {{ line }}
+    </span>
   </div>
 </template>
