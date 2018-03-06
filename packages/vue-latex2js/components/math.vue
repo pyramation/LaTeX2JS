@@ -1,7 +1,16 @@
 <template>
   <div>
-    <span v-for="line in lines">
-        {{ line }}
-    </span>
+{{ text }}
   </div>
 </template>
+
+<script>
+export default {
+  props: ['lines'],
+  computed: {
+    text() {
+      return this.lines.join('\n');
+    },
+  },
+};
+</script>
