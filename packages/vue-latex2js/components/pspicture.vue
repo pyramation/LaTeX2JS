@@ -1,8 +1,10 @@
 <template>
-  <h4>pspicture</h4>
-  <pre>
-{{ text }}
-  </pre>
+  <span>
+    <h4>pspicture</h4>
+    <pre>
+  {{ text }}
+    </pre>
+  </span>
 </template>
 
 <script>
