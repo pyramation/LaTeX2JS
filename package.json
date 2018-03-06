@@ -1,5 +1,9 @@
 {
 	"devDependencies": {
 		"lerna": "^2.5.1"
+	},
+	"dependencies": {
+		"d3": "^4.13.0",
+		"underscore": "1.5.2"
 	}
 }
