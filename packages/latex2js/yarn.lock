@@ -2120,9 +2120,9 @@ kind-of@^4.0.0:
   dependencies:
     is-buffer "^1.1.5"
 
-latex2js-pstricks@^0.0.22:
-  version "0.0.22"
-  resolved "https://registry.yarnpkg.com/latex2js-pstricks/-/latex2js-pstricks-0.0.22.tgz#6a9d7dd29f4aee62f1e046b746af669ea541e426"
+latex2js-pstricks@^0.0.24:
+  version "0.0.24"
+  resolved "https://registry.yarnpkg.com/latex2js-pstricks/-/latex2js-pstricks-0.0.24.tgz#e44417ca30d2b530048f8fa8d7985f4baed093b1"
   dependencies:
     d3 "^4.13.0"
     latex2js-settings "^0.0.21"

@@ -1,6 +1,5 @@
 // THIS FILE SHOULD BE REQUIRED BY COMPONENT THAT IMPLEMENTS pspicture
 import * as _ from 'underscore';
-import * as d3 from 'd3';
 import { X, Y } from 'latex2js-utils';
 
 // http://mathforum.org/library/drmath/view/54146.html

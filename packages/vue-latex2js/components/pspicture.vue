@@ -1,10 +1,13 @@
 <template>
-  <svg :width="size.width" :height="size.height" style="border: solid 1px black" />
+  <div :width="size.width" :height="size.height">
+    <svg ref="svg" :width="size.width" :height="size.height" style="border: solid 1px black" />
+  </div>
 </template>
 
 <script>
 import { psgraph } from 'latex2js-pstricks';
 import * as d3 from 'd3';
+import * as _ from 'underscore';
 
 export default {
   props: ['lines', 'plot', 'settings', 'env'],
@@ -12,17 +15,36 @@ export default {
     size() {
       return psgraph.getSize.call(this);
     },
-    // text() {
-    //   return this.lines.join('\n');
-    // },
   },
   mounted() {
-    d3
-      .select(this.$el)
-      .append('circle')
-      .attr('cx', '250')
-      .attr('cy', '150')
-      .attr('r', '100');
+    // d3
+    //   .select(this.$el)
+    //   .append('circle')
+    //   .attr('cx', '250')
+    //   .attr('cy', '150')
+    //   .attr('r', '100');
+
+    var env = this.env;
+    var el = this.$el;
+    var svg = d3.select(this.$refs.svg);
+
+    Object.keys(this.plot).forEach(key => {
+      const plot = this.plot[key];
+      if (key.match(/rput/)) return;
+      if (psgraph.hasOwnProperty(key)) {
+        plot.forEach(data => {
+          console.log(data);
+          data.data.global = env;
+          // give access to pspicture!
+          psgraph[key].call(data.data, svg);
+        });
+      }
+    });
+
+    // rput
+    this.plot.rput.forEach(rput => {
+      psgraph.rput.call(rput.data, el);
+    });
   },
 };
 </script>

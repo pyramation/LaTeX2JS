@@ -220,9 +220,9 @@ iconv-lite@0.4:
   version "0.4.19"
   resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.4.19.tgz#f7468f60135f5e5dad3399c0a81be9a1603a082b"
 
-latex2js-pstricks@^0.0.22:
-  version "0.0.22"
-  resolved "https://registry.yarnpkg.com/latex2js-pstricks/-/latex2js-pstricks-0.0.22.tgz#6a9d7dd29f4aee62f1e046b746af669ea541e426"
+latex2js-pstricks@^0.0.24:
+  version "0.0.24"
+  resolved "https://registry.yarnpkg.com/latex2js-pstricks/-/latex2js-pstricks-0.0.24.tgz#e44417ca30d2b530048f8fa8d7985f4baed093b1"
   dependencies:
     d3 "^4.13.0"
     latex2js-settings "^0.0.21"
@@ -241,11 +241,11 @@ latex2js-utils@^0.0.19:
   dependencies:
     underscore "1.5.2"
 
-latex2js@^0.0.22:
-  version "0.0.22"
-  resolved "https://registry.yarnpkg.com/latex2js/-/latex2js-0.0.22.tgz#c31615db60d7330c8a379822a4f67f3df417d1e9"
+latex2js@^0.0.24:
+  version "0.0.24"
+  resolved "https://registry.yarnpkg.com/latex2js/-/latex2js-0.0.24.tgz#37142e03739683ad4b4b0d128a61a0b3be89b0bf"
   dependencies:
-    latex2js-pstricks "^0.0.22"
+    latex2js-pstricks "^0.0.24"
     latex2js-settings "^0.0.21"
     latex2js-utils "^0.0.19"
     underscore "1.5.2"

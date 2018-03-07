@@ -1,6 +1,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var _ = require("underscore");
-var utils_1 = require("./utils");
+var latex2js_utils_1 = require("latex2js-utils");
 exports.Expressions = {
     emph: /\\emph\{[^}]*\}/g,
     bf: /\{*\\bf [^}]*\}/g,
@@ -41,48 +41,48 @@ exports.Functions = {
         });
         return contents;
     },
-    img: utils_1.matchrepl(/\\img\{([^}]*)\}/, function (m) {
+    img: latex2js_utils_1.matchrepl(/\\img\{([^}]*)\}/, function (m) {
         return ('<div style="width: 100%;text-align: center;"><img src="' +
             m[1] +
             '"></div>');
     }),
-    youtube: utils_1.matchrepl(/\\youtube\{([^}]*)\}/, function (m) {
+    youtube: latex2js_utils_1.matchrepl(/\\youtube\{([^}]*)\}/, function (m) {
         return ('<div style="width: 100%;text-align: center;"><iframe width="560" height="315" src="https://www.youtube.com/embed/' +
             m[1] +
             '" frameborder="0" allowfullscreen></iframe></div>');
     }),
-    href: utils_1.matchrepl(/\\href\{([^}]*)\}\{([^}]*)\}/, function (m) {
+    href: latex2js_utils_1.matchrepl(/\\href\{([^}]*)\}\{([^}]*)\}/, function (m) {
         return '<a href="' + m[1] + '">' + m[2] + '</a>';
     }),
-    set: utils_1.matchrepl(/\\set\{([^}]*)\}/, function (m) {
+    set: latex2js_utils_1.matchrepl(/\\set\{([^}]*)\}/, function (m) {
         return '<i>' + m[1] + '</i>';
     }),
-    euler: utils_1.simplerepl(/Euler\^/, 'exp'),
-    emph: utils_1.matchrepl(/\{([^}]*)\}/, function (m) {
+    euler: latex2js_utils_1.simplerepl(/Euler\^/, 'exp'),
+    emph: latex2js_utils_1.matchrepl(/\{([^}]*)\}/, function (m) {
         return '<i>' + m[1] + '</i>';
     }),
-    bf: utils_1.matchrepl(/\{*\\bf ([^}]*)\}/, function (m) {
+    bf: latex2js_utils_1.matchrepl(/\{*\\bf ([^}]*)\}/, function (m) {
         return '<b>' + m[1] + '</b>';
     }),
-    rm: utils_1.matchrepl(/\{*\\rm ([^}]*)\}/, function (m) {
+    rm: latex2js_utils_1.matchrepl(/\{*\\rm ([^}]*)\}/, function (m) {
         return '<span class="rm">' + m[1] + '</span>';
     }),
-    sl: utils_1.matchrepl(/\{*\\sl ([^}]*)\}/, function (m) {
+    sl: latex2js_utils_1.matchrepl(/\{*\\sl ([^}]*)\}/, function (m) {
         return '<i>' + m[1] + '</i>';
     }),
-    it: utils_1.matchrepl(/\{*\\it ([^}]*)\}/, function (m) {
+    it: latex2js_utils_1.matchrepl(/\{*\\it ([^}]*)\}/, function (m) {
         return '<i>' + m[1] + '</i>';
     }),
-    tt: utils_1.matchrepl(/\{*\\tt ([^}]*)\}/, function (m) {
+    tt: latex2js_utils_1.matchrepl(/\{*\\tt ([^}]*)\}/, function (m) {
         return '<span class="tt">' + m[1] + '</span>';
     }),
-    ndash: utils_1.simplerepl(/--/g, '&ndash;'),
-    mdash: utils_1.simplerepl(/---/g, '&mdash;'),
-    openq: utils_1.simplerepl(/``/g, '&ldquo;'),
-    closeq: utils_1.simplerepl(/''/g, '&rdquo;'),
-    vspace: utils_1.simplerepl(/\\vspace/g, '<br>'),
-    TeX: utils_1.simplerepl(/\\TeX\\|\\TeX/g, '$\\TeX$'),
-    LaTeX: utils_1.simplerepl(/\\LaTeX\\|\\LaTeX/g, '$\\LaTeX$'),
+    ndash: latex2js_utils_1.simplerepl(/--/g, '&ndash;'),
+    mdash: latex2js_utils_1.simplerepl(/---/g, '&mdash;'),
+    openq: latex2js_utils_1.simplerepl(/``/g, '&ldquo;'),
+    closeq: latex2js_utils_1.simplerepl(/''/g, '&rdquo;'),
+    vspace: latex2js_utils_1.simplerepl(/\\vspace/g, '<br>'),
+    TeX: latex2js_utils_1.simplerepl(/\\TeX\\|\\TeX/g, '$\\TeX$'),
+    LaTeX: latex2js_utils_1.simplerepl(/\\LaTeX\\|\\LaTeX/g, '$\\LaTeX$'),
 };
 exports.default = {
     Expressions: exports.Expressions,

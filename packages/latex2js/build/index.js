@@ -2,7 +2,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var _ = require("underscore");
 var text_1 = require("./lib/text");
 var headers_1 = require("./lib/headers");
-var pstricks_1 = require("./lib/pstricks");
+var latex2js_pstricks_1 = require("latex2js-pstricks");
 var environments_1 = require("./lib/environments");
 var ignore_1 = require("./lib/ignore");
 var parser_1 = require("./lib/parser");
@@ -12,7 +12,7 @@ var LaTeX2HTML5 = /** @class */ (function () {
         if (Headers === void 0) { Headers = headers_1.default; }
         if (Environments === void 0) { Environments = environments_1.default; }
         if (Ignore === void 0) { Ignore = ignore_1.default; }
-        if (PSTricks === void 0) { PSTricks = pstricks_1.default; }
+        if (PSTricks === void 0) { PSTricks = latex2js_pstricks_1.pstricks; }
         if (Views === void 0) { Views = {}; }
         var _this = this;
         this.Text = Text;
