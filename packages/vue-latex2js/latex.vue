@@ -1,6 +1,5 @@
 <template>
-  <div>
-    LaTeX components
+  <div class="latex-container">
     <component
       v-for="(item, id) in items"
       :is="item.type"
