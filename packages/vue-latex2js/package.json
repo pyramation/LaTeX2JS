@@ -6,6 +6,7 @@
   "license": "MIT",
   "main": "./index.js",
   "dependencies": {
-    "latex2js": "^0.0.22"
+    "latex2js": "^0.0.22",
+    "latex2js-pstricks": "^0.0.22"
   }
 }
