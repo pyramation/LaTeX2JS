@@ -1,6 +1,6 @@
 <template>
-  <div :style="style" class="pspicture">
-    <svg ref="svg" :width="size.width" :height="size.height" style="border: solid 1px black" />
+  <div :style="`width: ${size.width}px; height: ${size.height}px;`" class="pspicture">
+    <svg ref="svg" :width="`${size.width}px`" :height="`${size.height}px`" />
   </div>
 </template>
 
@@ -14,9 +14,6 @@ export default {
   computed: {
     size() {
       return psgraph.getSize.call(this);
-    },
-    style() {
-      return `{width: ${this.size.width}px; height: ${this.size.height}px}`;
     },
   },
   mounted() {
