@@ -1,0 +1,1 @@
+{"version":3,"file":"nicebox.js","sourceRoot":"","sources":["../../components/nicebox.ts"],"names":[],"mappings":";AAAA,gBAA+B,IAAI;IACjC,IAAM,IAAI,GAAG,QAAQ,CAAC,aAAa,CAAC,MAAM,CAAC,CAAC;IAC5C,IAAI,CAAC,SAAS,GAAG,cAAc,CAAC;IAChC,IAAI,CAAC,SAAS,GAAG,IAAI,CAAC,KAAK,CAAC,IAAI,CAAC,IAAI,CAAC,CAAC;IACvC,MAAM,CAAC,IAAI,CAAC;AACd,CAAC;AALD,yBAKC"}
