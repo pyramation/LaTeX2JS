@@ -1,6 +1,6 @@
 {
   "name": "latex2js-pstricks",
-  "version": "0.0.25",
+  "version": "0.0.26",
   "description": "latex2js",
   "author": "pyramation@gmail.com",
   "license": "MIT",
@@ -10,7 +10,7 @@
     "build": "rm -rf ./build && tsc"
   },
   "dependencies": {
-    "latex2js-settings": "^0.0.21",
+    "latex2js-settings": "^0.0.26",
     "latex2js-utils": "^0.0.19",
     "underscore": "1.5.2"
   },
