@@ -52,6 +52,7 @@ export default {
       false
     );
 
+    const plots = this.plot;
     function userEvent(coords) {
       svg.selectAll('.userline').remove();
       svg.selectAll('.psplot').remove();
