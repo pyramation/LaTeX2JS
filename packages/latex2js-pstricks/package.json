@@ -1,5 +1,5 @@
 {
-  "name": "latex2js",
+  "name": "latex2js-pstricks",
   "version": "0.0.18",
   "description": "latex2js",
   "author": "pyramation@gmail.com",
@@ -7,19 +7,15 @@
   "main": "./build/index.js",
   "types": "./build/types/index.d.ts",
   "scripts": {
-    "build": "rm -rf ./build && tsc",
-    "test": "jest",
-    "test:watch": "jest --watch"
+    "build": "rm -rf ./build && tsc"
   },
   "dependencies": {
+    "d3": "^4.13.0",
     "latex2js-utils": "^0.0.19",
     "underscore": "1.5.2"
   },
   "devDependencies": {
-    "@types/jest": "^21.1.0",
     "@types/node": "^8.0.0",
-    "jest": "^22.4.0",
-    "ts-jest": "^21.0.0",
     "ts-node": "^5.0.0",
     "tslint": "^5.4.3",
     "typescript": "^2.7.1"
