@@ -481,13 +481,12 @@ export default {
     if (typeof processMath === 'function') processMath();
 
     // rput defaults to centering the element in pstricks, so then so do we!
-    window.requestAnimationFrame(() => {
+    setTimeout(() => {
       const rct = div.getBoundingClientRect();
       const w = rct.width / 2;
       const h = rct.height / 2;
-      const halfpadding = 10;
-      // div.style.top = `${y - h}px`;
-      // div.style.left = `${x - w + halfpadding}px`;
-    });
+      div.style.top = `${y - h}px`;
+      div.style.left = `${x - w}px`;
+    }, 1100);
   },
 };

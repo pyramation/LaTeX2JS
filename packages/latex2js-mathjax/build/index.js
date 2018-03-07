@@ -1,9 +1,12 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var loadScript = require("load-script");
 exports.DEFAULT_SCRIPT = process.env.MATHJAX_CDN ||
-    'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+    'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js';
 exports.DEFAULT_OPTIONS = {
+    TeX: { extensions: ['AMSmath.js', 'AMSsymbols.js'] },
+    extensions: ['tex2jax.js'],
     showProcessingMessages: false,
+    jax: ['input/TeX', 'output/HTML-CSS'],
     messageStyle: 'none',
     showMathMenu: false,
     showMathMenuMSIE: false,
@@ -14,6 +17,7 @@ exports.DEFAULT_OPTIONS = {
         preview: 'none',
         processEscapes: true,
     },
+    'HTML-CSS': { linebreaks: { automatic: true, width: 'container' } },
 };
 exports.getMathJax = function () {
     return typeof MathJax === 'undefined' ? undefined : MathJax;
