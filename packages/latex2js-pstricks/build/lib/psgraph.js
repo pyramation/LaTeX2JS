@@ -405,6 +405,7 @@ exports.default = {
         var x = this.x;
         var y = this.y;
         div.innerHTML = this.text;
+        div.className = 'math';
         div.style.position = 'absolute';
         div.style.top = y + "px";
         div.style.left = x + "px";
