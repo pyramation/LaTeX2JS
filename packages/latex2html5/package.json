@@ -1,6 +1,6 @@
 {
   "name": "latex2html5",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Author interactive math equations and diagrams online using LaTeX and PSTricks",
   "author": "pyramation@gmail.com",
   "main": "./build/index.js",
