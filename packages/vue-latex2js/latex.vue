@@ -1,6 +1,6 @@
 <template>
   <div class="latex-container">
-    <macros v-if="macros" />
+    <macros v-if="!usemacros" />
     <component
       v-for="(item, id) in items"
       :is="item.type"
@@ -38,9 +38,9 @@ export default {
   },
   beforeMount() {
     if (document.getElementById('latex-macros')) {
-      this.macros = true;
+      this.usemacros = true;
     } else {
-      this.macros = false;
+      this.usemacros = false;
     }
 
     if (getMathJax()) {
@@ -52,7 +52,7 @@ export default {
   },
   data() {
     return {
-      macros: false,
+      usemacros: false,
       loaded: false,
     };
   },
