@@ -226,18 +226,18 @@ latex2js-mathjax@^0.1.10:
   dependencies:
     load-script "^1.0.0"
 
-latex2js-pstricks@^0.1.18:
-  version "0.1.18"
-  resolved "https://registry.yarnpkg.com/latex2js-pstricks/-/latex2js-pstricks-0.1.18.tgz#426dc862c8ac3c8d5891418f192a53584d740620"
+latex2js-pstricks@^0.1.19:
+  version "0.1.19"
+  resolved "https://registry.yarnpkg.com/latex2js-pstricks/-/latex2js-pstricks-0.1.19.tgz#168fb953b5d00cc3b468013f5747d71054ce84c4"
   dependencies:
     d3 "^4.13.0"
-    latex2js-settings "^0.0.26"
+    latex2js-settings "^0.1.19"
     latex2js-utils "^0.0.19"
     underscore "1.5.2"
 
-latex2js-settings@^0.0.26:
-  version "0.0.26"
-  resolved "https://registry.yarnpkg.com/latex2js-settings/-/latex2js-settings-0.0.26.tgz#d0c8dc64c4abf7965b6c616f82352b5b6781dc18"
+latex2js-settings@^0.1.19:
+  version "0.1.19"
+  resolved "https://registry.yarnpkg.com/latex2js-settings/-/latex2js-settings-0.1.19.tgz#3b03316319d0f6a244975c66b80d1067c56336ef"
   dependencies:
     latex2js-utils "^0.0.19"
 
@@ -247,12 +247,12 @@ latex2js-utils@^0.0.19:
   dependencies:
     underscore "1.5.2"
 
-latex2js@^0.1.18:
-  version "0.1.18"
-  resolved "https://registry.yarnpkg.com/latex2js/-/latex2js-0.1.18.tgz#724f3d8e695daa7814d6c24d61faf324c042bbbc"
+latex2js@^0.1.19:
+  version "0.1.19"
+  resolved "https://registry.yarnpkg.com/latex2js/-/latex2js-0.1.19.tgz#86f6b3383715443b38fbad44e487c3734b0e4d99"
   dependencies:
-    latex2js-pstricks "^0.1.18"
-    latex2js-settings "^0.0.26"
+    latex2js-pstricks "^0.1.19"
+    latex2js-settings "^0.1.19"
     latex2js-utils "^0.0.19"
     underscore "1.5.2"
 
