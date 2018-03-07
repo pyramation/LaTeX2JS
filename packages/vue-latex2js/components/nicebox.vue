@@ -1,5 +1,5 @@
 <template>
-  <span latex="true" v-html="text" class="nicebox math"></span>
+  <div latex="true" v-html="text" class="nicebox math"></div>
 </template>
 
 <script>

@@ -7,7 +7,6 @@
 <script>
 import { psgraph } from 'latex2js-pstricks';
 import * as d3 from 'd3';
-import * as _ from 'underscore';
 
 export default {
   props: ['lines', 'plot', 'settings', 'env'],
