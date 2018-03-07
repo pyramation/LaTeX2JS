@@ -18,6 +18,10 @@ section > h3,
   margin: auto;
 }
 
+.enumerate {
+  list-style: circle;
+}
+
 .math {
   font-family: 'Arbutus Slab', serif;
   font-size: 14px;

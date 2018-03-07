@@ -1,5 +1,5 @@
 <template>
-  <ul v-html="items" class="math"></ul>
+  <ul v-html="items" class="enumerate math"></ul>
 </template>
 <script>
 export default {
