@@ -1,6 +1,6 @@
 {
   "name": "latex2js-pstricks",
-  "version": "0.1.18",
+  "version": "0.1.19",
   "description": "latex2js",
   "author": "pyramation@gmail.com",
   "license": "MIT",
@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "d3": "^4.13.0",
-    "latex2js-settings": "^0.0.26",
+    "latex2js-settings": "^0.1.19",
     "latex2js-utils": "^0.0.19",
     "underscore": "1.5.2"
   },
