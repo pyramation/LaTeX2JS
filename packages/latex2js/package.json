@@ -1,11 +1,27 @@
 {
   "name": "latex2js",
   "version": "1.0.4",
-  "description": "latex2js",
+  "description": "LaTeX and PSTricks rendering & components for the Web",
   "author": "pyramation@gmail.com",
   "license": "MIT",
   "main": "./build/index.js",
   "types": "./build/types/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pyramation/LaTeX2JS.git"
+  },
+  "keywords": [
+    "latex",
+    "mathjax",
+    "latex2html",
+    "latex2js",
+    "math",
+    "mathematics",
+    "pstricks",
+    "graphics",
+    "diagrams",
+    "math diagrams"
+  ],
   "scripts": {
     "build": "rm -rf ./build && tsc",
     "test": "jest",
