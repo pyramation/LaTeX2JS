@@ -2,13 +2,13 @@
   <div>
     LaTeX components
     <component
-      v-for="item in items"
+      v-for="(item, id) in items"
       :is="item.type"
       :env="item.env"
       :lines="item.lines"
       :plot="item.plot"
       :settings="item.settings"
-      :key="item.id"
+      :key="id"
       >
     </component>
   </div>
@@ -51,12 +51,7 @@ export default {
     items() {
       const latex = new LaTeX2JS();
       const parsed = latex.parse(this.$attrs.content);
-      return this.loaded
-        ? parsed.map((item, i) => {
-            item.id = i;
-            return item;
-          })
-        : [];
+      return this.loaded ? parsed : [];
     },
   },
 };
