@@ -8,6 +8,7 @@
   "dependencies": {
     "d3": "^4.13.0",
     "latex2js": "^0.0.26",
+    "latex2js-mathjax": "^0.0.27",
     "latex2js-pstricks": "^0.0.26"
   }
 }

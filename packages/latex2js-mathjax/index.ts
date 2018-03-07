@@ -21,16 +21,13 @@ export const DEFAULT_OPTIONS = {
 export const getMathJax = () =>
   typeof MathJax === 'undefined' ? undefined : MathJax;
 
-export const onLoad = () => {
-  // const { options } = this.props
-  const options = DEFAULT_OPTIONS;
-  MathJax.Hub.Config(options);
-
-  // this.setState({
-  //   loaded: true
-  // })
-};
-export const mounted = (script: string = DEFAULT_SCRIPT) => {
+export const loadMathJax = (
+  script: string = DEFAULT_SCRIPT,
+  options: object = DEFAULT_OPTIONS
+) => {
+  const onLoad = () => {
+    MathJax.Hub.Config(options);
+  };
   if (!script) {
     return onLoad();
   }

@@ -220,18 +220,23 @@ iconv-lite@0.4:
   version "0.4.19"
   resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.4.19.tgz#f7468f60135f5e5dad3399c0a81be9a1603a082b"
 
-latex2js-pstricks@^0.0.24:
-  version "0.0.24"
-  resolved "https://registry.yarnpkg.com/latex2js-pstricks/-/latex2js-pstricks-0.0.24.tgz#e44417ca30d2b530048f8fa8d7985f4baed093b1"
+latex2js-mathjax@^0.0.27:
+  version "0.0.27"
+  resolved "https://registry.yarnpkg.com/latex2js-mathjax/-/latex2js-mathjax-0.0.27.tgz#8787066a595663bda6678b1a4ac6fab9cc651f90"
   dependencies:
-    d3 "^4.13.0"
-    latex2js-settings "^0.0.21"
+    load-script "^1.0.0"
+
+latex2js-pstricks@^0.0.26:
+  version "0.0.26"
+  resolved "https://registry.yarnpkg.com/latex2js-pstricks/-/latex2js-pstricks-0.0.26.tgz#c36f530f5c556060311a819f09e9213d0c2cef0d"
+  dependencies:
+    latex2js-settings "^0.0.26"
     latex2js-utils "^0.0.19"
     underscore "1.5.2"
 
-latex2js-settings@^0.0.21:
-  version "0.0.21"
-  resolved "https://registry.yarnpkg.com/latex2js-settings/-/latex2js-settings-0.0.21.tgz#1d10ab7b7a9dfc7e9f8c268c8bfe8d79fe6d737e"
+latex2js-settings@^0.0.26:
+  version "0.0.26"
+  resolved "https://registry.yarnpkg.com/latex2js-settings/-/latex2js-settings-0.0.26.tgz#d0c8dc64c4abf7965b6c616f82352b5b6781dc18"
   dependencies:
     latex2js-utils "^0.0.19"
 
@@ -241,14 +246,18 @@ latex2js-utils@^0.0.19:
   dependencies:
     underscore "1.5.2"
 
-latex2js@^0.0.24:
-  version "0.0.24"
-  resolved "https://registry.yarnpkg.com/latex2js/-/latex2js-0.0.24.tgz#37142e03739683ad4b4b0d128a61a0b3be89b0bf"
+latex2js@^0.0.26:
+  version "0.0.26"
+  resolved "https://registry.yarnpkg.com/latex2js/-/latex2js-0.0.26.tgz#873aa16130f1d4efe2257d24b30c5183842f46b0"
   dependencies:
-    latex2js-pstricks "^0.0.24"
-    latex2js-settings "^0.0.21"
+    latex2js-pstricks "^0.0.26"
+    latex2js-settings "^0.0.26"
     latex2js-utils "^0.0.19"
     underscore "1.5.2"
+
+load-script@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/load-script/-/load-script-1.0.0.tgz#0491939e0bee5643ee494a7e3da3d2bac70c6ca4"
 
 rw@1:
   version "1.3.3"

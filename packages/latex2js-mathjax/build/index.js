@@ -18,19 +18,15 @@ exports.DEFAULT_OPTIONS = {
 exports.getMathJax = function () {
     return typeof MathJax === 'undefined' ? undefined : MathJax;
 };
-exports.onLoad = function () {
-    // const { options } = this.props
-    var options = exports.DEFAULT_OPTIONS;
-    MathJax.Hub.Config(options);
-    // this.setState({
-    //   loaded: true
-    // })
-};
-exports.mounted = function (script) {
+exports.loadMathJax = function (script, options) {
     if (script === void 0) { script = exports.DEFAULT_SCRIPT; }
+    if (options === void 0) { options = exports.DEFAULT_OPTIONS; }
+    var onLoad = function () {
+        MathJax.Hub.Config(options);
+    };
     if (!script) {
-        return exports.onLoad();
+        return onLoad();
     }
-    load_script_1.default(script, exports.onLoad);
+    load_script_1.default(script, onLoad);
 };
 //# sourceMappingURL=index.js.map
