@@ -45,36 +45,23 @@ function arrow(x1, y1, x2, y2) {
 }
 
 export default {
-  init: function(el) {
-    var padding = 20;
-    this.scale = 1;
-
-    var goalWidth = $(window).width() - padding;
-    if (goalWidth <= this.w * this.xunit) {
-      this.scale = goalWidth / this.w / this.xunit;
+  getSize() {
+    const padding = 20;
+    this.env.scale = 1;
+    const goalWidth = window.innerWidth - padding;
+    if (goalWidth <= this.env.w * this.env.xunit) {
+      this.env.scale = goalWidth / this.env.w / this.env.xunit;
     }
+    const width = this.env.w * this.env.xunit;
+    const height = this.env.h * this.env.yunit;
 
-    var width = this.w * this.xunit;
-    var height = this.h * this.yunit;
-
-    var svg = d3
-      .select(el)
-      .append('svg:svg')
-      .attr('width', width)
-      .attr('height', height);
-
-    // .append('g')
-    // .attr('transform', 'scale('+ this.scale + ')');
-
-    // so we can center the diagrams, lets set the width
-    $(el)
-      .width(width)
-      .height(height);
-
-    return svg;
+    return {
+      width,
+      height,
+    };
   },
 
-  psframe: function(svg) {
+  psframe(svg) {
     // svg.append("svg:rect")
     //   .attr("x", this.x2)
     //   .attr("y", this.y2)

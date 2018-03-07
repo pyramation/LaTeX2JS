@@ -1,7 +1,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 // THIS FILE SHOULD BE REQUIRED BY COMPONENT THAT IMPLEMENTS pspicture
 var _ = require("underscore");
-var d3 = require("d3");
 var latex2js_utils_1 = require("latex2js-utils");
 // http://mathforum.org/library/drmath/view/54146.html
 function arrow(x1, y1, x2, y2) {
@@ -34,27 +33,19 @@ function arrow(x1, y1, x2, y2) {
     return context.join(' ');
 }
 exports.default = {
-    init: function (el) {
+    getSize: function () {
         var padding = 20;
-        this.scale = 1;
-        var goalWidth = $(window).width() - padding;
-        if (goalWidth <= this.w * this.xunit) {
-            this.scale = goalWidth / this.w / this.xunit;
+        this.env.scale = 1;
+        var goalWidth = window.innerWidth - padding;
+        if (goalWidth <= this.env.w * this.env.xunit) {
+            this.env.scale = goalWidth / this.env.w / this.env.xunit;
         }
-        var width = this.w * this.xunit;
-        var height = this.h * this.yunit;
-        var svg = d3
-            .select(el)
-            .append('svg:svg')
-            .attr('width', width)
-            .attr('height', height);
-        // .append('g')
-        // .attr('transform', 'scale('+ this.scale + ')');
-        // so we can center the diagrams, lets set the width
-        $(el)
-            .width(width)
-            .height(height);
-        return svg;
+        var width = this.env.w * this.env.xunit;
+        var height = this.env.h * this.env.yunit;
+        return {
+            width: width,
+            height: height,
+        };
     },
     psframe: function (svg) {
         // svg.append("svg:rect")

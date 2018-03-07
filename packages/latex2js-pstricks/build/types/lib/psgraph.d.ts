@@ -1,6 +1,9 @@
 declare const _default: {
-    init: (el: any) => any;
-    psframe: (svg: any) => void;
+    getSize(): {
+        width: number;
+        height: number;
+    };
+    psframe(svg: any): void;
     pscircle: (svg: any) => void;
     psplot: (svg: any) => void;
     pspolygon: (svg: any) => void;
