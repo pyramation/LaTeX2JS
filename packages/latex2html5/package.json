@@ -1,8 +1,7 @@
 {
   "name": "latex2html5",
-  "version": "1.0.5",
-  "description":
-    "Author interactive math equations and diagrams online using LaTeX and PSTricks",
+  "version": "1.0.6",
+  "description": "Author interactive math equations and diagrams online using LaTeX and PSTricks",
   "author": "pyramation@gmail.com",
   "main": "./build/index.js",
   "types": "./build/types/index.d.ts",
