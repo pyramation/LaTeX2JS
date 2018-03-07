@@ -1,14 +1,14 @@
 {
   "name": "vue-latex2js",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "latex2js",
   "author": "pyramation@gmail.com",
   "license": "MIT",
   "main": "./index.js",
   "dependencies": {
     "d3": "^4.13.0",
-    "latex2js": "^0.1.4",
+    "latex2js": "^0.1.5",
     "latex2js-mathjax": "^0.0.30",
-    "latex2js-pstricks": "^0.0.34"
+    "latex2js-pstricks": "^0.1.5"
   }
 }
