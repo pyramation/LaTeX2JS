@@ -20,6 +20,7 @@ section > h3,
 
 .enumerate {
   list-style: circle;
+  padding: 12px;
 }
 
 .math {
