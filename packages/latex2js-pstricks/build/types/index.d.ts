@@ -139,6 +139,7 @@ declare const _default: {
         psline(svg: any): void;
         userline(svg: any): void;
         rput(el: any): void;
+        pspicture(svg: any): void;
     };
 };
 export default _default;
