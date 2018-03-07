@@ -1,5 +1,5 @@
 Object.defineProperty(exports, "__esModule", { value: true });
-var load_script_1 = require("load-script");
+var loadScript = require("load-script");
 exports.DEFAULT_SCRIPT = process.env.MATHJAX_CDN ||
     'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
 exports.DEFAULT_OPTIONS = {
@@ -27,6 +27,6 @@ exports.loadMathJax = function (script, options) {
     if (!script) {
         return onLoad();
     }
-    load_script_1.default(script, onLoad);
+    loadScript(script, onLoad);
 };
 //# sourceMappingURL=index.js.map

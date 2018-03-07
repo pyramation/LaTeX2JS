@@ -1,4 +1,4 @@
-import loadScript from 'load-script';
+import * as loadScript from 'load-script';
 
 export const DEFAULT_SCRIPT =
   process.env.MATHJAX_CDN ||
