@@ -399,9 +399,6 @@ exports.default = {
     },
     rput: function (el) {
         var div = document.createElement('div');
-        var rect = el.getBoundingClientRect();
-        var left = rect.left;
-        var top = rect.top;
         var x = this.x;
         var y = this.y;
         div.innerHTML = this.text;
@@ -414,13 +411,14 @@ exports.default = {
         if (typeof processMath === 'function')
             processMath();
         // rput defaults to centering the element in pstricks, so then so do we!
-        setTimeout(function () {
+        window.requestAnimationFrame(function () {
             var rct = div.getBoundingClientRect();
-            var w = rct.width;
-            var h = rct.height;
-            div.style.top = y - h / 2 + "px";
-            div.style.left = x - w / 2 + "px";
-        }, 0);
+            var w = rct.width / 2;
+            var h = rct.height / 2;
+            var halfpadding = 10;
+            div.style.top = y - h + "px";
+            div.style.left = x - w + halfpadding + "px";
+        });
     },
 };
 //# sourceMappingURL=psgraph.js.map
