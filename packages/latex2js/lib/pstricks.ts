@@ -8,7 +8,7 @@ import {
   Xinv,
   Y,
   Yinv,
-} from './utils';
+} from 'latex2js-utils';
 
 import Settings from './settings';
 
