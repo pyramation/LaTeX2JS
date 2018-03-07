@@ -486,8 +486,8 @@ export default {
       const w = rct.width / 2;
       const h = rct.height / 2;
       const halfpadding = 10;
-      div.style.top = `${y - h}px`;
-      div.style.left = `${x - w + halfpadding}px`;
+      // div.style.top = `${y - h}px`;
+      // div.style.left = `${x - w + halfpadding}px`;
     });
   },
 };

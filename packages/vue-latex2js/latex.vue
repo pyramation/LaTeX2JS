@@ -1,5 +1,6 @@
 <template>
   <div class="latex-container">
+    <macros v-if="macros" />
     <component
       v-for="(item, id) in items"
       :is="item.type"
@@ -22,6 +23,7 @@ import enumerate from './components/enumerate.vue';
 import verbatim from './components/verbatim.vue';
 import slider from './components/slider.vue';
 import math from './components/math.vue';
+import macros from './components/macros.vue';
 
 export default {
   name: 'latex',
@@ -32,8 +34,15 @@ export default {
     verbatim,
     slider,
     math,
+    macros,
   },
   beforeMount() {
+    if (document.getElementById('latex-macros')) {
+      this.macros = true;
+    } else {
+      this.macros = false;
+    }
+
     if (getMathJax()) {
       return;
     }
@@ -43,6 +52,7 @@ export default {
   },
   data() {
     return {
+      macros: false,
       loaded: false,
     };
   },

@@ -416,8 +416,8 @@ exports.default = {
             var w = rct.width / 2;
             var h = rct.height / 2;
             var halfpadding = 10;
-            div.style.top = y - h + "px";
-            div.style.left = x - w + halfpadding + "px";
+            // div.style.top = `${y - h}px`;
+            // div.style.left = `${x - w + halfpadding}px`;
         });
     },
 };
