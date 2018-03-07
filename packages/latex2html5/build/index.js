@@ -22,7 +22,7 @@ function render(tex) {
         div.className = 'latex-container';
         parsed.forEach(function (el) {
             if (ELEMENTS.hasOwnProperty(el.type)) {
-                div.appendChild(ELEMENTS[el.type].call(el));
+                div.appendChild(ELEMENTS[el.type](el));
             }
         });
         document.body.appendChild(div);
