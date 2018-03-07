@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :style="style">
     <svg ref="svg" :width="size.width" :height="size.height" style="border: solid 1px black" />
   </div>
 </template>
@@ -14,6 +14,9 @@ export default {
   computed: {
     size() {
       return psgraph.getSize.call(this);
+    },
+    style() {
+      return `{width: ${this.size.width}px; height: ${this.size.height}px}`;
     },
   },
   mounted() {
@@ -32,6 +35,27 @@ export default {
         });
       }
     });
+
+    svg.on(
+      'touchmove',
+      function() {
+        d3.event.preventDefault();
+        var touchcoords = d3.touches(this)[0];
+        // userEvent(touchcoords);
+        console.log('userEvent', touchcoords);
+      },
+      false
+    );
+
+    svg.on(
+      'mousemove',
+      function() {
+        var coords = d3.mouse(this);
+        console.log('userEvent', coords);
+        // userEvent(coords);
+      },
+      false
+    );
 
     // rput
     this.plot.rput.forEach(rput => {

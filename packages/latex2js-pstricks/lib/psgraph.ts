@@ -47,7 +47,9 @@ export default {
   getSize() {
     const padding = 20;
     this.env.scale = 1;
-    const goalWidth = window.innerWidth - padding;
+    const goalWidth =
+      Math.max(document.documentElement.clientWidth, window.innerWidth || 0) -
+      padding;
     if (goalWidth <= this.env.w * this.env.xunit) {
       this.env.scale = goalWidth / this.env.w / this.env.xunit;
     }
