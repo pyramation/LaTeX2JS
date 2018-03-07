@@ -487,6 +487,7 @@ const psgraph = {
         div.style.left = `${x - w}px`;
       }, 10);
     };
+
     MathJax.Hub.Queue(['Typeset', MathJax.Hub, div], [done]);
   },
 
