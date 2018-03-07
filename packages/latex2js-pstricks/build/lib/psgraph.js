@@ -409,15 +409,15 @@ var psgraph = {
         el.appendChild(div);
         // rput defaults to centering the element in pstricks, so then so do we!
         var done = function () {
-            setTimeout(function () {
-                var rct = div.getBoundingClientRect();
-                var w = rct.width / 2;
-                var h = rct.height / 2;
-                div.style.top = y - h + "px";
-                div.style.left = x - w + "px";
-            }, 10);
+            var rct = div.getBoundingClientRect();
+            var w = rct.width / 2;
+            var h = rct.height / 2;
+            div.style.top = y - h + "px";
+            div.style.left = x - w + "px";
         };
-        MathJax.Hub.Queue(['Typeset', MathJax.Hub, div], [done]);
+        MathJax.Hub.Queue(['Typeset', MathJax.Hub, div]);
+        // using the queue works, but looks hackier in the UI than this setTimeout does in code
+        setTimeout(done, 1100);
     },
     pspicture: function (svg) {
         var _this = this;
