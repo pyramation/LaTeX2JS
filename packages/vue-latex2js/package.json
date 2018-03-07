@@ -1,8 +1,22 @@
 {
   "name": "vue-latex2js",
   "version": "1.0.4",
-  "description": "latex2js",
+  "description": "Vue components for LaTeX2JS",
   "author": "pyramation@gmail.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pyramation/LaTeX2JS.git"
+  },
+  "keywords": [
+    "latex",
+    "latex2html",
+    "latex2js",
+    "math",
+    "mathematics",
+    "mathjax",
+    "vue",
+    "vue.js"
+  ],
   "license": "MIT",
   "main": "./index.js",
   "dependencies": {
