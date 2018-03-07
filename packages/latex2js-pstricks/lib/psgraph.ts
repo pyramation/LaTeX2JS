@@ -471,6 +471,7 @@ const psgraph = {
 
     div.innerHTML = this.text;
     div.className = 'math';
+    div.style.visibility = 'hidden';
     div.style.position = 'absolute';
     div.style.top = `${y}px`;
     div.style.left = `${x}px`;
@@ -483,14 +484,15 @@ const psgraph = {
       const rct = div.getBoundingClientRect();
       const w = rct.width / 2;
       const h = rct.height / 2;
+      div.style.visibility = 'visible';
       div.style.top = `${y - h}px`;
       div.style.left = `${x - w}px`;
     };
 
-    MathJax.Hub.Queue(['Typeset', MathJax.Hub, div]);
+    MathJax.Hub.Queue(['Typeset', MathJax.Hub, div], [done]);
 
     // using the queue works, but looks hackier in the UI than this setTimeout does in code
-    setTimeout(done, 1100);
+    // setTimeout(done, 1100);
   },
 
   pspicture(svg) {
