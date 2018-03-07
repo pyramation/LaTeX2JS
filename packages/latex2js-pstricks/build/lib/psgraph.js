@@ -36,7 +36,8 @@ exports.default = {
     getSize: function () {
         var padding = 20;
         this.env.scale = 1;
-        var goalWidth = window.innerWidth - padding;
+        var goalWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0) -
+            padding;
         if (goalWidth <= this.env.w * this.env.xunit) {
             this.env.scale = goalWidth / this.env.w / this.env.xunit;
         }
@@ -411,21 +412,14 @@ exports.default = {
         var processMath = MathJax.Hub.Queue(['Typeset', MathJax.Hub, div]);
         if (typeof processMath === 'function')
             processMath();
-        //rput defaults to centering the element in pstricks, so then so do we!
-        // setTimeout(function() {
-        //   console.log('calling setTimeout()');
-        //   var w = $_.width();
-        //   var h = $_.height();
-        //   $_.css({
-        //     top: y - h / 2,
-        //     left: x - w / 2,
-        //   });
-        //   console.log({
-        //     top: y - h / 2,
-        //     left: x - w / 2,
-        //   });
-        // }, 1000);
-        // return $_;
+        // rput defaults to centering the element in pstricks, so then so do we!
+        setTimeout(function () {
+            var rct = div.getBoundingClientRect();
+            var w = rct.width;
+            var h = rct.height;
+            div.style.top = y - h / 2 + "px";
+            div.style.left = x - w / 2 + "px";
+        }, 0);
     },
 };
 //# sourceMappingURL=psgraph.js.map

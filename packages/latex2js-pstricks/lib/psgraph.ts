@@ -482,21 +482,13 @@ export default {
     var processMath = MathJax.Hub.Queue(['Typeset', MathJax.Hub, div]);
     if (typeof processMath === 'function') processMath();
 
-    //rput defaults to centering the element in pstricks, so then so do we!
-
-    // setTimeout(function() {
-    //   console.log('calling setTimeout()');
-    //   var w = $_.width();
-    //   var h = $_.height();
-    //   $_.css({
-    //     top: y - h / 2,
-    //     left: x - w / 2,
-    //   });
-    //   console.log({
-    //     top: y - h / 2,
-    //     left: x - w / 2,
-    //   });
-    // }, 1000);
-    // return $_;
+    // rput defaults to centering the element in pstricks, so then so do we!
+    setTimeout(function() {
+      const rct = div.getBoundingClientRect();
+      var w = rct.width;
+      var h = rct.height;
+      div.style.top = `${y - h / 2}px`;
+      div.style.left = `${x - w / 2}px`;
+    }, 0);
   },
 };
