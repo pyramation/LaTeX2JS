@@ -43,23 +43,21 @@ export default {
     });
   },
   data() {
-    const latex = new LaTeX2JS();
-    const parsed = latex.parse(this.$attrs.content);
     return {
       loaded: false,
     };
   },
-  computed() {
-    const latex = new LaTeX2JS();
-    const parsed = latex.parse(this.$attrs.content);
-    return {
-      items: this.loaded
+  computed: {
+    items() {
+      const latex = new LaTeX2JS();
+      const parsed = latex.parse(this.$attrs.content);
+      return this.loaded
         ? parsed.map((item, i) => {
             item.id = i;
             return item;
           })
-        : [],
-    };
+        : [];
+    },
   },
 };
 </script>
