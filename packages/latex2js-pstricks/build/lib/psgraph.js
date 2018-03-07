@@ -397,28 +397,35 @@ exports.default = {
         }
     },
     rput: function (el) {
-        var $_ = $('<div></div>');
-        $_.html(this.text).css({
-            position: 'absolute',
-            top: this.y,
-            left: this.x,
-        });
-        $(el).append($_);
-        var process = MathJax.Hub.Queue(['Typeset', MathJax.Hub, $_[0]]);
-        if (typeof process === 'function')
-            process();
-        //rput defaults to centering the element in pstricks, so then so do we!
+        var div = document.createElement('div');
+        var rect = el.getBoundingClientRect();
+        var left = rect.left;
+        var top = rect.top;
         var x = this.x;
         var y = this.y;
-        setTimeout(function () {
-            var w = $_.width();
-            var h = $_.height();
-            $_.css({
-                top: y - h / 2,
-                left: x - w / 2,
-            });
-        }, 0);
-        return $_;
+        div.innerHTML = this.text;
+        div.style.position = 'absolute';
+        div.style.top = y + "px";
+        div.style.left = x + "px";
+        el.appendChild(div);
+        var processMath = MathJax.Hub.Queue(['Typeset', MathJax.Hub, div]);
+        if (typeof processMath === 'function')
+            processMath();
+        //rput defaults to centering the element in pstricks, so then so do we!
+        // setTimeout(function() {
+        //   console.log('calling setTimeout()');
+        //   var w = $_.width();
+        //   var h = $_.height();
+        //   $_.css({
+        //     top: y - h / 2,
+        //     left: x - w / 2,
+        //   });
+        //   console.log({
+        //     top: y - h / 2,
+        //     left: x - w / 2,
+        //   });
+        // }, 1000);
+        // return $_;
     },
 };
 //# sourceMappingURL=psgraph.js.map

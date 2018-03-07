@@ -26,7 +26,6 @@ export default {
       if (key.match(/rput/)) return;
       if (psgraph.hasOwnProperty(key)) {
         plot.forEach(data => {
-          console.log(data);
           data.data.global = env;
           // give access to pspicture!
           psgraph[key].call(data.data, svg);
@@ -36,6 +35,7 @@ export default {
 
     // rput
     this.plot.rput.forEach(rput => {
+      console.log(rput.data, env);
       psgraph.rput.call(rput.data, el);
     });
   },

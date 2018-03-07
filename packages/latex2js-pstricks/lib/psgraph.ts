@@ -462,31 +462,39 @@ export default {
   },
 
   rput(el) {
-    var $_ = $('<div></div>');
+    const div = document.createElement('div');
+    const rect = el.getBoundingClientRect();
+    const left = rect.left;
+    const top = rect.top;
 
-    $_.html(this.text).css({
-      position: 'absolute',
-      top: this.y,
-      left: this.x,
-    });
+    const x = this.x;
+    const y = this.y;
 
-    $(el).append($_);
+    div.innerHTML = this.text;
+    div.style.position = 'absolute';
+    div.style.top = `${y}px`;
+    div.style.left = `${x}px`;
 
-    var process = MathJax.Hub.Queue(['Typeset', MathJax.Hub, $_[0]]);
-    if (typeof process === 'function') process();
+    el.appendChild(div);
+
+    var processMath = MathJax.Hub.Queue(['Typeset', MathJax.Hub, div]);
+    if (typeof processMath === 'function') processMath();
 
     //rput defaults to centering the element in pstricks, so then so do we!
-    var x = this.x;
-    var y = this.y;
-    setTimeout(function() {
-      var w = $_.width();
-      var h = $_.height();
-      $_.css({
-        top: y - h / 2,
-        left: x - w / 2,
-      });
-    }, 0);
 
-    return $_;
+    // setTimeout(function() {
+    //   console.log('calling setTimeout()');
+    //   var w = $_.width();
+    //   var h = $_.height();
+    //   $_.css({
+    //     top: y - h / 2,
+    //     left: x - w / 2,
+    //   });
+    //   console.log({
+    //     top: y - h / 2,
+    //     left: x - w / 2,
+    //   });
+    // }, 1000);
+    // return $_;
   },
 };
