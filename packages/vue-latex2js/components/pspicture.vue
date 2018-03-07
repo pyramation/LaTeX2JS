@@ -1,5 +1,5 @@
 <template>
-  <div :style="style">
+  <div :style="style" class="pspicture">
     <svg ref="svg" :width="size.width" :height="size.height" style="border: solid 1px black" />
   </div>
 </template>
