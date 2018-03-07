@@ -1,5 +1,5 @@
 <template>
-  <pre>
+  <pre class="verbatim">
 {{ text }}
   </pre>
 </template>

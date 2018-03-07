@@ -63,6 +63,10 @@ body {
   *zoom: 1;
 }
 
+pre.verbatim {
+  background-color: white;
+}
+
 @media (min-width: 1200px) {
 }
 
