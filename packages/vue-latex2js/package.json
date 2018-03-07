@@ -1,11 +1,11 @@
 {
   "name": "vue-latex2js",
-  "version": "0.0.17",
+  "version": "0.0.18",
   "description": "latex2js",
   "author": "pyramation@gmail.com",
   "license": "MIT",
   "main": "./index.js",
   "dependencies": {
-    "latex2js": "^0.0.15"
+    "latex2js": "^0.0.18"
   }
 }
