@@ -1,7 +1,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var _ = require("underscore");
 var latex2js_utils_1 = require("latex2js-utils");
-var settings_1 = require("./settings");
+var latex2js_settings_1 = require("latex2js-settings");
 exports.Expressions = {
     pspicture: /\\begin\{pspicture\}\(\s*(.*),(.*)\s*\)\(\s*(.*),(.*)\s*\)/,
     psframe: /\\psframe\(\s*(.*),(.*)\s*\)\(\s*(.*),(.*)\s*\)/,
@@ -404,9 +404,9 @@ exports.Functions = {
         _.each(pairs, function (pair) {
             var key = pair[0];
             var value = pair[1];
-            _.each(settings_1.default.Expressions, function (exp, setting) {
+            _.each(latex2js_settings_1.default.Expressions, function (exp, setting) {
                 if (key.match(exp)) {
-                    settings_1.default.Functions[setting](obj, value);
+                    latex2js_settings_1.default.Functions[setting](obj, value);
                 }
             });
         });

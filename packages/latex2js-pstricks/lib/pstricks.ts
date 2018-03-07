@@ -10,7 +10,7 @@ import {
   Yinv,
 } from 'latex2js-utils';
 
-import Settings from './settings';
+import Settings from 'latex2js-settings';
 
 export const Expressions = {
   pspicture: /\\begin\{pspicture\}\(\s*(.*),(.*)\s*\)\(\s*(.*),(.*)\s*\)/,

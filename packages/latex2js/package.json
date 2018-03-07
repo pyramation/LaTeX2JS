@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "latex2js-pstricks": "^0.0.20",
+    "latex2js-settings": "^0.0.21",
     "latex2js-utils": "^0.0.19",
     "underscore": "1.5.2"
   },
