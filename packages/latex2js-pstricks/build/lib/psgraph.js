@@ -407,17 +407,14 @@ var psgraph = {
         div.style.top = y + "px";
         div.style.left = x + "px";
         el.appendChild(div);
-        var processMath = MathJax.Hub.Queue(['Typeset', MathJax.Hub, div]);
-        if (typeof processMath === 'function')
-            processMath();
-        // rput defaults to centering the element in pstricks, so then so do we!
-        setTimeout(function () {
+        function repositionText() {
             var rct = div.getBoundingClientRect();
             var w = rct.width / 2;
             var h = rct.height / 2;
             div.style.top = y - h + "px";
             div.style.left = x - w + "px";
-        }, 1100);
+        }
+        MathJax.Hub.Queue(['Typeset', MathJax.Hub, div], [repositionText]);
     },
     pspicture: function (svg) {
         var _this = this;
