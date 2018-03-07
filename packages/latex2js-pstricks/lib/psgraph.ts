@@ -61,16 +61,6 @@ export default {
   },
 
   psframe(svg) {
-    // svg.append("svg:rect")
-    //   .attr("x", this.x2)
-    //   .attr("y", this.y2)
-    //   .attr("height", Math.abs(this.y2 - this.y1))
-    //   .attr("width", Math.abs(this.x1 - this.x2))
-    // .style("stroke-width", 2)
-    // .style("fill-color", "rgba(0,0,0,0)")
-    //   .style("stroke", "rgb(0,0,0)")
-    //   .style("stroke-opacity", 1);
-
     svg
       .append('svg:line')
       .attr('x1', this.x1)
@@ -123,7 +113,7 @@ export default {
       .style('stroke-opacity', 1);
   },
 
-  psplot: function(svg) {
+  psplot(svg) {
     var context = [];
     context.push('M');
     if (this.fillstyle === 'solid') {
@@ -155,7 +145,7 @@ export default {
       .style('stroke', this.linecolor);
   },
 
-  pspolygon: function(svg) {
+  pspolygon(svg) {
     var context = [];
     context.push('M');
     context.push(this.data[0]);
@@ -176,7 +166,7 @@ export default {
       .style('stroke', 'black');
   },
 
-  psarc: function(svg) {
+  psarc(svg) {
     // http://www.w3.org/TR/SVG/paths.html#PathDataEllipticalArcCommands
     var context = [];
     context.push('M');
@@ -187,7 +177,6 @@ export default {
     context.push(this.A.y);
 
     context.push('A');
-    // context.push('a');
 
     context.push(this.A.x);
     context.push(this.A.y);
@@ -206,18 +195,9 @@ export default {
       .style('stroke-opacity', 1)
       .style('fill', 'blue')
       .style('stroke', 'black');
-
-    // svg.append('svg:circle')
-    // .attr('cx', this.cx)
-    // .attr('cy', this.cy)
-    // .attr('r', this.r)
-    // .style("stroke", this.linecolor)
-    // .style("fill", "none")
-    // .style("stroke-width", 2)
-    // .style("stroke-opacity", 1);
   },
 
-  psaxes: function(svg) {
+  psaxes(svg) {
     var xaxis = [this.bottomLeft[0], this.topRight[0]];
     var yaxis = [this.bottomLeft[1], this.topRight[1]];
 
@@ -288,7 +268,7 @@ export default {
         .style('stroke', 'black');
     }
   },
-  psline: function(svg) {
+  psline(svg) {
     var linewidth = this.linewidth,
       linecolor = this.linecolor;
 
@@ -381,7 +361,7 @@ export default {
     }
   },
 
-  userline: function(svg) {
+  userline(svg) {
     var linewidth = this.linewidth,
       linecolor = this.linecolor;
 
@@ -481,7 +461,7 @@ export default {
     }
   },
 
-  rput: function(el) {
+  rput(el) {
     var $_ = $('<div></div>');
 
     $_.html(this.text).css({

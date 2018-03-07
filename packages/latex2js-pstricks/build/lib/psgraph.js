@@ -48,15 +48,6 @@ exports.default = {
         };
     },
     psframe: function (svg) {
-        // svg.append("svg:rect")
-        //   .attr("x", this.x2)
-        //   .attr("y", this.y2)
-        //   .attr("height", Math.abs(this.y2 - this.y1))
-        //   .attr("width", Math.abs(this.x1 - this.x2))
-        // .style("stroke-width", 2)
-        // .style("fill-color", "rgba(0,0,0,0)")
-        //   .style("stroke", "rgb(0,0,0)")
-        //   .style("stroke-opacity", 1);
         svg
             .append('svg:line')
             .attr('x1', this.x1)
@@ -162,7 +153,6 @@ exports.default = {
         context.push(this.A.x);
         context.push(this.A.y);
         context.push('A');
-        // context.push('a');
         context.push(this.A.x);
         context.push(this.A.y);
         context.push(0);
@@ -177,14 +167,6 @@ exports.default = {
             .style('stroke-opacity', 1)
             .style('fill', 'blue')
             .style('stroke', 'black');
-        // svg.append('svg:circle')
-        // .attr('cx', this.cx)
-        // .attr('cy', this.cy)
-        // .attr('r', this.r)
-        // .style("stroke", this.linecolor)
-        // .style("fill", "none")
-        // .style("stroke-width", 2)
-        // .style("stroke-opacity", 1);
     },
     psaxes: function (svg) {
         var xaxis = [this.bottomLeft[0], this.topRight[0]];

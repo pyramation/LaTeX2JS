@@ -58,7 +58,7 @@ exports.Functions = {
         this.sliders = this.sliders || [];
         this.sliders.push(obj);
         if (m[1]) {
-            _.extend(obj, latex2js_utils_1.parseOptions(m[1]));
+            Object.assign(obj, latex2js_utils_1.parseOptions(m[1]));
         }
         return obj;
     },
@@ -73,8 +73,8 @@ exports.Functions = {
             w: p.x1 - p.x0,
             h: p.y1 - p.y0,
         };
-        _.extend(this, p, s);
-        return _.extend(p, s);
+        Object.assign(this, p, s);
+        return Object.assign(p, s);
     },
     psframe: function (m) {
         var obj = {
@@ -171,7 +171,7 @@ exports.Functions = {
             linewidth: 2,
         };
         if (m[1])
-            _.extend(obj, latex2js_utils_1.parseOptions(m[1]));
+            Object.assign(obj, latex2js_utils_1.parseOptions(m[1]));
         obj.data = data;
         return obj;
     },
@@ -197,7 +197,7 @@ exports.Functions = {
             data: data,
         };
         if (m[1])
-            _.extend(obj, latex2js_utils_1.parseOptions(m[1]));
+            Object.assign(obj, latex2js_utils_1.parseOptions(m[1]));
         return obj;
     },
     psarc: function (m) {
@@ -217,7 +217,7 @@ exports.Functions = {
             cy: latex2js_utils_1.Y.call(this, 0),
         };
         if (m[1]) {
-            _.extend(obj, latex2js_utils_1.parseOptions(m[1]));
+            Object.assign(obj, latex2js_utils_1.parseOptions(m[1]));
         }
         // m[1] options
         // m[2] arrows
@@ -247,7 +247,8 @@ exports.Functions = {
         return obj;
     },
     psline: function (m) {
-        var options = m[1], lineType = m[2];
+        var options = m[1];
+        var lineType = m[2];
         var l = latex2js_utils_1.parseArrows(lineType);
         var arrows = l.arrows;
         var dots = l.dots;
@@ -273,7 +274,7 @@ exports.Functions = {
             obj.y2 = latex2js_utils_1.Y.call(this, m[4]);
         }
         if (options) {
-            _.extend(obj, latex2js_utils_1.parseOptions(options));
+            Object.assign(obj, latex2js_utils_1.parseOptions(options));
         }
         // TODO: add regex
         if (typeof obj.linewidth === 'string') {
@@ -309,9 +310,9 @@ exports.Functions = {
         return obj;
     },
     userline: function (m) {
-        var options = m[1], 
+        var options = m[1];
         // WE ARENT USING THIS YET!!!! e.g., [linecolor=green]
-        lineType = m[2];
+        var lineType = m[2];
         var l = latex2js_utils_1.parseArrows(lineType);
         var arrows = l.arrows;
         var dots = l.dots;
@@ -379,7 +380,7 @@ exports.Functions = {
             dots: dots,
         };
         if (options) {
-            _.extend(obj, latex2js_utils_1.parseOptions(options));
+            Object.assign(obj, latex2js_utils_1.parseOptions(options));
         }
         // TODO: add regex
         if (typeof obj.linewidth === 'string') {
@@ -397,14 +398,13 @@ exports.Functions = {
         };
     },
     psset: function (m) {
-        var pairs = _.map(m[1].split(','), function (pair) {
-            return pair.split('=');
-        });
+        var pairs = m[1].split(',').map(function (pair) { return pair.split('='); });
         var obj = {};
-        _.each(pairs, function (pair) {
+        pairs.forEach(function (pair) {
             var key = pair[0];
             var value = pair[1];
-            _.each(latex2js_settings_1.default.Expressions, function (exp, setting) {
+            Object.keys(latex2js_settings_1.default.Expressions).forEach(function (setting) {
+                var exp = latex2js_settings_1.default.Expressions[setting];
                 if (key.match(exp)) {
                     latex2js_settings_1.default.Functions[setting](obj, value);
                 }

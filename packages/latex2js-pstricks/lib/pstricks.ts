@@ -66,7 +66,7 @@ export const Expressions = {
 };
 
 export const Functions = {
-  slider: function(m) {
+  slider(m) {
     // console.log(m);
     var obj = {
       scalar: 1,
@@ -81,11 +81,11 @@ export const Functions = {
     this.sliders = this.sliders || [];
     this.sliders.push(obj);
     if (m[1]) {
-      _.extend(obj, parseOptions(m[1]));
+      Object.assign(obj, parseOptions(m[1]));
     }
     return obj;
   },
-  pspicture: function(m) {
+  pspicture(m) {
     var p = {
       x0: Number(m[1]),
       y0: Number(m[2]),
@@ -96,10 +96,10 @@ export const Functions = {
       w: p.x1 - p.x0,
       h: p.y1 - p.y0,
     };
-    _.extend(this, p, s);
-    return _.extend(p, s);
+    Object.assign(this, p, s);
+    return Object.assign(p, s);
   },
-  psframe: function(m) {
+  psframe(m) {
     var obj = {
       x1: X.call(this, m[1]),
       y1: Y.call(this, m[2]),
@@ -108,7 +108,7 @@ export const Functions = {
     };
     return obj;
   },
-  pscircle: function(m) {
+  pscircle(m) {
     var obj = {
       cx: X.call(this, m[1]),
       cy: Y.call(this, m[2]),
@@ -116,7 +116,7 @@ export const Functions = {
     };
     return obj;
   },
-  psaxes: function(m) {
+  psaxes(m) {
     var obj = {
       dx: 1 * this.xunit,
       dy: 1 * this.yunit,
@@ -167,7 +167,7 @@ export const Functions = {
     }
     return obj;
   },
-  psplot: function(m) {
+  psplot(m) {
     var startX = evaluate.call(this, m[2]);
     var endX = evaluate.call(this, m[3]);
     var data = [];
@@ -191,11 +191,11 @@ export const Functions = {
       fillcolor: 'none',
       linewidth: 2,
     };
-    if (m[1]) _.extend(obj, parseOptions(m[1]));
+    if (m[1]) Object.assign(obj, parseOptions(m[1]));
     obj.data = data;
     return obj;
   },
-  pspolygon: function(m) {
+  pspolygon(m) {
     var coords = m[2];
     if (!coords) return;
     var manyCoords = new RegExp(RE.coords, 'g');
@@ -219,10 +219,10 @@ export const Functions = {
       linewidth: 2,
       data: data,
     };
-    if (m[1]) _.extend(obj, parseOptions(m[1]));
+    if (m[1]) Object.assign(obj, parseOptions(m[1]));
     return obj;
   },
-  psarc: function(m) {
+  psarc(m) {
     // console.log(m);
     var l = parseArrows(m[2]);
     var arrows = l.arrows;
@@ -239,7 +239,7 @@ export const Functions = {
       cy: Y.call(this, 0),
     };
     if (m[1]) {
-      _.extend(obj, parseOptions(m[1]));
+      Object.assign(obj, parseOptions(m[1]));
     }
     // m[1] options
     // m[2] arrows
@@ -268,9 +268,9 @@ export const Functions = {
     };
     return obj;
   },
-  psline: function(m) {
-    var options = m[1],
-      lineType = m[2];
+  psline(m) {
+    var options = m[1];
+    var lineType = m[2];
     var l = parseArrows(lineType);
     var arrows = l.arrows;
     var dots = l.dots;
@@ -295,7 +295,7 @@ export const Functions = {
       obj.y2 = Y.call(this, m[4]);
     }
     if (options) {
-      _.extend(obj, parseOptions(options));
+      Object.assign(obj, parseOptions(options));
     }
     // TODO: add regex
     if (typeof obj.linewidth === 'string') {
@@ -303,7 +303,7 @@ export const Functions = {
     }
     return obj;
   },
-  uservariable: function(m) {
+  uservariable(m) {
     var options = m[1];
     var coords = [];
     if (this.userx && this.usery) {
@@ -329,10 +329,10 @@ export const Functions = {
     };
     return obj;
   },
-  userline: function(m) {
-    var options = m[1],
-      // WE ARENT USING THIS YET!!!! e.g., [linecolor=green]
-      lineType = m[2];
+  userline(m) {
+    var options = m[1];
+    // WE ARENT USING THIS YET!!!! e.g., [linecolor=green]
+    var lineType = m[2];
     var l = parseArrows(lineType);
     var arrows = l.arrows;
     var dots = l.dots;
@@ -400,7 +400,7 @@ export const Functions = {
       dots: dots,
     };
     if (options) {
-      _.extend(obj, parseOptions(options));
+      Object.assign(obj, parseOptions(options));
     }
     // TODO: add regex
     if (typeof obj.linewidth === 'string') {
@@ -410,22 +410,21 @@ export const Functions = {
     // console.log(obj);
     return obj;
   },
-  rput: function(m) {
+  rput(m) {
     return {
       x: X.call(this, m[1]),
       y: Y.call(this, m[2]),
       text: m[3],
     };
   },
-  psset: function(m) {
-    var pairs = _.map(m[1].split(','), function(pair) {
-      return pair.split('=');
-    });
-    var obj = {};
-    _.each(pairs, function(pair) {
-      var key = pair[0];
-      var value = pair[1];
-      _.each(Settings.Expressions, function(exp, setting) {
+  psset(m) {
+    const pairs = m[1].split(',').map(pair => pair.split('='));
+    const obj = {};
+    pairs.forEach(pair => {
+      const key = pair[0];
+      const value = pair[1];
+      Object.keys(Settings.Expressions).forEach(setting => {
+        const exp = Settings.Expressions[setting];
         if (key.match(exp)) {
           Settings.Functions[setting](obj, value);
         }

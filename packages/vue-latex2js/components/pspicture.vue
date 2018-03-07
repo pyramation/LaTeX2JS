@@ -1,5 +1,5 @@
 <template>
-  <div :width="size.width" :height="size.height">
+  <div>
     <svg ref="svg" :width="size.width" :height="size.height" style="border: solid 1px black" />
   </div>
 </template>
@@ -17,13 +17,6 @@ export default {
     },
   },
   mounted() {
-    // d3
-    //   .select(this.$el)
-    //   .append('circle')
-    //   .attr('cx', '250')
-    //   .attr('cy', '150')
-    //   .attr('r', '100');
-
     var env = this.env;
     var el = this.$el;
     var svg = d3.select(this.$refs.svg);

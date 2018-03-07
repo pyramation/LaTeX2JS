@@ -14,7 +14,7 @@ export declare const Expressions: {
     psset: RegExp;
 };
 export declare const Functions: {
-    slider: (m: any) => {
+    slider(m: any): {
         scalar: number;
         min: number;
         max: number;
@@ -22,33 +22,41 @@ export declare const Functions: {
         latex: any;
         value: number;
     };
-    pspicture: (m: any) => any;
-    psframe: (m: any) => {
+    pspicture(m: any): {
+        x0: number;
+        y0: number;
+        x1: number;
+        y1: number;
+    } & {
+        w: number;
+        h: number;
+    };
+    psframe(m: any): {
         x1: any;
         y1: any;
         x2: any;
         y2: any;
     };
-    pscircle: (m: any) => {
+    pscircle(m: any): {
         cx: any;
         cy: any;
         r: number;
     };
-    psaxes: (m: any) => {
+    psaxes(m: any): {
         dx: number;
         dy: number;
         arrows: number[];
         dots: number[];
         ticks: string;
     };
-    psplot: (m: any) => {
+    psplot(m: any): {
         linecolor: string;
         linestyle: string;
         fillstyle: string;
         fillcolor: string;
         linewidth: number;
     };
-    pspolygon: (m: any) => {
+    pspolygon(m: any): {
         linecolor: string;
         linestyle: string;
         fillstyle: string;
@@ -56,7 +64,7 @@ export declare const Functions: {
         linewidth: number;
         data: any[];
     };
-    psarc: (m: any) => {
+    psarc(m: any): {
         linecolor: string;
         linestyle: string;
         fillstyle: string;
@@ -67,7 +75,7 @@ export declare const Functions: {
         cx: any;
         cy: any;
     };
-    psline: (m: any) => {
+    psline(m: any): {
         linecolor: string;
         linestyle: string;
         fillstyle: string;
@@ -76,14 +84,14 @@ export declare const Functions: {
         arrows: number[];
         dots: number[];
     };
-    uservariable: (m: any) => {
+    uservariable(m: any): {
         name: any;
         x: any;
         y: any;
         func: any;
         value: any;
     };
-    userline: (m: any) => {
+    userline(m: any): {
         x1: any;
         y1: any;
         x2: any;
@@ -104,12 +112,12 @@ export declare const Functions: {
         arrows: number[];
         dots: number[];
     };
-    rput: (m: any) => {
+    rput(m: any): {
         x: any;
         y: any;
         text: any;
     };
-    psset: (m: any) => {};
+    psset(m: any): {};
 };
 declare const _default: {
     Expressions: {
@@ -128,7 +136,7 @@ declare const _default: {
         psset: RegExp;
     };
     Functions: {
-        slider: (m: any) => {
+        slider(m: any): {
             scalar: number;
             min: number;
             max: number;
@@ -136,33 +144,41 @@ declare const _default: {
             latex: any;
             value: number;
         };
-        pspicture: (m: any) => any;
-        psframe: (m: any) => {
+        pspicture(m: any): {
+            x0: number;
+            y0: number;
+            x1: number;
+            y1: number;
+        } & {
+            w: number;
+            h: number;
+        };
+        psframe(m: any): {
             x1: any;
             y1: any;
             x2: any;
             y2: any;
         };
-        pscircle: (m: any) => {
+        pscircle(m: any): {
             cx: any;
             cy: any;
             r: number;
         };
-        psaxes: (m: any) => {
+        psaxes(m: any): {
             dx: number;
             dy: number;
             arrows: number[];
             dots: number[];
             ticks: string;
         };
-        psplot: (m: any) => {
+        psplot(m: any): {
             linecolor: string;
             linestyle: string;
             fillstyle: string;
             fillcolor: string;
             linewidth: number;
         };
-        pspolygon: (m: any) => {
+        pspolygon(m: any): {
             linecolor: string;
             linestyle: string;
             fillstyle: string;
@@ -170,7 +186,7 @@ declare const _default: {
             linewidth: number;
             data: any[];
         };
-        psarc: (m: any) => {
+        psarc(m: any): {
             linecolor: string;
             linestyle: string;
             fillstyle: string;
@@ -181,7 +197,7 @@ declare const _default: {
             cx: any;
             cy: any;
         };
-        psline: (m: any) => {
+        psline(m: any): {
             linecolor: string;
             linestyle: string;
             fillstyle: string;
@@ -190,14 +206,14 @@ declare const _default: {
             arrows: number[];
             dots: number[];
         };
-        uservariable: (m: any) => {
+        uservariable(m: any): {
             name: any;
             x: any;
             y: any;
             func: any;
             value: any;
         };
-        userline: (m: any) => {
+        userline(m: any): {
             x1: any;
             y1: any;
             x2: any;
@@ -218,12 +234,12 @@ declare const _default: {
             arrows: number[];
             dots: number[];
         };
-        rput: (m: any) => {
+        rput(m: any): {
             x: any;
             y: any;
             text: any;
         };
-        psset: (m: any) => {};
+        psset(m: any): {};
     };
 };
 export default _default;
