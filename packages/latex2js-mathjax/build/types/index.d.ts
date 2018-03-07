@@ -13,4 +13,4 @@ export declare const DEFAULT_OPTIONS: {
     };
 };
 export declare const getMathJax: () => any;
-export declare const loadMathJax: (script?: string, options?: object) => void;
+export declare const loadMathJax: (callback?: Function, script?: string, options?: object) => void;

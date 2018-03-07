@@ -18,11 +18,13 @@ exports.DEFAULT_OPTIONS = {
 exports.getMathJax = function () {
     return typeof MathJax === 'undefined' ? undefined : MathJax;
 };
-exports.loadMathJax = function (script, options) {
+exports.loadMathJax = function (callback, script, options) {
+    if (callback === void 0) { callback = function () { }; }
     if (script === void 0) { script = exports.DEFAULT_SCRIPT; }
     if (options === void 0) { options = exports.DEFAULT_OPTIONS; }
     var onLoad = function () {
         MathJax.Hub.Config(options);
+        callback();
     };
     if (!script) {
         return onLoad();

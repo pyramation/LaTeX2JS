@@ -38,17 +38,21 @@ export default {
     if (getMathJax()) {
       return;
     }
-    loadMathJax();
+    loadMathJax(() => {
+      this.loaded = true;
+    });
   },
   data() {
     const latex = new LaTeX2JS();
     const parsed = latex.parse(this.$attrs.content);
-    console.log(parsed);
     return {
-      items: parsed.map((item, i) => {
-        item.id = i;
-        return item;
-      }),
+      loaded: false,
+      items: loaded
+        ? parsed.map((item, i) => {
+            item.id = i;
+            return item;
+          })
+        : [],
     };
   },
 };

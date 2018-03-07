@@ -22,11 +22,13 @@ export const getMathJax = () =>
   typeof MathJax === 'undefined' ? undefined : MathJax;
 
 export const loadMathJax = (
+  callback: Function = () => {},
   script: string = DEFAULT_SCRIPT,
   options: object = DEFAULT_OPTIONS
 ) => {
   const onLoad = () => {
     MathJax.Hub.Config(options);
+    callback();
   };
   if (!script) {
     return onLoad();
