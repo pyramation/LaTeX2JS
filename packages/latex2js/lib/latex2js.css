@@ -18,6 +18,14 @@ section > h3,
   margin: auto;
 }
 
+.math {
+  font-family: 'Arbutus Slab', serif;
+  font-size: 14px;
+  line-height: 20px;
+  color: #333333;
+  background-color: #ffffff;
+}
+
 span.tt {
   font-family: courier;
 }
