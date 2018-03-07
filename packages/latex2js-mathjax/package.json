@@ -1,6 +1,6 @@
 {
   "name": "latex2js-mathjax",
-  "version": "0.1.10",
+  "version": "1.0.5",
   "description": "MathJax utilities for LaTeX2JS",
   "author": "pyramation@gmail.com",
   "license": "MIT",
