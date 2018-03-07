@@ -47,7 +47,13 @@ export default {
     const parsed = latex.parse(this.$attrs.content);
     return {
       loaded: false,
-      items: loaded
+    };
+  },
+  computed() {
+    const latex = new LaTeX2JS();
+    const parsed = latex.parse(this.$attrs.content);
+    return {
+      items: this.loaded
         ? parsed.map((item, i) => {
             item.id = i;
             return item;
