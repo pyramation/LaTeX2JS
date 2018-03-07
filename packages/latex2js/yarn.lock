@@ -2120,18 +2120,18 @@ kind-of@^4.0.0:
   dependencies:
     is-buffer "^1.1.5"
 
-latex2js-pstricks@^0.0.24:
-  version "0.0.24"
-  resolved "https://registry.yarnpkg.com/latex2js-pstricks/-/latex2js-pstricks-0.0.24.tgz#e44417ca30d2b530048f8fa8d7985f4baed093b1"
+latex2js-pstricks@^0.1.18:
+  version "0.1.18"
+  resolved "https://registry.yarnpkg.com/latex2js-pstricks/-/latex2js-pstricks-0.1.18.tgz#426dc862c8ac3c8d5891418f192a53584d740620"
   dependencies:
     d3 "^4.13.0"
-    latex2js-settings "^0.0.21"
+    latex2js-settings "^0.0.26"
     latex2js-utils "^0.0.19"
     underscore "1.5.2"
 
-latex2js-settings@^0.0.21:
-  version "0.0.21"
-  resolved "https://registry.yarnpkg.com/latex2js-settings/-/latex2js-settings-0.0.21.tgz#1d10ab7b7a9dfc7e9f8c268c8bfe8d79fe6d737e"
+latex2js-settings@^0.0.26:
+  version "0.0.26"
+  resolved "https://registry.yarnpkg.com/latex2js-settings/-/latex2js-settings-0.0.26.tgz#d0c8dc64c4abf7965b6c616f82352b5b6781dc18"
   dependencies:
     latex2js-utils "^0.0.19"
 

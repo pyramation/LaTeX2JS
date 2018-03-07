@@ -220,16 +220,17 @@ iconv-lite@0.4:
   version "0.4.19"
   resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.4.19.tgz#f7468f60135f5e5dad3399c0a81be9a1603a082b"
 
-latex2js-mathjax@^0.0.27:
-  version "0.0.27"
-  resolved "https://registry.yarnpkg.com/latex2js-mathjax/-/latex2js-mathjax-0.0.27.tgz#8787066a595663bda6678b1a4ac6fab9cc651f90"
+latex2js-mathjax@^0.1.10:
+  version "0.1.10"
+  resolved "https://registry.yarnpkg.com/latex2js-mathjax/-/latex2js-mathjax-0.1.10.tgz#d1d308e5c0e0968c054a6a5f26164a2de55bb4cf"
   dependencies:
     load-script "^1.0.0"
 
-latex2js-pstricks@^0.0.26:
-  version "0.0.26"
-  resolved "https://registry.yarnpkg.com/latex2js-pstricks/-/latex2js-pstricks-0.0.26.tgz#c36f530f5c556060311a819f09e9213d0c2cef0d"
+latex2js-pstricks@^0.1.18:
+  version "0.1.18"
+  resolved "https://registry.yarnpkg.com/latex2js-pstricks/-/latex2js-pstricks-0.1.18.tgz#426dc862c8ac3c8d5891418f192a53584d740620"
   dependencies:
+    d3 "^4.13.0"
     latex2js-settings "^0.0.26"
     latex2js-utils "^0.0.19"
     underscore "1.5.2"
@@ -246,11 +247,11 @@ latex2js-utils@^0.0.19:
   dependencies:
     underscore "1.5.2"
 
-latex2js@^0.0.26:
-  version "0.0.26"
-  resolved "https://registry.yarnpkg.com/latex2js/-/latex2js-0.0.26.tgz#873aa16130f1d4efe2257d24b30c5183842f46b0"
+latex2js@^0.1.18:
+  version "0.1.18"
+  resolved "https://registry.yarnpkg.com/latex2js/-/latex2js-0.1.18.tgz#724f3d8e695daa7814d6c24d61faf324c042bbbc"
   dependencies:
-    latex2js-pstricks "^0.0.26"
+    latex2js-pstricks "^0.1.18"
     latex2js-settings "^0.0.26"
     latex2js-utils "^0.0.19"
     underscore "1.5.2"

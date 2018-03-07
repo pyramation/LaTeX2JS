@@ -9,14 +9,14 @@ export declare const Expressions: {
     yunit: RegExp;
 };
 export declare const Functions: {
-    fillcolor: (o: any, v: any) => void;
-    fillstyle: (o: any, v: any) => void;
-    linecolor: (o: any, v: any) => void;
-    linestyle: (o: any, v: any) => void;
-    unit: (o: any, v: any) => void;
-    runit: (o: any, v: any) => void;
-    xunit: (o: any, v: any) => void;
-    yunit: (o: any, v: any) => void;
+    fillcolor(o: any, v: any): void;
+    fillstyle(o: any, v: any): void;
+    linecolor(o: any, v: any): void;
+    linestyle(o: any, v: any): void;
+    unit(o: any, v: any): void;
+    runit(o: any, v: any): void;
+    xunit(o: any, v: any): void;
+    yunit(o: any, v: any): void;
 };
 declare const _default: {
     Expressions: {
@@ -30,14 +30,14 @@ declare const _default: {
         yunit: RegExp;
     };
     Functions: {
-        fillcolor: (o: any, v: any) => void;
-        fillstyle: (o: any, v: any) => void;
-        linecolor: (o: any, v: any) => void;
-        linestyle: (o: any, v: any) => void;
-        unit: (o: any, v: any) => void;
-        runit: (o: any, v: any) => void;
-        xunit: (o: any, v: any) => void;
-        yunit: (o: any, v: any) => void;
+        fillcolor(o: any, v: any): void;
+        fillstyle(o: any, v: any): void;
+        linecolor(o: any, v: any): void;
+        linestyle(o: any, v: any): void;
+        unit(o: any, v: any): void;
+        runit(o: any, v: any): void;
+        xunit(o: any, v: any): void;
+        yunit(o: any, v: any): void;
     };
 };
 export default _default;
