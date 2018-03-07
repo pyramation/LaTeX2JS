@@ -76,7 +76,7 @@ export default {
             });
             var d = data.fn.call(data.env, data.match);
             d.global = {};
-            _.extend(d.global, env);
+            Object.assign(d.global, env);
             // give pspicture!
             psgraph[k].call(d, svg);
           });
@@ -103,9 +103,9 @@ export default {
               data.data.y2 = d.usery(coords);
             }
             d.global = {};
-            _.extend(d.global, env);
+            Object.assign(d.global, env);
             // give pspicture!
-            _.extend(d, data.data);
+            Object.assign(d, data.data);
             psgraph[k].call(d, svg);
           });
         }
