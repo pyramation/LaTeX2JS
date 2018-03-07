@@ -1,0 +1,21 @@
+{
+  "name": "latex2js-mathjax",
+  "version": "0.0.19",
+  "description": "latex2js",
+  "author": "pyramation@gmail.com",
+  "license": "MIT",
+  "main": "./build/index.js",
+  "types": "./build/types/index.d.ts",
+  "scripts": {
+    "build": "rm -rf ./build && tsc"
+  },
+  "dependencies": {
+    "load-script": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^8.0.0",
+    "ts-node": "^5.0.0",
+    "tslint": "^5.4.3",
+    "typescript": "^2.7.1"
+  }
+}
