@@ -20491,7 +20491,7 @@ module.exports = Array.isArray || function (arr) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var loadScript = require("load-script");
 exports.DEFAULT_SCRIPT = process.env.MATHJAX_CDN ||
-    'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js';
+    'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/MathJax.js';
 exports.DEFAULT_OPTIONS = {
     TeX: { extensions: ['AMSmath.js', 'AMSsymbols.js'] },
     extensions: ['tex2jax.js'],

@@ -220,24 +220,24 @@ iconv-lite@0.4:
   version "0.4.19"
   resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.4.19.tgz#f7468f60135f5e5dad3399c0a81be9a1603a082b"
 
-latex2js-mathjax@^1.0.5:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/latex2js-mathjax/-/latex2js-mathjax-1.0.5.tgz#c06230e1dce3907d44c50c3f3ab90a5d044885b5"
+latex2js-mathjax@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/latex2js-mathjax/-/latex2js-mathjax-1.1.0.tgz#191a2cdb4186bd929c6aa6c5e9f13122d2b9d24a"
   dependencies:
     load-script "^1.0.0"
 
-latex2js-pstricks@^1.0.5:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/latex2js-pstricks/-/latex2js-pstricks-1.0.5.tgz#58e3065bcbbc0c29b1d473db1945e0b4e33f1f9c"
+latex2js-pstricks@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/latex2js-pstricks/-/latex2js-pstricks-1.1.0.tgz#230e23b92148cd5f0194c00fc6c6baf72f5230f4"
   dependencies:
     d3 "^4.13.0"
-    latex2js-settings "^1.0.5"
+    latex2js-settings "^1.1.0"
     latex2js-utils "^1.0.5"
     underscore "1.5.2"
 
-latex2js-settings@^1.0.5:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/latex2js-settings/-/latex2js-settings-1.0.5.tgz#a2357cdf519a35819e2bc064cdf4966691a46a1a"
+latex2js-settings@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/latex2js-settings/-/latex2js-settings-1.1.0.tgz#0c970a487da6b3e3425fbae025f718f6bfa2d6af"
   dependencies:
     latex2js-utils "^1.0.5"
 
@@ -247,12 +247,12 @@ latex2js-utils@^1.0.5:
   dependencies:
     underscore "1.5.2"
 
-latex2js@^1.0.11:
-  version "1.0.11"
-  resolved "https://registry.yarnpkg.com/latex2js/-/latex2js-1.0.11.tgz#03ba9447344aa83fa36e0b5e367a3b6b5b2abf2b"
+latex2js@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/latex2js/-/latex2js-1.1.0.tgz#c5267345d5d8e2f5e096328e9391692a6e84eac2"
   dependencies:
-    latex2js-pstricks "^1.0.5"
-    latex2js-settings "^1.0.5"
+    latex2js-pstricks "^1.1.0"
+    latex2js-settings "^1.1.0"
     latex2js-utils "^1.0.5"
     underscore "1.5.2"
 
