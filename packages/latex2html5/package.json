@@ -20,7 +20,8 @@
   ],
   "license": "MIT",
   "scripts": {
-    "build": "rm -rf ./build && tsc"
+    "build": "rm -rf ./build && tsc",
+    "bundle": "browserify build/index.js --s LaTeX2HTML5 -o latex2html5.bundle.js"
   },
   "dependencies": {
     "d3": "^4.13.0",
@@ -30,6 +31,7 @@
   },
   "devDependencies": {
     "@types/node": "^8.0.0",
+    "browserify": "^16.1.1",
     "ts-node": "^5.0.0",
     "tslint": "^5.4.3",
     "typescript": "^2.7.1"

@@ -13,7 +13,7 @@ export default function render(that) {
   const svg = document.createElement('svg');
   svg.width = width;
   svg.height = height;
-  var d3svg = d3.select(this.$refs.svg);
+  var d3svg = d3.select(svg);
   psgraph.pspicture.call(this, d3svg);
   div.appendChild(svg);
   return div;
