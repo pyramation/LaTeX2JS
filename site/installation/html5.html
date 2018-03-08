@@ -48,11 +48,7 @@
   <script type="text/latex">
 This is for those who just want to make a simple HTML page with LaTeX2JS. The object provided is called ``LaTeX2HTML5'':
 
-\begin{enumerate}
-\item Download the JS and CSS files! You can do get the JS \href{https://github.com/pyramation/LaTeX2JS/blob/master/packages/latex2html5/latex2html5.bundle.js}{here} and CSS here \href{https://github.com/pyramation/LaTeX2JS/blob/master/packages/latex2js/lib/latex2js.css}{here}.
-\item Then, write your \LaTeX inside of a script tag with \emph{type} set to ``text/latex'':
-\item Lastly, towards the end of your HTML page, call the \emph{init} method
-\end{enumerate}
+1. Download the JS and CSS files! You can go get the JS \href{https://github.com/pyramation/LaTeX2JS/blob/master/libs/latex2html5/latex2html5.bundle.js}{here} and CSS here \href{https://github.com/pyramation/LaTeX2JS/blob/master/core/latex2js/lib/latex2js.css}{here}.
 
 \begin{verbatim}
 &lt;html&gt;
@@ -60,7 +56,11 @@ This is for those who just want to make a simple HTML page with LaTeX2JS. The ob
     &lt;link rel=&quot;stylesheet&quot; href=&quot;/path/to/your/css/latex2js.css&quot;&gt;
     &lt;script src=&quot;/path/to/your/js/latex2html5.bundle.js&quot;&gt;&lt;/script&gt;
   &lt;/head&gt;
+\end{verbatim}
 
+2. Then, write your \LaTeX inside of a script tag with \emph{type} set to ``text/latex'':
+
+\begin{verbatim}
   &lt;body&gt;
     &lt;script type=&quot;text/latex&quot;&gt;
     you can write any \LaTeX here!
@@ -69,7 +69,11 @@ This is for those who just want to make a simple HTML page with LaTeX2JS. The ob
     &lt;script type=&quot;text/latex&quot;&gt;
     some more ...
     &lt;/script&gt;
+\end{verbatim}
 
+3. Lastly, towards the end of your HTML page, call the \emph{init} method
+
+\begin{verbatim}
     &lt;script&gt;
     LaTeX2HTML5.init();
     &lt;/script&gt;

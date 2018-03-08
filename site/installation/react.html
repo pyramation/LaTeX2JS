@@ -46,11 +46,37 @@
   </div>
 
   <script type="text/latex">
-Install the library!
+1. Install the library!
 
 \begin{verbatim}
-npm install react-latex2js
+npm install latex2react
 \end{verbatim}
+
+2. import the {\tt latex2js} CSS file, and the {\tt LaTeX} React component
+
+\begin{verbatim}
+import 'latex2js/lib/latex2js.css';
+import { LaTeX } from 'latex2react';
+\end{verbatim}
+
+3. Load your {\tt TeX} into the {\tt content} property. Enjoy!
+
+\begin{verbatim}
+const tex = String.raw`
+\begin{center}
+\begin{pspicture}(0,-3)(8,3)
+...
+\end{pspicture}
+\end{center}
+`;
+
+class App extends Component {
+  render() {
+    return &lt;LaTeX content={tex} /&gt;;
+  }
+}
+\end{verbatim}
+
   </script>
 
 <div class="latex-container">

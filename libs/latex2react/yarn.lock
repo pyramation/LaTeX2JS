@@ -1496,28 +1496,28 @@ kind-of@^4.0.0:
   dependencies:
     is-buffer "^1.1.5"
 
-latex2js-macros@^1.1.4:
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/latex2js-macros/-/latex2js-macros-1.1.4.tgz#85f531531a17e94dec86dcfbc8a8a6c7df0b4ff5"
+latex2js-macros@^1.1.5:
+  version "1.1.5"
+  resolved "https://registry.yarnpkg.com/latex2js-macros/-/latex2js-macros-1.1.5.tgz#965eb1e46b8498293ff23ec60f5987e8f6b2e8d3"
 
-latex2js-mathjax@^1.1.4:
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/latex2js-mathjax/-/latex2js-mathjax-1.1.4.tgz#0a579ae4be5c49ec413a6b1993cca17ea8846ebe"
+latex2js-mathjax@^1.1.5:
+  version "1.1.5"
+  resolved "https://registry.yarnpkg.com/latex2js-mathjax/-/latex2js-mathjax-1.1.5.tgz#79ff65bce8a20381310223aa527e9251ad3db77e"
   dependencies:
     load-script "^1.0.0"
 
-latex2js-pstricks@^1.1.4:
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/latex2js-pstricks/-/latex2js-pstricks-1.1.4.tgz#3bcdaed372d4e4e988d32253f1c8b37cd1373267"
+latex2js-pstricks@^1.1.5:
+  version "1.1.5"
+  resolved "https://registry.yarnpkg.com/latex2js-pstricks/-/latex2js-pstricks-1.1.5.tgz#02db49712c8d102b0af6b73eca94c74a0fd0109a"
   dependencies:
     d3 "^4.13.0"
-    latex2js-settings "^1.1.4"
+    latex2js-settings "^1.1.5"
     latex2js-utils "^1.1.4"
     underscore "1.5.2"
 
-latex2js-settings@^1.1.4:
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/latex2js-settings/-/latex2js-settings-1.1.4.tgz#007800b1ff29751b90210a1da74280cd735194d3"
+latex2js-settings@^1.1.5:
+  version "1.1.5"
+  resolved "https://registry.yarnpkg.com/latex2js-settings/-/latex2js-settings-1.1.5.tgz#7ee34195aab8df4a91ff8ca6c3144926dbd9e83c"
   dependencies:
     latex2js-utils "^1.1.4"
 
@@ -1527,12 +1527,12 @@ latex2js-utils@^1.1.4:
   dependencies:
     underscore "1.5.2"
 
-latex2js@^1.1.4:
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/latex2js/-/latex2js-1.1.4.tgz#e039e7399b705945b217276585410645ba31d554"
+latex2js@^1.1.5:
+  version "1.1.5"
+  resolved "https://registry.yarnpkg.com/latex2js/-/latex2js-1.1.5.tgz#7f919efa73adde2f50422a515526448649672c97"
   dependencies:
-    latex2js-pstricks "^1.1.4"
-    latex2js-settings "^1.1.4"
+    latex2js-pstricks "^1.1.5"
+    latex2js-settings "^1.1.5"
     latex2js-utils "^1.1.4"
     underscore "1.5.2"
 
