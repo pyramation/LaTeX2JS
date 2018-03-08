@@ -1,5 +1,5 @@
 # LaTeX2JS
 
 ```sh
-yarn add vue-latex2js
+yarn add latex2vue
 ```
