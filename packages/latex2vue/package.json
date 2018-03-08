@@ -1,6 +1,6 @@
 {
   "name": "latex2vue",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Vue components for LaTeX2JS",
   "author": "pyramation@gmail.com",
   "repository": {
@@ -21,8 +21,8 @@
   "main": "./index.js",
   "dependencies": {
     "d3": "^4.13.0",
-    "latex2js": "^1.1.0",
+    "latex2js": "^1.1.2",
     "latex2js-mathjax": "^1.1.0",
-    "latex2js-pstricks": "^1.1.0"
+    "latex2js-pstricks": "^1.1.2"
   }
 }

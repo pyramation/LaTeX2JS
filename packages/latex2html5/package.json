@@ -1,6 +1,6 @@
 {
   "name": "latex2html5",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Author interactive math equations and diagrams online using LaTeX and PSTricks",
   "author": "pyramation@gmail.com",
   "main": "./build/index.js",
@@ -25,9 +25,9 @@
   },
   "dependencies": {
     "d3": "^4.13.0",
-    "latex2js": "^1.1.0",
+    "latex2js": "^1.1.2",
     "latex2js-mathjax": "^1.1.0",
-    "latex2js-pstricks": "^1.1.0"
+    "latex2js-pstricks": "^1.1.2"
   },
   "devDependencies": {
     "@types/node": "^8.0.0",
