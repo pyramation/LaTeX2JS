@@ -121,6 +121,11 @@ function render(tex) {
     latex2js_mathjax_1.loadMathJax(done);
 }
 exports.default = render;
+exports.init = function () {
+    document.querySelectorAll('script[type="text/latex"]').forEach(function (el) {
+        render(el.innerHTML);
+    });
+};
 
 },{"./components/enumerate":1,"./components/macros":2,"./components/math":3,"./components/nicebox":4,"./components/pspicture":5,"./components/verbatim":6,"latex2js":57,"latex2js-mathjax":51}],8:[function(require,module,exports){
 'use strict'

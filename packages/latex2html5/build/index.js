@@ -33,4 +33,9 @@ function render(tex) {
     latex2js_mathjax_1.loadMathJax(done);
 }
 exports.default = render;
+exports.init = function () {
+    document.querySelectorAll('script[type="text/latex"]').forEach(function (el) {
+        render(el.innerHTML);
+    });
+};
 //# sourceMappingURL=index.js.map

@@ -31,3 +31,9 @@ export default function render(tex) {
   }
   loadMathJax(done);
 }
+
+export const init = () => {
+  document.querySelectorAll('script[type="text/latex"]').forEach(el => {
+    render(el.innerHTML);
+  });
+};

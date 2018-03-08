@@ -7,12 +7,6 @@ svg {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
-article > h1,
-section > h3,
-.books h1 {
-  text-align: center;
-}
-
 .pspicture {
   position: relative;
   margin: auto;
@@ -77,9 +71,6 @@ body {
 
 pre.verbatim {
   background-color: white;
-}
-
-@media (min-width: 1200px) {
 }
 
 @media (min-width: 768px) and (max-width: 979px) {
