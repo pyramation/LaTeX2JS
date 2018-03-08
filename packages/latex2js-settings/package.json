@@ -1,6 +1,6 @@
 {
   "name": "latex2js-settings",
-  "version": "1.0.5",
+  "version": "1.1.0",
   "description": "LaTeX/PSTricks settings types for LaTeX2JS",
   "author": "pyramation@gmail.com",
   "license": "MIT",
