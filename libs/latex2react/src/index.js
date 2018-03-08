@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, createElement } from 'react';
 import PropTypes from 'prop-types';
 import LaTeX2JS from 'latex2js';
 import { getMathJax, loadMathJax } from 'latex2js-mathjax';
@@ -20,10 +20,6 @@ export class LaTeX extends Component {
     super(props);
     this.onLoad = this.onLoad.bind(this);
   }
-
-  // state = {
-  //   loaded: false,
-  // };
 
   componentDidMount() {
     if (getMathJax()) {
@@ -48,7 +44,7 @@ export class LaTeX extends Component {
 
     parsed.forEach(el => {
       if (ELEMENTS.hasOwnProperty(el.type)) {
-        children.push(ELEMENTS[el.type](el));
+        children.push(createElement(ELEMENTS[el.type], el));
       }
     });
 
