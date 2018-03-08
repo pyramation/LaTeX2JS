@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "build":
-      "rm -f latex2html5.bundle.js && rm -f latex2js.css && cp ../packages/latex2js/lib/latex2js.css ./assets/css/ && cp ../packages/latex2html5/latex2html5.bundle.js ./assets/js/",
+      "rm -f latex2html5.bundle.js && rm -f latex2js.css && cp ../core/latex2js/lib/latex2js.css ./assets/css/ && cp ../libs/latex2html5/latex2html5.bundle.js ./assets/js/",
     "examples": "node bin/examples"
   },
   "devDependencies": {
