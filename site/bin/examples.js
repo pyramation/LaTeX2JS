@@ -67,7 +67,7 @@ const FOOTER = `
 <div class="latex-container">
     <a href="http://www.mathjax.org" target="mathjax">
       <img title="Powered by MathJax"
-        src="http://cdn.mathjax.org/mathjax/badge/badge.gif"
+        src="https://cdn.mathjax.org/mathjax/badge/badge.gif"
         border="0" alt="Powered by MathJax" />
     </a>
 </div>
