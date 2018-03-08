@@ -100,7 +100,11 @@ var LaTeX = exports.LaTeX = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      if (!(0, _latex2jsMathjax.getMathJax)()) return;
+      if (!(0, _latex2jsMathjax.getMathJax)()) return _react2.default.createElement(
+        'div',
+        { className: 'latex-container' },
+        'loading...'
+      );
 
       var latex = new _latex2js2.default();
       var parsed = latex.parse(this.props.content);

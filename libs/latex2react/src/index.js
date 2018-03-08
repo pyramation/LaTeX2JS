@@ -39,7 +39,7 @@ export class LaTeX extends Component {
   }
 
   render() {
-    if (!getMathJax()) return;
+    if (!getMathJax()) return <div className="latex-container">loading...</div>;
 
     const latex = new LaTeX2JS();
     const parsed = latex.parse(this.props.content);
