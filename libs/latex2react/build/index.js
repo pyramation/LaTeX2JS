@@ -113,7 +113,11 @@ var LaTeX = exports.LaTeX = function (_Component) {
         }
       });
 
-      return _react2.default.Children.only(children);
+      return _react2.default.createElement(
+        'div',
+        { className: 'latex-container' },
+        children
+      );
     }
   }]);
 

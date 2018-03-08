@@ -52,6 +52,6 @@ export class LaTeX extends Component {
       }
     });
 
-    return React.Children.only(children);
+    return <div className="latex-container">{children}</div>;
   }
 }
