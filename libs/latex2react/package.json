@@ -1,6 +1,6 @@
 {
   "name": "latex2react",
-  "version": "1.1.11",
+  "version": "1.2.0",
   "description": "Author interactive math equations and diagrams online using LaTeX and PSTricks",
   "author": "pyramation@gmail.com",
   "main": "./build/index.js",
@@ -23,10 +23,10 @@
   "license": "MIT",
   "dependencies": {
     "d3": "^4.13.0",
-    "latex2js": "^1.1.5",
+    "latex2js": "^1.2.0",
     "latex2js-macros": "^1.1.5",
     "latex2js-mathjax": "^1.1.5",
-    "latex2js-pstricks": "^1.1.5",
+    "latex2js-pstricks": "^1.2.0",
     "prop-types": "^15.6.1",
     "react": "^16.2.0"
   },
