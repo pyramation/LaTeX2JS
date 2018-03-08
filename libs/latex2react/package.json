@@ -1,6 +1,6 @@
 {
   "name": "latex2react",
-  "version": "1.1.10",
+  "version": "1.1.11",
   "description": "Author interactive math equations and diagrams online using LaTeX and PSTricks",
   "author": "pyramation@gmail.com",
   "main": "./build/index.js",
