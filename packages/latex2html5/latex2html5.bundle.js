@@ -102,7 +102,7 @@ exports.math = math_1.default;
 var macros_1 = require("./components/macros");
 exports.macros = macros_1.default;
 var ELEMENTS = { pspicture: pspicture_1.default, nicebox: nicebox_1.default, enumerate: enumerate_1.default, verbatim: verbatim_1.default, math: math_1.default, macros: macros_1.default };
-function render(tex) {
+function render(tex, resolve) {
     var done = function () {
         var latex = new latex2js_1.default();
         var parsed = latex.parse(tex);
@@ -113,7 +113,7 @@ function render(tex) {
                 div.appendChild(ELEMENTS[el.type](el));
             }
         });
-        document.body.appendChild(div);
+        resolve(div);
     };
     if (latex2js_mathjax_1.getMathJax()) {
         return done();
@@ -123,7 +123,9 @@ function render(tex) {
 exports.default = render;
 exports.init = function () {
     document.querySelectorAll('script[type="text/latex"]').forEach(function (el) {
-        render(el.innerHTML);
+        render(el.innerHTML, function (div) {
+            el.parentNode.insertBefore(div, el);
+        });
     });
 };
 

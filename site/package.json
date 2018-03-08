@@ -1,5 +1,8 @@
 {
   "name": "latex2js.com",
   "version": "1.0.0",
-  "main": "index.js"
+  "scripts": {
+    "build":
+      "rm -f latex2html5.bundle.js && rm -f latex2js.css && cp ../packages/latex2js/lib/latex2js.css . && cp ../packages/latex2html5/latex2html5.bundle.js ."
+  }
 }

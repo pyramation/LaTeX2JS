@@ -12,7 +12,7 @@ const ELEMENTS = { pspicture, nicebox, enumerate, verbatim, math, macros };
 
 export { pspicture, nicebox, enumerate, verbatim, math, macros };
 
-export default function render(tex) {
+export default function render(tex, resolve) {
   const done = () => {
     const latex = new LaTeX2JS();
     const parsed = latex.parse(tex);
@@ -23,7 +23,7 @@ export default function render(tex) {
         div.appendChild(ELEMENTS[el.type](el));
       }
     });
-    document.body.appendChild(div);
+    resolve(div);
   };
 
   if (getMathJax()) {
@@ -34,6 +34,8 @@ export default function render(tex) {
 
 export const init = () => {
   document.querySelectorAll('script[type="text/latex"]').forEach(el => {
-    render(el.innerHTML);
+    render(el.innerHTML, div => {
+      el.parentNode.insertBefore(div, el);
+    });
   });
 };
