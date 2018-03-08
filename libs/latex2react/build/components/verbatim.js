@@ -12,5 +12,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 exports.default = function (_ref) {
   var lines = _ref.lines;
-  return _react2.default.createElement('pre', { className: 'verbatim', dangerouslySetInnerHTML: lines.join('\n') });
+  return _react2.default.createElement('pre', {
+    className: 'verbatim',
+    dangerouslySetInnerHTML: { _html: lines.join('\n') }
+  });
 };

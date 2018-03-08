@@ -15,5 +15,8 @@ var _latex2jsMacros2 = _interopRequireDefault(_latex2jsMacros);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = function () {
-  return _react2.default.createElement('div', { style: { display: 'none' }, dangerouslySetInnerHTML: _latex2jsMacros2.default });
+  return _react2.default.createElement('div', {
+    style: { display: 'none' },
+    dangerouslySetInnerHTML: { __html: _latex2jsMacros2.default }
+  });
 };
