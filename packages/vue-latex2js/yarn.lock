@@ -220,40 +220,40 @@ iconv-lite@0.4:
   version "0.4.19"
   resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.4.19.tgz#f7468f60135f5e5dad3399c0a81be9a1603a082b"
 
-latex2js-mathjax@^0.1.10:
-  version "0.1.10"
-  resolved "https://registry.yarnpkg.com/latex2js-mathjax/-/latex2js-mathjax-0.1.10.tgz#d1d308e5c0e0968c054a6a5f26164a2de55bb4cf"
+latex2js-mathjax@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/latex2js-mathjax/-/latex2js-mathjax-1.0.5.tgz#c06230e1dce3907d44c50c3f3ab90a5d044885b5"
   dependencies:
     load-script "^1.0.0"
 
-latex2js-pstricks@^0.1.19:
-  version "0.1.19"
-  resolved "https://registry.yarnpkg.com/latex2js-pstricks/-/latex2js-pstricks-0.1.19.tgz#168fb953b5d00cc3b468013f5747d71054ce84c4"
+latex2js-pstricks@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/latex2js-pstricks/-/latex2js-pstricks-1.0.5.tgz#58e3065bcbbc0c29b1d473db1945e0b4e33f1f9c"
   dependencies:
     d3 "^4.13.0"
-    latex2js-settings "^0.1.19"
-    latex2js-utils "^0.0.19"
+    latex2js-settings "^1.0.5"
+    latex2js-utils "^1.0.5"
     underscore "1.5.2"
 
-latex2js-settings@^0.1.19:
-  version "0.1.19"
-  resolved "https://registry.yarnpkg.com/latex2js-settings/-/latex2js-settings-0.1.19.tgz#3b03316319d0f6a244975c66b80d1067c56336ef"
+latex2js-settings@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/latex2js-settings/-/latex2js-settings-1.0.5.tgz#a2357cdf519a35819e2bc064cdf4966691a46a1a"
   dependencies:
-    latex2js-utils "^0.0.19"
+    latex2js-utils "^1.0.5"
 
-latex2js-utils@^0.0.19:
-  version "0.0.19"
-  resolved "https://registry.yarnpkg.com/latex2js-utils/-/latex2js-utils-0.0.19.tgz#ef125c72156cf3aeb93d35ff6169966c1181d385"
+latex2js-utils@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/latex2js-utils/-/latex2js-utils-1.0.5.tgz#6c593590faa964b6959981762eb4d177ffc14d2b"
   dependencies:
     underscore "1.5.2"
 
-latex2js@^0.1.19:
-  version "0.1.19"
-  resolved "https://registry.yarnpkg.com/latex2js/-/latex2js-0.1.19.tgz#86f6b3383715443b38fbad44e487c3734b0e4d99"
+latex2js@^1.0.11:
+  version "1.0.11"
+  resolved "https://registry.yarnpkg.com/latex2js/-/latex2js-1.0.11.tgz#03ba9447344aa83fa36e0b5e367a3b6b5b2abf2b"
   dependencies:
-    latex2js-pstricks "^0.1.19"
-    latex2js-settings "^0.1.19"
-    latex2js-utils "^0.0.19"
+    latex2js-pstricks "^1.0.5"
+    latex2js-settings "^1.0.5"
+    latex2js-utils "^1.0.5"
     underscore "1.5.2"
 
 load-script@^1.0.0:

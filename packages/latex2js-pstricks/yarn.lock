@@ -366,15 +366,15 @@ js-yaml@^3.7.0:
     argparse "^1.0.7"
     esprima "^4.0.0"
 
-latex2js-settings@^0.1.19:
-  version "0.1.19"
-  resolved "https://registry.yarnpkg.com/latex2js-settings/-/latex2js-settings-0.1.19.tgz#3b03316319d0f6a244975c66b80d1067c56336ef"
+latex2js-settings@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/latex2js-settings/-/latex2js-settings-1.0.5.tgz#a2357cdf519a35819e2bc064cdf4966691a46a1a"
   dependencies:
-    latex2js-utils "^0.0.19"
+    latex2js-utils "^1.0.5"
 
-latex2js-utils@^0.0.19:
-  version "0.0.19"
-  resolved "https://registry.yarnpkg.com/latex2js-utils/-/latex2js-utils-0.0.19.tgz#ef125c72156cf3aeb93d35ff6169966c1181d385"
+latex2js-utils@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/latex2js-utils/-/latex2js-utils-1.0.5.tgz#6c593590faa964b6959981762eb4d177ffc14d2b"
   dependencies:
     underscore "1.5.2"
 

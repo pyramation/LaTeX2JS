@@ -2,7 +2,7 @@ import * as loadScript from 'load-script';
 
 export const DEFAULT_SCRIPT =
   process.env.MATHJAX_CDN ||
-  'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js';
+  'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/MathJax.js';
 
 export const DEFAULT_OPTIONS = {
   TeX: { extensions: ['AMSmath.js', 'AMSsymbols.js'] },

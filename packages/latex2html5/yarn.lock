@@ -886,9 +886,9 @@ latex2js-utils@^1.0.5:
   dependencies:
     underscore "1.5.2"
 
-latex2js@^1.0.5:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/latex2js/-/latex2js-1.0.5.tgz#ad7e0787fb3a19dbc038c3508aefa7e3eb8383d5"
+latex2js@^1.0.11:
+  version "1.0.11"
+  resolved "https://registry.yarnpkg.com/latex2js/-/latex2js-1.0.11.tgz#03ba9447344aa83fa36e0b5e367a3b6b5b2abf2b"
   dependencies:
     latex2js-pstricks "^1.0.5"
     latex2js-settings "^1.0.5"

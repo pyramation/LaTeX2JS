@@ -122,9 +122,10 @@ function render(tex, resolve) {
 }
 exports.default = render;
 exports.init = function () {
+    latex2js_mathjax_1.loadMathJax();
     document.querySelectorAll('script[type="text/latex"]').forEach(function (el) {
         render(el.innerHTML, function (div) {
-            el.parentNode.insertBefore(div, el);
+            el.parentNode.insertBefore(div, el.nextSibling);
         });
     });
 };

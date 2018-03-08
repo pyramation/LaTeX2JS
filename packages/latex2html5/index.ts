@@ -33,9 +33,10 @@ export default function render(tex, resolve) {
 }
 
 export const init = () => {
+  loadMathJax();
   document.querySelectorAll('script[type="text/latex"]').forEach(el => {
     render(el.innerHTML, div => {
-      el.parentNode.insertBefore(div, el);
+      el.parentNode.insertBefore(div, el.nextSibling);
     });
   });
 };
