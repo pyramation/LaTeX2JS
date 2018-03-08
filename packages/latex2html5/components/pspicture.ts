@@ -10,11 +10,12 @@ export default function render(that) {
   div.className = 'pspicture';
   div.style.width = width;
   div.style.height = height;
-  const svg = document.createElement('svg');
-  svg.width = width;
-  svg.height = height;
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.setAttribute('width', width);
+  svg.setAttribute('height', height);
   var d3svg = d3.select(svg);
-  psgraph.pspicture.call(this, d3svg);
+  that.$el = div;
+  psgraph.pspicture.call(that, d3svg);
   div.appendChild(svg);
   return div;
 }
