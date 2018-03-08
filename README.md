@@ -1,8 +1,8 @@
 # LaTeX2JS
 
-Author interactive math equations and diagrams online using LATEX and PSTricks
+Author interactive math equations and diagrams online using LaTeX and PSTricks
 
-Author real LaTeX in react, vue, or native HTML5.
+Author real LaTeX+PSTricks in React, Vue.js, or pure HTML5.
 
 ```sh
 npm install latex2html5
@@ -25,3 +25,5 @@ The loose structure and nature of user interface design poses a problem for docu
 The Art is where we can blend these two standards bodies; higher levels of abstraction allow people to express their ideas without having to worry about the mechanisms by which the technology is rendering their works. It is in these environments when people can express themselves freely.
 
 ![LaTeX2JS](https://latex2js.com/assets/images/photo.png)
+
+As always, BIG thanks to [MathJax](https://www.mathjax.org)
