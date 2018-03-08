@@ -56,6 +56,7 @@ const HEADER = `
 
 <div class="centered">
   <h1>LaTeX2JS Examples</h1>
+  <p> Be sure to checkout the example apps on Github <a href="https://github.com/pyramation/LaTeX2JS/tree/master/examples">here</a>! </p>
 </div>
 
 <script type="text/latex">
