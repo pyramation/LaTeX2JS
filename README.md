@@ -2,6 +2,14 @@
 
 Author interactive math equations and diagrams online using LATEX and PSTricks
 
+Author real LaTeX in react, vue, or native HTML5.
+
+```sh
+npm install latex2html5
+npm install latex2vue
+npm install latex2react
+```
+
 [LaTeX2JS website](https://latex2js.com)
 
 [Example Diagrams](https://latex2js.com/examples)
