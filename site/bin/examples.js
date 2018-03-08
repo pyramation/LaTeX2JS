@@ -53,6 +53,7 @@ const HEADER = `
 <a href="/">Home</a>
 <a href="/examples">Examples</a>
 <a href="/installation">Installation</a>
+<a href="https://github.com/pyramation/LaTeX2JS/tree/master/examples">Github Examples</a>
 
 <div class="centered">
   <h1>LaTeX2JS Examples</h1>
@@ -88,3 +89,9 @@ LaTeX2HTML5.init();
 const content = HEADER + t.join('\n') + FOOTER;
 
 fs.writeFileSync(__dirname + '/../examples/index.html', content);
+
+glob(__dirname + '/../examples/community/*.tex').forEach(tex => {
+  const text = fs.readFileSync(tex).toString();
+  const content = HEADER + text + FOOTER;
+  fs.writeFileSync(tex.replace(/\.tex$/, '.html'), content);
+});
