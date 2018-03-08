@@ -1,6 +1,7 @@
 import * as _ from 'underscore';
 import { X, Y } from 'latex2js-utils';
 import * as d3 from 'd3';
+declare var MathJax: any;
 
 // http://mathforum.org/library/drmath/view/54146.html
 function arrow(x1, y1, x2, y2) {

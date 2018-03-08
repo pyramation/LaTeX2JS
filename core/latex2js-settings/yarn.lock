@@ -152,9 +152,9 @@ js-yaml@^3.7.0:
     argparse "^1.0.7"
     esprima "^4.0.0"
 
-latex2js-utils@^1.0.5:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/latex2js-utils/-/latex2js-utils-1.0.5.tgz#6c593590faa964b6959981762eb4d177ffc14d2b"
+latex2js-utils@^1.1.4:
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/latex2js-utils/-/latex2js-utils-1.1.4.tgz#c82b8e48c7d0a92dec22de2416c66a6857d53cfc"
   dependencies:
     underscore "1.5.2"
 

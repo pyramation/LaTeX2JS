@@ -21,17 +21,18 @@ exports.default = render;
 
 },{}],2:[function(require,module,exports){
 Object.defineProperty(exports, "__esModule", { value: true });
+var latex2js_macros_1 = require("latex2js-macros");
 function render(that) {
     var div = document.createElement('div');
     div.id = 'latex-macros';
     div.style.display = 'none';
     div.className = 'verbatim';
-    div.innerHTML = "\n    $$\n    % create the definition symbol\n    \\def\\bydef{\\stackrel{\\Delta}{=}}\n    %\\def\\circconv{\\otimes}\n    \\def\\circconv{\\circledast}\n\n    \\newcommand{\\qed}{\\mbox{ } \\Box}\n\n\n    \\newcommand{\\infint}{\\int_{-\\infty}^{\\infty}}\n\n    % z transform\n    \\newcommand{\\ztp}{ ~~ \\mathop{\\mathcal{Z}}\\limits_{\\longleftrightarrow} ~~ }\n    \\newcommand{\\iztp}{ ~~ \\mathop{\\mathcal{Z}^{-1}}\\limits_{\\longleftrightarrow} ~~ }\n    % fourier transform pair\n    \\newcommand{\\ftp}{ ~~ \\mathop{\\mathcal{F}}\\limits_{\\longleftrightarrow} ~~ }\n    \\newcommand{\\iftp}{ ~~ \\mathop{\\mathcal{F}^{-1}}\\limits_{\\longleftrightarrow} ~~ }\n    % laplace transform\n    \\newcommand{\\ltp}{ ~~ \\mathop{\\mathcal{L}}\\limits_{\\longleftrightarrow} ~~ }\n    \\newcommand{\\iltp}{ ~~ \\mathop{\\mathcal{L}^{-1}}\\limits_{\\longleftrightarrow} ~~ }\n\n    \\newcommand{\\ftrans}[1]{ \\mathcal{F} \\left\\{#1\\right\\} }\n    \\newcommand{\\iftrans}[1]{ \\mathcal{F}^{-1} \\left\\{#1\\right\\} }\n    \\newcommand{\\ztrans}[1]{ \\mathcal{Z} \\left\\{#1\\right\\} }\n    \\newcommand{\\iztrans}[1]{ \\mathcal{Z}^{-1} \\left\\{#1\\right\\} }\n    \\newcommand{\\ltrans}[1]{ \\mathcal{L} \\left\\{#1\\right\\} }\n    \\newcommand{\\iltrans}[1]{ \\mathcal{L}^{-1} \\left\\{#1\\right\\} }\n\n\n    % coordinate vector relative to a basis (linear algebra)\n    \\newcommand{\\cvrb}[2]{\\left[ \\vec{#1} \\right]_{#2} }\n    % change of coordinate matrix (linear algebra)\n    \\newcommand{\\cocm}[2]{ \\mathop{P}\\limits_{#2 \\leftarrow #1} }\n    % Transformed vector set\n    \\newcommand{\\tset}[3]{\\{#1\\lr{\\vec{#2}_1}, #1\\lr{\\vec{#2}_2}, \\dots, #1\\lr{\\vec{#2}_{#3}}\\}}\n    % sum transformed vector set\n    \\newcommand{\\tsetcsum}[4]{{#1}_1#2(\\vec{#3}_1) + {#1}_2#2(\\vec{#3}_2) + \\cdots + {#1}_{#4}#2(\\vec{#3}_{#4})}\n    \\newcommand{\\tsetcsumall}[4]{#2\\lr{{#1}_1\\vec{#3}_1 + {#1}_2\\vec{#3}_2 + \\cdots + {#1}_{#4}\\vec{#3}_{#4}}}\n    \\newcommand{\\cvecsum}[3]{{#1}_1\\vec{#2}_1 + {#1}_2\\vec{#2}_2 + \\cdots + {#1}_{#3}\\vec{#2}_{#3}}\n\n\n    % function def\n    \\newcommand{\\fndef}[3]{#1:#2 \\to #3}\n    % vector set\n    \\newcommand{\\vset}[2]{\\{\\vec{#1}_1, \\vec{#1}_2, \\dots, \\vec{#1}_{#2}\\}}\n    % absolute value\n    \\newcommand{\\abs}[1]{\\left| #1 \\right|}\n    % vector norm\n    \\newcommand{\\norm}[1]{\\left|\\left| #1 \\right|\\right|}\n    % trans\n    \\newcommand{\\trans}{\\mapsto}\n    % evaluate integral\n    \\newcommand{\\evalint}[3]{\\left. #1 \\right|_{#2}^{#3}}\n    % slist\n    \\newcommand{\\slist}[2]{{#1}_{1},{#1}_{2},\\dots,{#1}_{#2}}\n\n    % vectors\n    \\newcommand{\\vc}[1]{\\textbf{#1}}\n\n    % real\n    \\newcommand{\\Real}[1]{{\\Re \\mit{e}\\left\\{{#1}\\right\\}}}\n    % imaginary\n    \\newcommand{\\Imag}[1]{{\\Im \\mit{m}\\left\\{{#1}\\right\\}}}\n\n    \\newcommand{\\mcal}[1]{\\mathcal{#1}}\n    \\newcommand{\\bb}[1]{\\mathbb{#1}}\n    \\newcommand{\\N}{\\mathbb{N}}\n    \\newcommand{\\Z}{\\mathbb{Z}}\n    \\newcommand{\\Q}{\\mathbb{Q}}\n    \\newcommand{\\R}{\\mathbb{R}}\n    \\newcommand{\\C}{\\mathbb{C}}\n    \\newcommand{\\I}{\\mathbb{I}}\n    \\newcommand{\\Th}[1]{\\mathop\\mathrm{Th(#1)}}\n    \\newcommand{\\intersect}{\\cap}\n    \\newcommand{\\union}{\\cup}\n    \\newcommand{\\intersectop}{\\bigcap}\n    \\newcommand{\\unionop}{\\bigcup}\n    \\newcommand{\\setdiff}{\\backslash}\n    \\newcommand{\\iso}{\\cong}\n    \\newcommand{\\aut}[1]{\\mathop{\\mathrm{Aut(#1)}}}\n    \\newcommand{\\inn}[1]{\\mathop{\\mathrm{Inn(#1)}}}\n    \\newcommand{\\Ann}[1]{\\mathop{\\mathrm{Ann(#1)}}}\n    \\newcommand{\\dom}[1]{\\mathop{\\mathrm{dom} #1}}\n    \\newcommand{\\cod}[1]{\\mathop{\\mathrm{cod} #1}}\n    \\newcommand{\\id}{\\mathrm{id}}\n    \\newcommand{\\st}{\\ |\\ }\n    \\newcommand{\\mbf}[1]{\\mathbf{#1}}\n    \\newcommand{\\enclose}[1]{\\left\\langle #1\\right\\rangle}\n    \\newcommand{\\lr}[1]{\\left( #1\\right)}\n    \\newcommand{\\lrsq}[1]{\\left[ #1\\right]}\n    \\newcommand{\\op}{\\mathrm{op}}\n    \\newcommand{\\dotarr}{\\dot{\\rightarrow}}\n    %Category Names:\n    \\newcommand{\\Grp}{\\mathbf{Grp}}\n    \\newcommand{\\Ab}{\\mathbf{Ab}}\n    \\newcommand{\\Set}{\\mathbf{Set}}\n    \\newcommand{\\Matr}{\\mathbf{Matr}}\n    \\newcommand{\\IntDom}{\\mathbf{IntDom}}\n    \\newcommand{\\Field}{\\mathbf{Field}}\n    \\newcommand{\\Vect}{\\mathbf{Vect}}\n\n    \\newcommand{\\thm}[1]{\\begin{theorem} #1 \\end{theorem}}\n    \\newcommand{\\clm}[1]{\\begin{claim} #1 \\end{claim}}\n    \\newcommand{\\cor}[1]{\\begin{corollary} #1 \\end{corollary}}\n    \\newcommand{\\ex}[1]{\\begin{example} #1 \\end{example}}\n    \\newcommand{\\prf}[1]{\\begin{proof} #1 \\end{proof}}\n    \\newcommand{\\prbm}[1]{\\begin{problem} #1 \\end{problem}}\n    \\newcommand{\\soln}[1]{\\begin{solution} #1 \\end{solution}}\n    \\newcommand{\\rmk}[1]{\\begin{remark} #1 \\end{remark}}\n    \\newcommand{\\defn}[1]{\\begin{definition} #1 \\end{definition}}\n\n    \\newcommand{\\ifff}{\\LeftRightArrow}\n\n    <!-- For the set of reals and integers -->\n    \\newcommand{\\rr}{\\R}\n    \\newcommand{\\reals}{\\R}\n    \\newcommand{\\ii}{\\Z}\n    \\newcommand{\\cc}{\\C}\n    \\newcommand{\\nn}{\\N}\n    \\newcommand{\\nats}{\\N}\n\n    <!-- For terms being indexed.\n    Puts them in standard font face and creates an index entry.\n    arg: The term being defined.\n    \\newcommand{\\pointer}[1]{#1\\index{#1}} -->\n\n    <!-- For bold terms to be index, but defined elsewhere\n    Puts them in bold face and creates an index entry.\n    arg: The term being defined. -->\n    \\newcommand{\\strong}[1]{\\textbf{#1}}\n\n    <!-- For set names.\n    Puts them in italics. In math mode, yields decent spacing.\n    arg: The name of the set. -->\n    \\newcommand{\\set}[1]{\\textit{#1}}\n\n    $$\n\n    ";
+    div.innerHTML = latex2js_macros_1.default;
     return div;
 }
 exports.default = render;
 
-},{}],3:[function(require,module,exports){
+},{"latex2js-macros":51}],3:[function(require,module,exports){
 Object.defineProperty(exports, "__esModule", { value: true });
 function render(that) {
     var span = document.createElement('span');
@@ -75,7 +76,7 @@ function render(that) {
 }
 exports.default = render;
 
-},{"d3":44,"latex2js-pstricks":52}],6:[function(require,module,exports){
+},{"d3":44,"latex2js-pstricks":53}],6:[function(require,module,exports){
 Object.defineProperty(exports, "__esModule", { value: true });
 function render(that) {
     var pre = document.createElement('pre');
@@ -130,7 +131,7 @@ exports.init = function () {
     });
 };
 
-},{"./components/enumerate":1,"./components/macros":2,"./components/math":3,"./components/nicebox":4,"./components/pspicture":5,"./components/verbatim":6,"latex2js":57,"latex2js-mathjax":51}],8:[function(require,module,exports){
+},{"./components/enumerate":1,"./components/macros":2,"./components/math":3,"./components/nicebox":4,"./components/pspicture":5,"./components/verbatim":6,"latex2js":58,"latex2js-mathjax":52}],8:[function(require,module,exports){
 'use strict'
 
 exports.byteLength = byteLength
@@ -12337,7 +12338,7 @@ exports.xml = xml;
 exports.csv = csv;
 exports.tsv = tsv;
 
-},{"d3-collection":18,"d3-dispatch":20,"d3-dsv":22,"xmlhttprequest":90}],35:[function(require,module,exports){
+},{"d3-collection":18,"d3-dispatch":20,"d3-dsv":22,"xmlhttprequest":91}],35:[function(require,module,exports){
 // https://d3js.org/d3-scale/ Version 1.0.7. Copyright 2017 Mike Bostock.
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('d3-array'), require('d3-collection'), require('d3-interpolate'), require('d3-format'), require('d3-time'), require('d3-time-format'), require('d3-color')) :
@@ -20345,7 +20346,7 @@ function validateParams (params) {
   return params
 }
 
-},{"http":80,"url":87}],47:[function(require,module,exports){
+},{"http":81,"url":88}],47:[function(require,module,exports){
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
   var e, m
   var eLen = nBytes * 8 - mLen - 1
@@ -20487,6 +20488,15 @@ module.exports = Array.isArray || function (arr) {
 };
 
 },{}],51:[function(require,module,exports){
+var __makeTemplateObject = (this && this.__makeTemplateObject) || function (cooked, raw) {
+    if (Object.defineProperty) { Object.defineProperty(cooked, "raw", { value: raw }); } else { cooked.raw = raw; }
+    return cooked;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = String.raw(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  $$\n  % create the definition symbol\n  def\bydef{stackrel{Delta}{=}}\n  %defcircconv{otimes}\n  defcircconv{circledast}\n\n  \newcommand{qed}{mbox{ } Box}\n\n\n  \newcommand{infint}{int_{-infty}^{infty}}\n\n  % z transform\n  \newcommand{ztp}{ ~~ mathop{mathcal{Z}}limits_{longleftrightarrow} ~~ }\n  \newcommand{iztp}{ ~~ mathop{mathcal{Z}^{-1}}limits_{longleftrightarrow} ~~ }\n  % fourier transform pair\n  \newcommand{\ftp}{ ~~ mathop{mathcal{F}}limits_{longleftrightarrow} ~~ }\n  \newcommand{iftp}{ ~~ mathop{mathcal{F}^{-1}}limits_{longleftrightarrow} ~~ }\n  % laplace transform\n  \newcommand{ltp}{ ~~ mathop{mathcal{L}}limits_{longleftrightarrow} ~~ }\n  \newcommand{iltp}{ ~~ mathop{mathcal{L}^{-1}}limits_{longleftrightarrow} ~~ }\n\n  \newcommand{\ftrans}[1]{ mathcal{F} left{#1\right} }\n  \newcommand{iftrans}[1]{ mathcal{F}^{-1} left{#1\right} }\n  \newcommand{ztrans}[1]{ mathcal{Z} left{#1\right} }\n  \newcommand{iztrans}[1]{ mathcal{Z}^{-1} left{#1\right} }\n  \newcommand{ltrans}[1]{ mathcal{L} left{#1\right} }\n  \newcommand{iltrans}[1]{ mathcal{L}^{-1} left{#1\right} }\n\n\n  % coordinate vector relative to a basis (linear algebra)\n  \newcommand{cvrb}[2]{left[ \vec{#1} \right]_{#2} }\n  % change of coordinate matrix (linear algebra)\n  \newcommand{cocm}[2]{ mathop{P}limits_{#2 leftarrow #1} }\n  % Transformed vector set\n  \newcommand{\tset}[3]{{#1lr{\vec{#2}_1}, #1lr{\vec{#2}_2}, dots, #1lr{\vec{#2}_{#3}}}}\n  % sum transformed vector set\n  \newcommand{\tsetcsum}[4]{{#1}_1#2(\vec{#3}_1) + {#1}_2#2(\vec{#3}_2) + cdots + {#1}_{#4}#2(\vec{#3}_{#4})}\n  \newcommand{\tsetcsumall}[4]{#2lr{{#1}_1\vec{#3}_1 + {#1}_2\vec{#3}_2 + cdots + {#1}_{#4}\vec{#3}_{#4}}}\n  \newcommand{cvecsum}[3]{{#1}_1\vec{#2}_1 + {#1}_2\vec{#2}_2 + cdots + {#1}_{#3}\vec{#2}_{#3}}\n\n\n  % function def\n  \newcommand{\fndef}[3]{#1:#2 \to #3}\n  % vector set\n  \newcommand{\vset}[2]{{\vec{#1}_1, \vec{#1}_2, dots, \vec{#1}_{#2}}}\n  % absolute value\n  \newcommand{abs}[1]{left| #1 \right|}\n  % vector norm\n  \newcommand{\norm}[1]{left|left| #1 \right|\right|}\n  % trans\n  \newcommand{\trans}{mapsto}\n  % evaluate integral\n  \newcommand{evalint}[3]{left. #1 \right|_{#2}^{#3}}\n  % slist\n  \newcommand{slist}[2]{{#1}_{1},{#1}_{2},dots,{#1}_{#2}}\n\n  % vectors\n  \newcommand{\vc}[1]{\textbf{#1}}\n\n  % real\n  \newcommand{Real}[1]{{Re mit{e}left{{#1}\right}}}\n  % imaginary\n  \newcommand{Imag}[1]{{Im mit{m}left{{#1}\right}}}\n\n  \newcommand{mcal}[1]{mathcal{#1}}\n  \newcommand{\bb}[1]{mathbb{#1}}\n  \newcommand{N}{mathbb{N}}\n  \newcommand{Z}{mathbb{Z}}\n  \newcommand{Q}{mathbb{Q}}\n  \newcommand{R}{mathbb{R}}\n  \newcommand{C}{mathbb{C}}\n  \newcommand{I}{mathbb{I}}\n  \newcommand{Th}[1]{mathopmathrm{Th(#1)}}\n  \newcommand{intersect}{cap}\n  \newcommand{nion}{cup}\n  \newcommand{intersectop}{\bigcap}\n  \newcommand{nionop}{\bigcup}\n  \newcommand{setdiff}{\backslash}\n  \newcommand{iso}{cong}\n  \newcommand{aut}[1]{mathop{mathrm{Aut(#1)}}}\n  \newcommand{inn}[1]{mathop{mathrm{Inn(#1)}}}\n  \newcommand{Ann}[1]{mathop{mathrm{Ann(#1)}}}\n  \newcommand{dom}[1]{mathop{mathrm{dom} #1}}\n  \newcommand{cod}[1]{mathop{mathrm{cod} #1}}\n  \newcommand{id}{mathrm{id}}\n  \newcommand{st}{ | }\n  \newcommand{mbf}[1]{mathbf{#1}}\n  \newcommand{enclose}[1]{leftlangle #1\right\rangle}\n  \newcommand{lr}[1]{left( #1\right)}\n  \newcommand{lrsq}[1]{left[ #1\right]}\n  \newcommand{op}{mathrm{op}}\n  \newcommand{dotarr}{dot{\rightarrow}}\n  %Category Names:\n  \newcommand{Grp}{mathbf{Grp}}\n  \newcommand{Ab}{mathbf{Ab}}\n  \newcommand{Set}{mathbf{Set}}\n  \newcommand{Matr}{mathbf{Matr}}\n  \newcommand{IntDom}{mathbf{IntDom}}\n  \newcommand{Field}{mathbf{Field}}\n  \newcommand{Vect}{mathbf{Vect}}\n\n  \newcommand{\thm}[1]{\begin{theorem} #1 end{theorem}}\n  \newcommand{clm}[1]{\begin{claim} #1 end{claim}}\n  \newcommand{cor}[1]{\begin{corollary} #1 end{corollary}}\n  \newcommand{ex}[1]{\begin{example} #1 end{example}}\n  \newcommand{prf}[1]{\begin{proof} #1 end{proof}}\n  \newcommand{prbm}[1]{\begin{problem} #1 end{problem}}\n  \newcommand{soln}[1]{\begin{solution} #1 end{solution}}\n  \newcommand{\rmk}[1]{\begin{remark} #1 end{remark}}\n  \newcommand{defn}[1]{\begin{definition} #1 end{definition}}\n\n  \newcommand{ifff}{LeftRightArrow}\n\n  <!-- For the set of reals and integers -->\n  \newcommand{\rr}{R}\n  \newcommand{\reals}{R}\n  \newcommand{ii}{Z}\n  \newcommand{cc}{C}\n  \newcommand{\nn}{N}\n  \newcommand{\nats}{N}\n\n  <!-- For terms being indexed.\n  Puts them in standard font face and creates an index entry.\n  arg: The term being defined.\n  \newcommand{pointer}[1]{#1index{#1}} -->\n\n  <!-- For bold terms to be index, but defined elsewhere\n  Puts them in bold face and creates an index entry.\n  arg: The term being defined. -->\n  \newcommand{strong}[1]{\textbf{#1}}\n\n  <!-- For set names.\n  Puts them in italics. In math mode, yields decent spacing.\n  arg: The name of the set. -->\n  \newcommand{set}[1]{\textit{#1}}\n\n  $$\n  "], ["\n  $$\n  % create the definition symbol\n  \\def\\bydef{\\stackrel{\\Delta}{=}}\n  %\\def\\circconv{\\otimes}\n  \\def\\circconv{\\circledast}\n\n  \\newcommand{\\qed}{\\mbox{ } \\Box}\n\n\n  \\newcommand{\\infint}{\\int_{-\\infty}^{\\infty}}\n\n  % z transform\n  \\newcommand{\\ztp}{ ~~ \\mathop{\\mathcal{Z}}\\limits_{\\longleftrightarrow} ~~ }\n  \\newcommand{\\iztp}{ ~~ \\mathop{\\mathcal{Z}^{-1}}\\limits_{\\longleftrightarrow} ~~ }\n  % fourier transform pair\n  \\newcommand{\\ftp}{ ~~ \\mathop{\\mathcal{F}}\\limits_{\\longleftrightarrow} ~~ }\n  \\newcommand{\\iftp}{ ~~ \\mathop{\\mathcal{F}^{-1}}\\limits_{\\longleftrightarrow} ~~ }\n  % laplace transform\n  \\newcommand{\\ltp}{ ~~ \\mathop{\\mathcal{L}}\\limits_{\\longleftrightarrow} ~~ }\n  \\newcommand{\\iltp}{ ~~ \\mathop{\\mathcal{L}^{-1}}\\limits_{\\longleftrightarrow} ~~ }\n\n  \\newcommand{\\ftrans}[1]{ \\mathcal{F} \\left\\{#1\\right\\} }\n  \\newcommand{\\iftrans}[1]{ \\mathcal{F}^{-1} \\left\\{#1\\right\\} }\n  \\newcommand{\\ztrans}[1]{ \\mathcal{Z} \\left\\{#1\\right\\} }\n  \\newcommand{\\iztrans}[1]{ \\mathcal{Z}^{-1} \\left\\{#1\\right\\} }\n  \\newcommand{\\ltrans}[1]{ \\mathcal{L} \\left\\{#1\\right\\} }\n  \\newcommand{\\iltrans}[1]{ \\mathcal{L}^{-1} \\left\\{#1\\right\\} }\n\n\n  % coordinate vector relative to a basis (linear algebra)\n  \\newcommand{\\cvrb}[2]{\\left[ \\vec{#1} \\right]_{#2} }\n  % change of coordinate matrix (linear algebra)\n  \\newcommand{\\cocm}[2]{ \\mathop{P}\\limits_{#2 \\leftarrow #1} }\n  % Transformed vector set\n  \\newcommand{\\tset}[3]{\\{#1\\lr{\\vec{#2}_1}, #1\\lr{\\vec{#2}_2}, \\dots, #1\\lr{\\vec{#2}_{#3}}\\}}\n  % sum transformed vector set\n  \\newcommand{\\tsetcsum}[4]{{#1}_1#2(\\vec{#3}_1) + {#1}_2#2(\\vec{#3}_2) + \\cdots + {#1}_{#4}#2(\\vec{#3}_{#4})}\n  \\newcommand{\\tsetcsumall}[4]{#2\\lr{{#1}_1\\vec{#3}_1 + {#1}_2\\vec{#3}_2 + \\cdots + {#1}_{#4}\\vec{#3}_{#4}}}\n  \\newcommand{\\cvecsum}[3]{{#1}_1\\vec{#2}_1 + {#1}_2\\vec{#2}_2 + \\cdots + {#1}_{#3}\\vec{#2}_{#3}}\n\n\n  % function def\n  \\newcommand{\\fndef}[3]{#1:#2 \\to #3}\n  % vector set\n  \\newcommand{\\vset}[2]{\\{\\vec{#1}_1, \\vec{#1}_2, \\dots, \\vec{#1}_{#2}\\}}\n  % absolute value\n  \\newcommand{\\abs}[1]{\\left| #1 \\right|}\n  % vector norm\n  \\newcommand{\\norm}[1]{\\left|\\left| #1 \\right|\\right|}\n  % trans\n  \\newcommand{\\trans}{\\mapsto}\n  % evaluate integral\n  \\newcommand{\\evalint}[3]{\\left. #1 \\right|_{#2}^{#3}}\n  % slist\n  \\newcommand{\\slist}[2]{{#1}_{1},{#1}_{2},\\dots,{#1}_{#2}}\n\n  % vectors\n  \\newcommand{\\vc}[1]{\\textbf{#1}}\n\n  % real\n  \\newcommand{\\Real}[1]{{\\Re \\mit{e}\\left\\{{#1}\\right\\}}}\n  % imaginary\n  \\newcommand{\\Imag}[1]{{\\Im \\mit{m}\\left\\{{#1}\\right\\}}}\n\n  \\newcommand{\\mcal}[1]{\\mathcal{#1}}\n  \\newcommand{\\bb}[1]{\\mathbb{#1}}\n  \\newcommand{\\N}{\\mathbb{N}}\n  \\newcommand{\\Z}{\\mathbb{Z}}\n  \\newcommand{\\Q}{\\mathbb{Q}}\n  \\newcommand{\\R}{\\mathbb{R}}\n  \\newcommand{\\C}{\\mathbb{C}}\n  \\newcommand{\\I}{\\mathbb{I}}\n  \\newcommand{\\Th}[1]{\\mathop\\mathrm{Th(#1)}}\n  \\newcommand{\\intersect}{\\cap}\n  \\newcommand{\\union}{\\cup}\n  \\newcommand{\\intersectop}{\\bigcap}\n  \\newcommand{\\unionop}{\\bigcup}\n  \\newcommand{\\setdiff}{\\backslash}\n  \\newcommand{\\iso}{\\cong}\n  \\newcommand{\\aut}[1]{\\mathop{\\mathrm{Aut(#1)}}}\n  \\newcommand{\\inn}[1]{\\mathop{\\mathrm{Inn(#1)}}}\n  \\newcommand{\\Ann}[1]{\\mathop{\\mathrm{Ann(#1)}}}\n  \\newcommand{\\dom}[1]{\\mathop{\\mathrm{dom} #1}}\n  \\newcommand{\\cod}[1]{\\mathop{\\mathrm{cod} #1}}\n  \\newcommand{\\id}{\\mathrm{id}}\n  \\newcommand{\\st}{\\ |\\ }\n  \\newcommand{\\mbf}[1]{\\mathbf{#1}}\n  \\newcommand{\\enclose}[1]{\\left\\langle #1\\right\\rangle}\n  \\newcommand{\\lr}[1]{\\left( #1\\right)}\n  \\newcommand{\\lrsq}[1]{\\left[ #1\\right]}\n  \\newcommand{\\op}{\\mathrm{op}}\n  \\newcommand{\\dotarr}{\\dot{\\rightarrow}}\n  %Category Names:\n  \\newcommand{\\Grp}{\\mathbf{Grp}}\n  \\newcommand{\\Ab}{\\mathbf{Ab}}\n  \\newcommand{\\Set}{\\mathbf{Set}}\n  \\newcommand{\\Matr}{\\mathbf{Matr}}\n  \\newcommand{\\IntDom}{\\mathbf{IntDom}}\n  \\newcommand{\\Field}{\\mathbf{Field}}\n  \\newcommand{\\Vect}{\\mathbf{Vect}}\n\n  \\newcommand{\\thm}[1]{\\begin{theorem} #1 \\end{theorem}}\n  \\newcommand{\\clm}[1]{\\begin{claim} #1 \\end{claim}}\n  \\newcommand{\\cor}[1]{\\begin{corollary} #1 \\end{corollary}}\n  \\newcommand{\\ex}[1]{\\begin{example} #1 \\end{example}}\n  \\newcommand{\\prf}[1]{\\begin{proof} #1 \\end{proof}}\n  \\newcommand{\\prbm}[1]{\\begin{problem} #1 \\end{problem}}\n  \\newcommand{\\soln}[1]{\\begin{solution} #1 \\end{solution}}\n  \\newcommand{\\rmk}[1]{\\begin{remark} #1 \\end{remark}}\n  \\newcommand{\\defn}[1]{\\begin{definition} #1 \\end{definition}}\n\n  \\newcommand{\\ifff}{\\LeftRightArrow}\n\n  <!-- For the set of reals and integers -->\n  \\newcommand{\\rr}{\\R}\n  \\newcommand{\\reals}{\\R}\n  \\newcommand{\\ii}{\\Z}\n  \\newcommand{\\cc}{\\C}\n  \\newcommand{\\nn}{\\N}\n  \\newcommand{\\nats}{\\N}\n\n  <!-- For terms being indexed.\n  Puts them in standard font face and creates an index entry.\n  arg: The term being defined.\n  \\newcommand{\\pointer}[1]{#1\\index{#1}} -->\n\n  <!-- For bold terms to be index, but defined elsewhere\n  Puts them in bold face and creates an index entry.\n  arg: The term being defined. -->\n  \\newcommand{\\strong}[1]{\\textbf{#1}}\n\n  <!-- For set names.\n  Puts them in italics. In math mode, yields decent spacing.\n  arg: The name of the set. -->\n  \\newcommand{\\set}[1]{\\textit{#1}}\n\n  $$\n  "])));
+var templateObject_1;
+
+},{}],52:[function(require,module,exports){
 (function (process){
 Object.defineProperty(exports, "__esModule", { value: true });
 var loadScript = require("load-script");
@@ -20527,7 +20537,7 @@ exports.loadMathJax = function (callback, script, options) {
 };
 
 }).call(this,require('_process'))
-},{"_process":65,"load-script":63}],52:[function(require,module,exports){
+},{"_process":66,"load-script":64}],53:[function(require,module,exports){
 Object.defineProperty(exports, "__esModule", { value: true });
 var pstricks_1 = require("./lib/pstricks");
 exports.pstricks = pstricks_1.default;
@@ -20538,7 +20548,7 @@ exports.default = {
     psgraph: psgraph_1.default,
 };
 
-},{"./lib/psgraph":53,"./lib/pstricks":54}],53:[function(require,module,exports){
+},{"./lib/psgraph":54,"./lib/pstricks":55}],54:[function(require,module,exports){
 Object.defineProperty(exports, "__esModule", { value: true });
 var _ = require("underscore");
 var latex2js_utils_1 = require("latex2js-utils");
@@ -21056,7 +21066,7 @@ var psgraph = {
 };
 exports.default = psgraph;
 
-},{"d3":44,"latex2js-utils":56,"underscore":86}],54:[function(require,module,exports){
+},{"d3":44,"latex2js-utils":57,"underscore":87}],55:[function(require,module,exports){
 Object.defineProperty(exports, "__esModule", { value: true });
 var _ = require("underscore");
 var latex2js_utils_1 = require("latex2js-utils");
@@ -21477,7 +21487,7 @@ exports.default = {
     Functions: exports.Functions,
 };
 
-},{"latex2js-settings":55,"latex2js-utils":56,"underscore":86}],55:[function(require,module,exports){
+},{"latex2js-settings":56,"latex2js-utils":57,"underscore":87}],56:[function(require,module,exports){
 Object.defineProperty(exports, "__esModule", { value: true });
 var latex2js_utils_1 = require("latex2js-utils");
 exports.Expressions = {
@@ -21528,7 +21538,7 @@ exports.default = {
     Functions: exports.Functions,
 };
 
-},{"latex2js-utils":56}],56:[function(require,module,exports){
+},{"latex2js-utils":57}],57:[function(require,module,exports){
 Object.defineProperty(exports, "__esModule", { value: true });
 var _ = require("underscore");
 exports.simplerepl = function (regex, replace) {
@@ -21645,7 +21655,7 @@ exports.Yinv = function (v) {
     return this.y1 - Number(v) / this.yunit;
 };
 
-},{"underscore":86}],57:[function(require,module,exports){
+},{"underscore":87}],58:[function(require,module,exports){
 Object.defineProperty(exports, "__esModule", { value: true });
 var _ = require("underscore");
 var text_1 = require("./lib/text");
@@ -21726,11 +21736,11 @@ var LaTeX2HTML5 = /** @class */ (function () {
 }());
 exports.default = LaTeX2HTML5;
 
-},{"./lib/environments":58,"./lib/headers":59,"./lib/ignore":60,"./lib/parser":61,"./lib/text":62,"latex2js-pstricks":52,"underscore":86}],58:[function(require,module,exports){
+},{"./lib/environments":59,"./lib/headers":60,"./lib/ignore":61,"./lib/parser":62,"./lib/text":63,"latex2js-pstricks":53,"underscore":87}],59:[function(require,module,exports){
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = ['pspicture', 'verbatim', 'enumerate', 'print', 'nicebox'];
 
-},{}],59:[function(require,module,exports){
+},{}],60:[function(require,module,exports){
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Expressions = {
     bq: /\\begin\{quotation\}/,
@@ -21777,7 +21787,7 @@ exports.default = {
     Functions: exports.Functions,
 };
 
-},{}],60:[function(require,module,exports){
+},{}],61:[function(require,module,exports){
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = [
     /^\%/,
@@ -21801,7 +21811,7 @@ exports.default = [
     /\\end\{center\}/,
 ];
 
-},{}],61:[function(require,module,exports){
+},{}],62:[function(require,module,exports){
 Object.defineProperty(exports, "__esModule", { value: true });
 var _ = require("underscore");
 function Parser(LaTeX2JS) {
@@ -22040,7 +22050,7 @@ Parser.prototype = {
 };
 exports.default = Parser;
 
-},{"underscore":86}],62:[function(require,module,exports){
+},{"underscore":87}],63:[function(require,module,exports){
 Object.defineProperty(exports, "__esModule", { value: true });
 var _ = require("underscore");
 var latex2js_utils_1 = require("latex2js-utils");
@@ -22132,7 +22142,7 @@ exports.default = {
     Functions: exports.Functions,
 };
 
-},{"latex2js-utils":56,"underscore":86}],63:[function(require,module,exports){
+},{"latex2js-utils":57,"underscore":87}],64:[function(require,module,exports){
 
 module.exports = function load (src, opts, cb) {
   var head = document.head || document.getElementsByTagName('head')[0]
@@ -22199,7 +22209,7 @@ function ieOnEnd (script, cb) {
   }
 }
 
-},{}],64:[function(require,module,exports){
+},{}],65:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -22247,7 +22257,7 @@ function nextTick(fn, arg1, arg2, arg3) {
 
 
 }).call(this,require('_process'))
-},{"_process":65}],65:[function(require,module,exports){
+},{"_process":66}],66:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -22433,7 +22443,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],66:[function(require,module,exports){
+},{}],67:[function(require,module,exports){
 (function (global){
 /*! https://mths.be/punycode v1.4.1 by @mathias */
 ;(function(root) {
@@ -22970,7 +22980,7 @@ process.umask = function() { return 0; };
 }(this));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],67:[function(require,module,exports){
+},{}],68:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -23056,7 +23066,7 @@ var isArray = Array.isArray || function (xs) {
   return Object.prototype.toString.call(xs) === '[object Array]';
 };
 
-},{}],68:[function(require,module,exports){
+},{}],69:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -23143,13 +23153,13 @@ var objectKeys = Object.keys || function (obj) {
   return res;
 };
 
-},{}],69:[function(require,module,exports){
+},{}],70:[function(require,module,exports){
 'use strict';
 
 exports.decode = exports.parse = require('./decode');
 exports.encode = exports.stringify = require('./encode');
 
-},{"./decode":67,"./encode":68}],70:[function(require,module,exports){
+},{"./decode":68,"./encode":69}],71:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -23274,7 +23284,7 @@ function forEach(xs, f) {
     f(xs[i], i);
   }
 }
-},{"./_stream_readable":72,"./_stream_writable":74,"core-util-is":13,"inherits":48,"process-nextick-args":64}],71:[function(require,module,exports){
+},{"./_stream_readable":73,"./_stream_writable":75,"core-util-is":13,"inherits":48,"process-nextick-args":65}],72:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -23322,7 +23332,7 @@ function PassThrough(options) {
 PassThrough.prototype._transform = function (chunk, encoding, cb) {
   cb(null, chunk);
 };
-},{"./_stream_transform":73,"core-util-is":13,"inherits":48}],72:[function(require,module,exports){
+},{"./_stream_transform":74,"core-util-is":13,"inherits":48}],73:[function(require,module,exports){
 (function (process,global){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -24340,7 +24350,7 @@ function indexOf(xs, x) {
   return -1;
 }
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./_stream_duplex":70,"./internal/streams/BufferList":75,"./internal/streams/destroy":76,"./internal/streams/stream":77,"_process":65,"core-util-is":13,"events":45,"inherits":48,"isarray":50,"process-nextick-args":64,"safe-buffer":79,"string_decoder/":84,"util":9}],73:[function(require,module,exports){
+},{"./_stream_duplex":71,"./internal/streams/BufferList":76,"./internal/streams/destroy":77,"./internal/streams/stream":78,"_process":66,"core-util-is":13,"events":45,"inherits":48,"isarray":50,"process-nextick-args":65,"safe-buffer":80,"string_decoder/":85,"util":9}],74:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -24555,7 +24565,7 @@ function done(stream, er, data) {
 
   return stream.push(null);
 }
-},{"./_stream_duplex":70,"core-util-is":13,"inherits":48}],74:[function(require,module,exports){
+},{"./_stream_duplex":71,"core-util-is":13,"inherits":48}],75:[function(require,module,exports){
 (function (process,global){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -25235,7 +25245,7 @@ Writable.prototype._destroy = function (err, cb) {
   cb(err);
 };
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./_stream_duplex":70,"./internal/streams/destroy":76,"./internal/streams/stream":77,"_process":65,"core-util-is":13,"inherits":48,"process-nextick-args":64,"safe-buffer":79,"util-deprecate":89}],75:[function(require,module,exports){
+},{"./_stream_duplex":71,"./internal/streams/destroy":77,"./internal/streams/stream":78,"_process":66,"core-util-is":13,"inherits":48,"process-nextick-args":65,"safe-buffer":80,"util-deprecate":90}],76:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -25315,7 +25325,7 @@ if (util && util.inspect && util.inspect.custom) {
     return this.constructor.name + ' ' + obj;
   };
 }
-},{"safe-buffer":79,"util":9}],76:[function(require,module,exports){
+},{"safe-buffer":80,"util":9}],77:[function(require,module,exports){
 'use strict';
 
 /*<replacement>*/
@@ -25390,10 +25400,10 @@ module.exports = {
   destroy: destroy,
   undestroy: undestroy
 };
-},{"process-nextick-args":64}],77:[function(require,module,exports){
+},{"process-nextick-args":65}],78:[function(require,module,exports){
 module.exports = require('events').EventEmitter;
 
-},{"events":45}],78:[function(require,module,exports){
+},{"events":45}],79:[function(require,module,exports){
 exports = module.exports = require('./lib/_stream_readable.js');
 exports.Stream = exports;
 exports.Readable = exports;
@@ -25402,7 +25412,7 @@ exports.Duplex = require('./lib/_stream_duplex.js');
 exports.Transform = require('./lib/_stream_transform.js');
 exports.PassThrough = require('./lib/_stream_passthrough.js');
 
-},{"./lib/_stream_duplex.js":70,"./lib/_stream_passthrough.js":71,"./lib/_stream_readable.js":72,"./lib/_stream_transform.js":73,"./lib/_stream_writable.js":74}],79:[function(require,module,exports){
+},{"./lib/_stream_duplex.js":71,"./lib/_stream_passthrough.js":72,"./lib/_stream_readable.js":73,"./lib/_stream_transform.js":74,"./lib/_stream_writable.js":75}],80:[function(require,module,exports){
 /* eslint-disable node/no-deprecated-api */
 var buffer = require('buffer')
 var Buffer = buffer.Buffer
@@ -25466,7 +25476,7 @@ SafeBuffer.allocUnsafeSlow = function (size) {
   return buffer.SlowBuffer(size)
 }
 
-},{"buffer":11}],80:[function(require,module,exports){
+},{"buffer":11}],81:[function(require,module,exports){
 (function (global){
 var ClientRequest = require('./lib/request')
 var IncomingMessage = require('./lib/response')
@@ -25552,7 +25562,7 @@ http.METHODS = [
 	'UNSUBSCRIBE'
 ]
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./lib/request":82,"./lib/response":83,"builtin-status-codes":12,"url":87,"xtend":91}],81:[function(require,module,exports){
+},{"./lib/request":83,"./lib/response":84,"builtin-status-codes":12,"url":88,"xtend":92}],82:[function(require,module,exports){
 (function (global){
 exports.fetch = isFunction(global.fetch) && isFunction(global.ReadableStream)
 
@@ -25629,7 +25639,7 @@ function isFunction (value) {
 xhr = null // Help gc
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],82:[function(require,module,exports){
+},{}],83:[function(require,module,exports){
 (function (process,global,Buffer){
 var capability = require('./capability')
 var inherits = require('inherits')
@@ -25956,7 +25966,7 @@ var unsafeHeaders = [
 ]
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer)
-},{"./capability":81,"./response":83,"_process":65,"buffer":11,"inherits":48,"readable-stream":78,"to-arraybuffer":85}],83:[function(require,module,exports){
+},{"./capability":82,"./response":84,"_process":66,"buffer":11,"inherits":48,"readable-stream":79,"to-arraybuffer":86}],84:[function(require,module,exports){
 (function (process,global,Buffer){
 var capability = require('./capability')
 var inherits = require('inherits')
@@ -26177,7 +26187,7 @@ IncomingMessage.prototype._onXHRProgress = function () {
 }
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer)
-},{"./capability":81,"_process":65,"buffer":11,"inherits":48,"readable-stream":78}],84:[function(require,module,exports){
+},{"./capability":82,"_process":66,"buffer":11,"inherits":48,"readable-stream":79}],85:[function(require,module,exports){
 'use strict';
 
 var Buffer = require('safe-buffer').Buffer;
@@ -26450,7 +26460,7 @@ function simpleWrite(buf) {
 function simpleEnd(buf) {
   return buf && buf.length ? this.write(buf) : '';
 }
-},{"safe-buffer":79}],85:[function(require,module,exports){
+},{"safe-buffer":80}],86:[function(require,module,exports){
 var Buffer = require('buffer').Buffer
 
 module.exports = function (buf) {
@@ -26479,7 +26489,7 @@ module.exports = function (buf) {
 	}
 }
 
-},{"buffer":11}],86:[function(require,module,exports){
+},{"buffer":11}],87:[function(require,module,exports){
 //     Underscore.js 1.5.2
 //     http://underscorejs.org
 //     (c) 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -27757,7 +27767,7 @@ module.exports = function (buf) {
 
 }).call(this);
 
-},{}],87:[function(require,module,exports){
+},{}],88:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -28491,7 +28501,7 @@ Url.prototype.parseHost = function() {
   if (host) this.hostname = host;
 };
 
-},{"./util":88,"punycode":66,"querystring":69}],88:[function(require,module,exports){
+},{"./util":89,"punycode":67,"querystring":70}],89:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -28509,7 +28519,7 @@ module.exports = {
   }
 };
 
-},{}],89:[function(require,module,exports){
+},{}],90:[function(require,module,exports){
 (function (global){
 
 /**
@@ -28580,7 +28590,7 @@ function config (name) {
 }
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],90:[function(require,module,exports){
+},{}],91:[function(require,module,exports){
 (function (process,Buffer){
 /**
  * Wrapper for built-in http.js to emulate the browser XMLHttpRequest object.
@@ -29204,7 +29214,7 @@ exports.XMLHttpRequest = function() {
 };
 
 }).call(this,require('_process'),require("buffer").Buffer)
-},{"_process":65,"buffer":11,"child_process":10,"fs":10,"http":80,"https":46,"url":87}],91:[function(require,module,exports){
+},{"_process":66,"buffer":11,"child_process":10,"fs":10,"http":81,"https":46,"url":88}],92:[function(require,module,exports){
 module.exports = extend
 
 var hasOwnProperty = Object.prototype.hasOwnProperty;

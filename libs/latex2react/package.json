@@ -24,6 +24,7 @@
   "dependencies": {
     "d3": "^4.13.0",
     "latex2js": "^1.1.4",
+    "latex2js-macros": "^1.1.4",
     "latex2js-mathjax": "^1.1.4",
     "latex2js-pstricks": "^1.1.4",
     "prop-types": "^15.6.1",

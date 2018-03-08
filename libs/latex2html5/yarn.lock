@@ -859,40 +859,44 @@ labeled-stream-splicer@^2.0.0:
     isarray "~0.0.1"
     stream-splicer "^2.0.0"
 
-latex2js-mathjax@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/latex2js-mathjax/-/latex2js-mathjax-1.1.0.tgz#191a2cdb4186bd929c6aa6c5e9f13122d2b9d24a"
+latex2js-macros@^1.1.4:
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/latex2js-macros/-/latex2js-macros-1.1.4.tgz#85f531531a17e94dec86dcfbc8a8a6c7df0b4ff5"
+
+latex2js-mathjax@^1.1.4:
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/latex2js-mathjax/-/latex2js-mathjax-1.1.4.tgz#0a579ae4be5c49ec413a6b1993cca17ea8846ebe"
   dependencies:
     load-script "^1.0.0"
 
-latex2js-pstricks@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/latex2js-pstricks/-/latex2js-pstricks-1.1.0.tgz#230e23b92148cd5f0194c00fc6c6baf72f5230f4"
+latex2js-pstricks@^1.1.4:
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/latex2js-pstricks/-/latex2js-pstricks-1.1.4.tgz#3bcdaed372d4e4e988d32253f1c8b37cd1373267"
   dependencies:
     d3 "^4.13.0"
-    latex2js-settings "^1.1.0"
-    latex2js-utils "^1.0.5"
+    latex2js-settings "^1.1.4"
+    latex2js-utils "^1.1.4"
     underscore "1.5.2"
 
-latex2js-settings@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/latex2js-settings/-/latex2js-settings-1.1.0.tgz#0c970a487da6b3e3425fbae025f718f6bfa2d6af"
+latex2js-settings@^1.1.4:
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/latex2js-settings/-/latex2js-settings-1.1.4.tgz#007800b1ff29751b90210a1da74280cd735194d3"
   dependencies:
-    latex2js-utils "^1.0.5"
+    latex2js-utils "^1.1.4"
 
-latex2js-utils@^1.0.5:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/latex2js-utils/-/latex2js-utils-1.0.5.tgz#6c593590faa964b6959981762eb4d177ffc14d2b"
+latex2js-utils@^1.1.4:
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/latex2js-utils/-/latex2js-utils-1.1.4.tgz#c82b8e48c7d0a92dec22de2416c66a6857d53cfc"
   dependencies:
     underscore "1.5.2"
 
-latex2js@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/latex2js/-/latex2js-1.1.0.tgz#c5267345d5d8e2f5e096328e9391692a6e84eac2"
+latex2js@^1.1.4:
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/latex2js/-/latex2js-1.1.4.tgz#e039e7399b705945b217276585410645ba31d554"
   dependencies:
-    latex2js-pstricks "^1.1.0"
-    latex2js-settings "^1.1.0"
-    latex2js-utils "^1.0.5"
+    latex2js-pstricks "^1.1.4"
+    latex2js-settings "^1.1.4"
+    latex2js-utils "^1.1.4"
     underscore "1.5.2"
 
 lexical-scope@^1.2.0:
