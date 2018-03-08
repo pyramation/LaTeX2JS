@@ -14,6 +14,6 @@ exports.default = function (_ref) {
   var lines = _ref.lines;
   return _react2.default.createElement('pre', {
     className: 'verbatim',
-    dangerouslySetInnerHTML: { _html: lines.join('\n') }
+    dangerouslySetInnerHTML: { __html: lines.join('\n') }
   });
 };
