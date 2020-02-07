@@ -1,12 +1,21 @@
-Object.defineProperty(exports, "__esModule", { value: true });
-var latex2js_macros_1 = require("latex2js-macros");
-function render(that) {
-    var div = document.createElement('div');
-    div.id = 'latex-macros';
-    div.style.display = 'none';
-    div.className = 'verbatim';
-    div.innerHTML = latex2js_macros_1.default;
-    return div;
-}
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 exports.default = render;
-//# sourceMappingURL=macros.js.map
+
+var _latex2jsMacros = require('latex2js-macros');
+
+var _latex2jsMacros2 = _interopRequireDefault(_latex2jsMacros);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function render(that) {
+  var div = document.createElement('div');
+  div.id = 'latex-macros';
+  div.style.display = 'none';
+  div.className = 'verbatim';
+  div.innerHTML = _latex2jsMacros2.default;
+  return div;
+}

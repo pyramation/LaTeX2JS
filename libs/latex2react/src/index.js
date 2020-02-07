@@ -42,7 +42,7 @@ export class LaTeX extends Component {
 
     const children = [];
 
-    parsed.forEach(el => {
+    parsed && parsed.forEach(el => {
       if (ELEMENTS.hasOwnProperty(el.type)) {
         children.push(createElement(ELEMENTS[el.type], el));
       }

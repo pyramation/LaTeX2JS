@@ -1,9 +1,12 @@
-Object.defineProperty(exports, "__esModule", { value: true });
-function render(that) {
-    var span = document.createElement('span');
-    span.className = 'math';
-    span.innerHTML = that.lines.join('\n');
-    return span;
-}
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 exports.default = render;
-//# sourceMappingURL=math.js.map
+function render(that) {
+  var span = document.createElement('span');
+  span.className = 'math';
+  span.innerHTML = that.lines.join('\n');
+  return span;
+}

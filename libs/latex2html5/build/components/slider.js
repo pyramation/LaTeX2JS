@@ -1,6 +1,9 @@
-Object.defineProperty(exports, "__esModule", { value: true });
-function render(that) {
-    return document.createElement('input');
-}
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 exports.default = render;
-//# sourceMappingURL=slider.js.map
+function render(that) {
+  return document.createElement('input');
+}

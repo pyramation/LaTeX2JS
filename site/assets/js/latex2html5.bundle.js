@@ -109,7 +109,7 @@ function render(tex, resolve) {
         var parsed = latex.parse(tex);
         var div = document.createElement('div');
         div.className = 'latex-container';
-        parsed.forEach(function (el) {
+        parsed && parsed.forEach(function (el) {
             if (ELEMENTS.hasOwnProperty(el.type)) {
                 div.appendChild(ELEMENTS[el.type](el));
             }

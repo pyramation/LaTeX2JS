@@ -20,7 +20,7 @@
   ],
   "license": "MIT",
   "scripts": {
-    "build": "rm -rf ./build && tsc",
+    "build": "rm -rf build && NODE_ENV=production babel --out-dir build ./src",
     "bundle": "browserify build/index.js --s LaTeX2HTML5 -o latex2html5.bundle.js"
   },
   "dependencies": {
@@ -31,10 +31,9 @@
     "latex2js-pstricks": "^1.2.0"
   },
   "devDependencies": {
-    "@types/node": "^8.0.0",
     "browserify": "^16.1.1",
-    "ts-node": "^5.0.0",
-    "tslint": "^5.4.3",
-    "typescript": "^2.7.1"
+    "babel-cli": "^6.26.0",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
+    "babel-preset-react-app": "^3.1.1"
   }
 }

@@ -18,7 +18,7 @@ export default function render(tex, resolve) {
     const parsed = latex.parse(tex);
     const div = document.createElement('div');
     div.className = 'latex-container';
-    parsed.forEach(el => {
+    parsed && parsed.forEach(el => {
       if (ELEMENTS.hasOwnProperty(el.type)) {
         div.appendChild(ELEMENTS[el.type](el));
       }
