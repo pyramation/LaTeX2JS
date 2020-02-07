@@ -15,7 +15,7 @@ exports.default = function (_ref) {
   return _react2.default.createElement(
     "ul",
     { className: "math" },
-    list.map(function (line) {
+    lines.map(function (line) {
       var m = line.match(/\\item (.*)/);
       if (m) {
         return _react2.default.createElement(
