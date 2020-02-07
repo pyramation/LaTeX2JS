@@ -107,7 +107,7 @@ var LaTeX = exports.LaTeX = function (_Component) {
 
       var children = [];
 
-      parsed && parsed.forEach(function (el) {
+      parsed && parsed.forEach && parsed.forEach(function (el) {
         if (ELEMENTS.hasOwnProperty(el.type)) {
           children.push((0, _react.createElement)(ELEMENTS[el.type], el));
         }
