@@ -2120,9 +2120,9 @@ kind-of@^4.0.0:
   dependencies:
     is-buffer "^1.1.5"
 
-latex2js-pstricks@^1.1.5:
-  version "1.1.5"
-  resolved "https://registry.yarnpkg.com/latex2js-pstricks/-/latex2js-pstricks-1.1.5.tgz#02db49712c8d102b0af6b73eca94c74a0fd0109a"
+latex2js-pstricks@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/latex2js-pstricks/-/latex2js-pstricks-1.2.0.tgz#c181a09ee7ea35a19163aa93b5d1b74430a9607e"
   dependencies:
     d3 "^4.13.0"
     latex2js-settings "^1.1.5"
@@ -2188,8 +2188,8 @@ lodash.sortby@^4.7.0:
   resolved "https://registry.yarnpkg.com/lodash.sortby/-/lodash.sortby-4.7.0.tgz#edd14c824e2cc9c1e0b0a1b42bb5210516a42438"
 
 lodash@^4.13.1, lodash@^4.14.0, lodash@^4.17.4:
-  version "4.17.5"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.5.tgz#99a92d65c0272debe8c96b6057bc8fbfa3bed511"
+  version "4.17.15"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
 
 longest@^1.0.1:
   version "1.0.1"
