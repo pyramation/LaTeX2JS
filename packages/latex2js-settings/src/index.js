@@ -8,7 +8,7 @@ export const Expressions = {
   unit: /^unit/,
   runit: /^runit/,
   xunit: /^xunit/,
-  yunit: /^yunit/,
+  yunit: /^yunit/
 };
 
 export const Functions = {
@@ -42,10 +42,10 @@ export const Functions = {
   yunit(o, v) {
     v = convertUnits(v);
     o.yunit = v;
-  },
+  }
 };
 
 export default {
   Expressions,
-  Functions,
+  Functions
 };

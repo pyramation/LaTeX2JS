@@ -35228,56 +35228,65 @@ var _default = {
 };
 exports["default"] = _default;
 },{"@babel/runtime/helpers/interopRequireDefault":6,"@babel/runtime/helpers/slicedToArray":10,"latex2js-settings":124,"latex2js-utils":125}],124:[function(require,module,exports){
-Object.defineProperty(exports, "__esModule", { value: true });
-var latex2js_utils_1 = require("latex2js-utils");
-exports.Expressions = {
-    fillcolor: /^fillcolor$/,
-    fillstyle: /^fillstyle$/,
-    linecolor: /^linecolor$/,
-    linestyle: /^linestyle$/,
-    unit: /^unit/,
-    runit: /^runit/,
-    xunit: /^xunit/,
-    yunit: /^yunit/,
-};
-exports.Functions = {
-    fillcolor: function (o, v) {
-        o.fillcolor = v;
-    },
-    fillstyle: function (o, v) {
-        o.fillstyle = v;
-    },
-    linecolor: function (o, v) {
-        o.linecolor = v;
-    },
-    linestyle: function (o, v) {
-        o.linestyle = v;
-    },
-    unit: function (o, v) {
-        v = latex2js_utils_1.convertUnits(v);
-        o.unit = v;
-        o.runit = v;
-        o.xunit = v;
-        o.yunit = v;
-    },
-    runit: function (o, v) {
-        v = latex2js_utils_1.convertUnits(v);
-        o.runit = v;
-    },
-    xunit: function (o, v) {
-        v = latex2js_utils_1.convertUnits(v);
-        o.xunit = v;
-    },
-    yunit: function (o, v) {
-        v = latex2js_utils_1.convertUnits(v);
-        o.yunit = v;
-    },
-};
-exports.default = {
-    Expressions: exports.Expressions,
-    Functions: exports.Functions,
-};
+"use strict";
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.Functions = exports.Expressions = void 0;
+
+var _latex2jsUtils = require("latex2js-utils");
+
+var Expressions = {
+  fillcolor: /^fillcolor$/,
+  fillstyle: /^fillstyle$/,
+  linecolor: /^linecolor$/,
+  linestyle: /^linestyle$/,
+  unit: /^unit/,
+  runit: /^runit/,
+  xunit: /^xunit/,
+  yunit: /^yunit/
+};
+exports.Expressions = Expressions;
+var Functions = {
+  fillcolor: function fillcolor(o, v) {
+    o.fillcolor = v;
+  },
+  fillstyle: function fillstyle(o, v) {
+    o.fillstyle = v;
+  },
+  linecolor: function linecolor(o, v) {
+    o.linecolor = v;
+  },
+  linestyle: function linestyle(o, v) {
+    o.linestyle = v;
+  },
+  unit: function unit(o, v) {
+    v = (0, _latex2jsUtils.convertUnits)(v);
+    o.unit = v;
+    o.runit = v;
+    o.xunit = v;
+    o.yunit = v;
+  },
+  runit: function runit(o, v) {
+    v = (0, _latex2jsUtils.convertUnits)(v);
+    o.runit = v;
+  },
+  xunit: function xunit(o, v) {
+    v = (0, _latex2jsUtils.convertUnits)(v);
+    o.xunit = v;
+  },
+  yunit: function yunit(o, v) {
+    v = (0, _latex2jsUtils.convertUnits)(v);
+    o.yunit = v;
+  }
+};
+exports.Functions = Functions;
+var _default = {
+  Expressions: Expressions,
+  Functions: Functions
+};
+exports["default"] = _default;
 },{"latex2js-utils":125}],125:[function(require,module,exports){
 Object.defineProperty(exports, "__esModule", {
   value: true
