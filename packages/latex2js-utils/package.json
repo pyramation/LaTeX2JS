@@ -69,7 +69,6 @@
     "regenerator-runtime": "^0.13.5"
   },
   "dependencies": {
-    "@babel/runtime": "^7.4.2",
-    "underscore": "1.5.2"
+    "@babel/runtime": "^7.4.2"
   }
 }

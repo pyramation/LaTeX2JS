@@ -17,14 +17,14 @@ export default class pspicture extends Component {
       <div
         className="pspicture"
         style={{ width: width, height: height }}
-        ref={div => {
+        ref={(div) => {
           this.refDiv = div;
         }}
       >
         <svg
           width={size.width}
           height={size.height}
-          ref={svg => {
+          ref={(svg) => {
             this.refSvg = svg;
           }}
         />
