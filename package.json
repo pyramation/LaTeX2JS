@@ -13,6 +13,8 @@
     "lint:js": "eslint --ignore-path .gitignore 'packages/**/*.js'",
     "lint:fix": "eslint --ignore-path .gitignore 'packages/**/*.js' --fix",
     "lint:style": "stylelint 'packages/**/*.js'",
+    "build:serve": "bin/build-all.sh && npm run serve",
+    "serve": "serve website/latex2js.com/static",
     "pretest": "yarn lint",
     "test:watch": "jest --watch",
     "test": "jest"

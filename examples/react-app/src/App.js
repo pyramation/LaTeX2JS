@@ -6,28 +6,6 @@ import 'latex2js/latex2js.css';
 import { LaTeX } from 'latex2react';
 
 const tex = String.raw`
-
-\begin{pspicture}(-3.5,-1)(3.75,3.5)
-
-
-\slider{1}{8}{n}{$N$}{4}
-
-
-\psplot[algebraic,linewidth=1.5pt,plotpoints=1000]{-3.14}{3.14}{cos(n*x/2)+1.3}
-\psaxes[showorigin=false,labels=none, Dx=1.62](0,0)(-3.25,0)(3.25,2.5)
-\psline[linestyle=dashed](-3.14,0.3)(3.14,0.3)
-\psline[linestyle=dashed](-3.14,2.3)(3.14,2.3)
-\rput(3.6,2.3){$\frac{1}{1-\alpha}$}
-\rput(3.6,0.3){$\frac{1}{1+\alpha}$}
-\rput(3.14, -0.35){$\pi$}
-\rput(1.62, -0.35){$\pi/2$}
-\rput(-1.62, -0.35){$-\pi/2$}
-\rput(-3.14, -0.35){$-\pi$}
-\rput(0, -0.35){$0$}
-\end{pspicture}
-
-SLIDER EXAMPLE
-
 Probably the best part of using PSTricks is that you can mix both graphics and mathematics:
 
 \begin{center}
