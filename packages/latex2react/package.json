@@ -81,7 +81,6 @@
     "latex2js-macros": "^2.0.0",
     "latex2js-mathjax": "^2.0.0",
     "latex2js-pstricks": "^2.0.0",
-    "prop-types": "^15.6.1",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "styled-components": "^5.0.1",

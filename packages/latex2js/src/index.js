@@ -1,4 +1,3 @@
-import * as _ from 'underscore';
 import TextExt from './lib/text';
 import HeadersExt from './lib/headers';
 import { pstricks as PSTricksExt } from 'latex2js-pstricks';
@@ -64,7 +63,6 @@ export default class LaTeX2HTML5 {
     };
     Object.assign(this.Headers.Functions, fns);
   }
-  // events: _.clone(Backbone.Events),
 
   getParser() {
     return new Parser(this);
@@ -73,13 +71,13 @@ export default class LaTeX2HTML5 {
   parse(text) {
     const parser = new Parser(this);
     const parsed = parser.parse(text);
-    _.each(parsed, (element) => {
+    parsed.forEach((element) => {
       if (!element.hasOwnProperty('type')) {
         throw new Error('no type!');
       }
       // TODO implement rendering
-      // console.log(element.type);
     });
+
     return parsed;
   }
 }

@@ -64,7 +64,6 @@
     "@babel/runtime": "^7.4.2",
     "d3": "^4.13.0",
     "latex2js-settings": "^2.0.0",
-    "latex2js-utils": "^2.0.0",
-    "underscore": "1.5.2"
+    "latex2js-utils": "^2.0.0"
   }
 }
