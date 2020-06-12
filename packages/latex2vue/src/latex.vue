@@ -44,11 +44,17 @@ export default {
     }
 
     if (getMathJax()) {
+	  this.loaded = true;
       return;
     }
     loadMathJax(() => {
       this.loaded = true;
     });
+  },
+  mounted(){
+  	let MathJax = getMathJax();
+	if (MathJax != undefined)
+	MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
   },
   data() {
     return {
