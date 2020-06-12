@@ -1,6 +1,6 @@
 {
   "name": "latex2js.com",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "private": true,
   "scripts": {
     "build": "cp ../../packages/latex2js/latex2js.css ./assets/css/ && cp ../../packages/latex2html5/latex2html5.bundle.js ./assets/js/",

@@ -1,9 +1,9 @@
 {
   "name": "react-app",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "private": true,
   "dependencies": {
-    "latex2react": "^2.1.0",
+    "latex2react": "^2.1.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-scripts": "1.1.1"

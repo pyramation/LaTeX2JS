@@ -1,6 +1,6 @@
 {
   "name": "latex2js",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "LaTeX and PSTricks rendering & components for the Web",
   "author": "Dan Lynch <pyramation@gmail.com>",
   "homepage": "https://github.com/pyramation/latex2js/tree/master/packages/latex2js#readme",
@@ -77,8 +77,8 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.4.2",
-    "latex2js-pstricks": "^2.1.0",
-    "latex2js-settings": "^2.1.0",
+    "latex2js-pstricks": "^2.1.1",
+    "latex2js-settings": "^2.1.1",
     "latex2js-utils": "^2.1.0"
   }
 }

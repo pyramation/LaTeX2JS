@@ -1,6 +1,6 @@
 {
     "name": "latex2js-settings",
-    "version": "2.1.0",
+    "version": "2.1.1",
     "description": "settings for LaTeX2JS",
     "author": "Dan Lynch <pyramation@gmail.com>",
     "homepage": "https://github.com/pyramation/latex2js/tree/master/packages/latex2js-settings#readme",
