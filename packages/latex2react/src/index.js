@@ -1,5 +1,4 @@
 import React, { Component, createElement } from 'react';
-import PropTypes from 'prop-types';
 import LaTeX2JS from 'latex2js';
 import { getMathJax, loadMathJax } from 'latex2js-mathjax';
 
