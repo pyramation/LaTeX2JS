@@ -35,7 +35,8 @@
   "scripts": {
     "build:main": "BABEL_ENV=production babel src --out-dir main --delete-dir-on-start",
     "build:module": "MODULE=true babel src --out-dir module --delete-dir-on-start",
-    "build": "npm run build:module && npm run build:main",
+    "build": "npm run build:module && npm run build:main && npm run copy",
+    "copy": "cp src/latex.vue main/ && cp src/latex.vue module/ && cp -r src/components main/ && cp -r src/components module/",
     "prepare": "npm run build",
     "lint": "npm run lint:js && npm run lint:style",
     "lint:js": "eslint src --ext .js",
