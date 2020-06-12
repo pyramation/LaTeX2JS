@@ -1,6 +1,6 @@
 {
   "name": "latex2vue",
-  "version": "2.1.1",
+  "version": "2.2.0",
   "description": "Vue components for LaTeX2JS",
   "author": "Dan Lynch <pyramation@gmail.com>",
   "homepage": "https://github.com/pyramation/latex2js/tree/master/packages/latex2vue#readme",
@@ -74,9 +74,9 @@
   "dependencies": {
     "@babel/runtime": "^7.4.2",
     "d3": "^4.13.0",
-    "latex2js": "^2.0.0",
-    "latex2js-macros": "^2.0.0",
-    "latex2js-mathjax": "^2.0.0",
-    "latex2js-pstricks": "^2.0.0"
+    "latex2js": "^2.1.0",
+    "latex2js-macros": "^2.1.0",
+    "latex2js-mathjax": "^2.1.0",
+    "latex2js-pstricks": "^2.1.0"
   }
 }

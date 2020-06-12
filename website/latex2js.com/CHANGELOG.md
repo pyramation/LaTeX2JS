@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.1.0](https://github.com/pyramation/LaTeX2JS/compare/latex2js.com@2.0.0...latex2js.com@2.1.0) (2020-06-12)
+
+**Note:** Version bump only for package latex2js.com
+
+
+
+
+
 # 2.0.0 (2020-06-12)
 
 **Note:** Version bump only for package latex2js.com

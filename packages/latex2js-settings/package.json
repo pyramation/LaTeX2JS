@@ -1,6 +1,6 @@
 {
   "name": "latex2js-settings",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "LaTeX/PSTricks settings types for LaTeX2JS",
   "author": "pyramation@gmail.com",
   "license": "MIT",
@@ -22,7 +22,7 @@
     "build": "rm -rf ./build && tsc"
   },
   "dependencies": {
-    "latex2js-utils": "^2.0.0"
+    "latex2js-utils": "^2.1.0"
   },
   "devDependencies": {
     "@types/node": "^8.0.0",

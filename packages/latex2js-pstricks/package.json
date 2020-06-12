@@ -1,6 +1,6 @@
 {
   "name": "latex2js-pstricks",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "PSTricks extension for LaTeX2JS",
   "author": "Dan Lynch <pyramation@gmail.com>",
   "homepage": "https://github.com/pyramation/latex2js/tree/master/packages/latex2js-pstricks#readme",
@@ -63,7 +63,7 @@
   "dependencies": {
     "@babel/runtime": "^7.4.2",
     "d3": "^4.13.0",
-    "latex2js-settings": "^2.0.0",
-    "latex2js-utils": "^2.0.0"
+    "latex2js-settings": "^2.1.0",
+    "latex2js-utils": "^2.1.0"
   }
 }
