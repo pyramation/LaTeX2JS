@@ -66,7 +66,6 @@ export const Expressions = {
 
 export const Functions = {
   slider(m) {
-    // console.log(m);
     var obj = {
       scalar: 1,
       min: Number(m[2]),
@@ -79,6 +78,7 @@ export const Functions = {
     this.variables[obj.variable] = obj.value;
     this.sliders = this.sliders || [];
     this.sliders.push(obj);
+
     if (m[1]) {
       Object.assign(obj, parseOptions(m[1]));
     }
@@ -177,7 +177,6 @@ export const Functions = {
       expression += 'var ' + name + ' = ' + val + ';';
     });
     expression += 'with (Math){' + m[4] + '}';
-    // console.log(expression);
     for (x = startX; x <= endX; x += 0.005) {
       data.push(X.call(this, x));
       // data.push(Y.call(this, Math.cos(x/2)));
@@ -218,7 +217,6 @@ export const Functions = {
     return obj;
   },
   psarc(m) {
-    // console.log(m);
     var l = parseArrows(m[2]);
     var arrows = l.arrows;
     var dots = l.dots;
@@ -401,8 +399,6 @@ export const Functions = {
     if (typeof obj.linewidth === 'string') {
       obj.linewidth = 2;
     }
-    // console.log('check options!!!!');
-    // console.log(obj);
     return obj;
   },
   rput(m) {

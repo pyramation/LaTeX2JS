@@ -14,22 +14,16 @@ function Parser(LaTeX2JS) {
 }
 Parser.prototype = {
   parse: function (text) {
-    console.log('parse()');
     if (!text) return {};
     var lines = text.split('\n');
     this.parseEnvText(lines);
     this.parseEnv(lines);
 
-    console.log('this.objects');
-    console.log(this.objects);
-
     this.objects.forEach((obj) => {
-      console.log(obj.type);
       if (obj.type.match(/pspicture/)) {
         obj.plot = this.parsePSTricks(obj.lines, obj.env);
       }
     });
-
     return this.objects;
   },
   newEnvironment: function (type) {
