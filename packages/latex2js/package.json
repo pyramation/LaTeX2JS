@@ -13,7 +13,9 @@
   },
   "files": [
     "main",
-    "module"
+    "module",
+    "latex2js.css",
+    "latex2js.mathapedia.css"
   ],
   "publishConfig": {
     "access": "public"
