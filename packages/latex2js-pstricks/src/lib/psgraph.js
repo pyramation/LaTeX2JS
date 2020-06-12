@@ -1,4 +1,3 @@
-import * as _ from 'underscore';
 import { X, Y } from 'latex2js-utils';
 import * as d3 from 'd3';
 
@@ -127,9 +126,9 @@ const psgraph = {
     }
     context.push('L');
 
-    _.each(this.data, function (data) {
+    this.data.forEach(data=> {
       context.push(data);
-    });
+    })
 
     if (this.fillstyle === 'solid') {
       context.push(this.data[this.data.length - 2]);
@@ -154,7 +153,7 @@ const psgraph = {
     context.push(this.data[1]);
     context.push('L');
 
-    _.each(this.data, function (data) {
+    this.data.forEach(data=> {
       context.push(data);
     });
     context.push('Z');
@@ -536,9 +535,10 @@ const psgraph = {
       svg.selectAll('.psplot').remove();
       var currentEnvironment = {};
       // find special vars
-      _.each(plots, function (plot, k) {
+      Object.entries(plots || {})
+      .forEach(([k, plot]) => {
         if (k.match(/uservariable/)) {
-          _.each(plot, function (data) {
+          plot.forEach(data=> {
             data.env.userx = coords[0];
             data.env.usery = coords[1];
             var dd = data.fn.call(data.env, data.match);
@@ -546,21 +546,23 @@ const psgraph = {
           });
         }
       });
-      _.each(plots, function (plot, k) {
+      Object.entries(plots || {})
+      .forEach(([k, plot]) => {
         if (k.match(/psplot/)) {
-          _.each(plot, function (data) {
-            _.each(currentEnvironment, function (variable, name) {
+          plot.forEach(data=>{
+            Object.entries(currentEnvironment || {})
+            .forEach(([name, variable]) => {
               data.env.variables[name] = variable;
             });
             var d = data.fn.call(data.env, data.match);
             d.global = {};
             Object.assign(d.global, env);
             // give pspicture!
-            psgraph[k].call(d, svg);
+            psgraph[k].call(d, svg);            
           });
         }
         if (k.match(/userline/)) {
-          _.each(plot, function (data) {
+          plot.forEach(data=>{
             var d = data.fn.call(data.env, data.match);
             data.env.x2 = coords[0];
             // / env.xunit;
@@ -584,7 +586,7 @@ const psgraph = {
             Object.assign(d.global, env);
             // give pspicture!
             Object.assign(d, data.data);
-            psgraph[k].call(d, svg);
+            psgraph[k].call(d, svg);            
           });
         }
       });
