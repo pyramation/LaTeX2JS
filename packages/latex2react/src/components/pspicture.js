@@ -10,7 +10,7 @@ export default (props) => {
   const width = `${size.width}px`;
   const height = `${size.height}px`;
 
-  useEffect(()=> {
+  useEffect(() => {
     const d3svg = d3.select(svgRef.current);
     const obj = { ...props };
     obj.$el = divRef.current;
@@ -23,21 +23,18 @@ export default (props) => {
       style={{ width: width, height: height }}
       ref={divRef}
     >
-      <svg
-        width={size.width}
-        height={size.height}
-        ref={svgRef}
-      />
-      {props.env.sliders && props.env.sliders.map(slider => {
-        return (
-          <Slider 
-            slider={slider}
-            env={props.env}
-            svgRef={svgRef}
-            plot={props.plot}
-          />
-        )
-      })}
+      <svg width={size.width} height={size.height} ref={svgRef} />
+      {props.env.sliders &&
+        props.env.sliders.map((slider) => {
+          return (
+            <Slider
+              slider={slider}
+              env={props.env}
+              svgRef={svgRef}
+              plot={props.plot}
+            />
+          );
+        })}
     </div>
   );
-}
+};
