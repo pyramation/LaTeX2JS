@@ -1,8 +1,28 @@
 {
-  "lerna": "2.5.1",
-  "packages": [
-    "core/*",
-    "libs/*"
+  "lerna": "3.4.2",
+  "useWorkspaces": true,
+  "conventionalCommits": true,
+  "npmClient": "yarn",
+  "npmClientArgs": [
+    "--no-lockfile"
   ],
-  "version": "1.3.1"
+  "packages": [
+    "packages/*",
+    "website/*",
+    "examples/*"
+  ],
+  "version": "independent",
+  "registry": "https://registry.npmjs.org",
+  "command": {
+    "create": {
+      "homepage": "https://github.com/pyramation/latex2js",
+      "license": "SEE LICENSE IN LICENSE",
+      "access": "restricted"
+    },
+    "publish": {
+      "allowBranch": "master",
+      "conventionalCommits": true,
+      "message": "chore(release): publish"
+    }
+  }
 }

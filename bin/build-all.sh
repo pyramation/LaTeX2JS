@@ -1,25 +1,14 @@
 #!/bin/bash
 
-for x in $(ls core)
-do
-  cd core/$x
-  yarn
-  yarn build
-  cd ../../
-done
+DIR=$(pwd)
 
-for x in $(ls libs)
-do
-  cd libs/$x
-  yarn
-  yarn build
-  cd ../../
-done
-
-cd libs/latex2html5
-yarn bundle
-cd ../../
-
-cd site
 yarn build
-cd ../
+
+cd packages/latex2html5
+yarn bundle
+cd $DIR
+
+cd website/latex2js.com
+yarn build
+yarn copy
+cd $DIR

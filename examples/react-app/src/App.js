@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-import 'latex2js/lib/latex2js.css';
+import 'latex2js/latex2js.css';
 import { LaTeX } from 'latex2react';
 
 const tex = String.raw`

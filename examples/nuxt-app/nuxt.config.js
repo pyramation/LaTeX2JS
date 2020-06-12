@@ -15,7 +15,7 @@ module.exports = {
   /*
   ** Add latex2js CSS and latex2vue JS
   */
-  css: ['latex2js/lib/latex2js.css'],
+  css: ['latex2js/latex2js.css'],
   plugins: [{ src: '~plugins/latex2vue.js', ssr: false }],
 
   /*

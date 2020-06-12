@@ -1,9 +1,80 @@
 {
-	"devDependencies": {
-		"lerna": "^2.5.1"
-	},
-	"dependencies": {
-		"d3": "^4.13.0",
-		"underscore": "1.5.2"
-	}
+  "name": "latex2js",
+  "version": "0.0.1",
+  "publishConfig": {
+    "access": "restricted"
+  },
+  "private": true,
+  "scripts": {
+    "commit": "git-cz",
+    "build": "lerna run prepare --parallel",
+    "bootstrap": "lerna bootstrap --use-workspaces",
+    "lint": "npm run lint:js && npm run lint:style",
+    "lint:js": "eslint --ignore-path .gitignore 'packages/**/*.js'",
+    "lint:fix": "eslint --ignore-path .gitignore 'packages/**/*.js' --fix",
+    "lint:style": "stylelint 'packages/**/*.js'",
+    "build:serve": "bin/build-all.sh && npm run serve",
+    "serve": "serve website/latex2js.com/static",
+    "pretest": "yarn lint",
+    "test:watch": "jest --watch",
+    "test": "jest"
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
+  "devDependencies": {
+    "@babel/cli": "7.10.1",
+    "@babel/core": "7.10.2",
+    "@commitlint/cli": "8.3.5",
+    "@commitlint/config-conventional": "8.3.4",
+    "@pyramation/babel-preset-env": "0.1.0",
+    "babel-core": "7.0.0-bridge.0",
+    "babel-eslint": "10.1.0",
+    "babel-jest": "^24.9.0",
+    "commitizen": "4.1.2",
+    "commitlint": "8.3.5",
+    "cz-conventional-changelog": "3.2.0",
+    "eslint": "6.8.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-config-react-app": "5.2.1",
+    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-react": "^7.18.3",
+    "eslint-plugin-react-hooks": "4.0.4",
+    "husky": "4.2.5",
+    "jest": "25.1.0",
+    "lerna": "3.22.1",
+    "lint-staged": "10.2.9",
+    "prettier": "2.0.5",
+    "stylelint": "13.6.0",
+    "stylelint-config-recommended": "3.0.0",
+    "stylelint-config-styled-components": "0.1.1",
+    "stylelint-processor-styled-components": "1.10.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "stylelint '*.js'"
+    ]
+  },
+  "workspaces": [
+    "packages/*",
+    "website/*",
+    "examples/*"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pyramation/latex2js"
+  }
 }
