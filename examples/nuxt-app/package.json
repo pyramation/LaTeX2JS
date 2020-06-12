@@ -1,6 +1,6 @@
 {
   "name": "nuxt-app",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Nuxt.js project",
   "author": "Dan Lynch <pyramation@gmail.com>",
   "private": true,
@@ -13,7 +13,7 @@
     "precommit": "npm run lint"
   },
   "dependencies": {
-    "latex2vue": "^2.1.0",
+    "latex2vue": "^2.1.1",
     "nuxt": "^1.0.0"
   },
   "devDependencies": {
